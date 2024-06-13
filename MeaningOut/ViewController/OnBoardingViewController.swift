@@ -24,6 +24,12 @@ class OnBoardingViewController: UIViewController {
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
+    lazy var startButton = {
+        let button = BigSizeButton()
+        button.setTitle("START", for: .normal)
+        button.addTarget(self, action: #selector(startButtonTapped), for: .touchUpInside)
+        return button
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,9 +39,14 @@ class OnBoardingViewController: UIViewController {
         configureLayout()
     }
     
+    @objc func startButtonTapped() {
+        
+    }
+    
     func configureHierarchy() {
         view.addSubview(launchImageView)
         view.addSubview(projectTitle)
+        view.addSubview(startButton)
     }
     func configureLayout() {
         launchImageView.snp.makeConstraints { make in
@@ -47,6 +58,11 @@ class OnBoardingViewController: UIViewController {
             make.top.equalTo(view.safeAreaLayoutGuide).inset(120)
             make.bottom.equalTo(launchImageView.snp.top)
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
+        }
+        startButton.snp.makeConstraints { make in
+            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(20)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(60)
+            make.height.equalTo(50)
         }
     }
 
