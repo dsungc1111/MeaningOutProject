@@ -22,7 +22,7 @@ class CustomProfileButton: UIButton {
     func configureImage() {
         
         
-        setImage(UIImage(named: profileImages.allCases.randomElement()!.rawValue), for: .normal)
+        setImage(UIImage(named: Constant.profileImages.allCases.randomElement()!.rawValue), for: .normal)
         clipsToBounds = true
         contentMode = .scaleAspectFit
         layer.borderWidth = 3

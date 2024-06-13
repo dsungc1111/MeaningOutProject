@@ -40,7 +40,7 @@ class OnBoardingViewController: UIViewController {
     }
     
     @objc func startButtonTapped() {
-        let vc = ProfileSettingViewController()
+        let vc = ProfileViewController()
         navigationController?.navigationBar.tintColor = .black
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         navigationController?.pushViewController(vc, animated: true)

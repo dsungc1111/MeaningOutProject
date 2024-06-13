@@ -7,13 +7,14 @@
 
 import UIKit
 
-class SelectProfileViewController: UIViewController {
+class SelectViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .orange
+        view.backgroundColor = .white
         navigationItem.title = "Profile Setting"
     }
+    
     
 
   

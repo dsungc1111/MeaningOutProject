@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProfileSettingViewController: UIViewController {
+class ProfileViewController: UIViewController {
 
     
     lazy var profileButton = {
@@ -34,8 +34,7 @@ class ProfileSettingViewController: UIViewController {
     }()
     let warningTextfield = {
         let warning = UITextField()
-        warning.text = "닉네임에 @는 포함될 수 없어요."
-        
+        warning.text = Constant.warningMessage.basic.rawValue
         warning.textColor = UIColor.mainColor
         warning.font = .systemFont(ofSize: 13)
         return warning
@@ -56,18 +55,14 @@ class ProfileSettingViewController: UIViewController {
         configureHierarchy()
         configureLayout()
         completeButton.isEnabled = false
-        
     }
+    
     override func viewDidLayoutSubviews() {
         profileButton.layer.cornerRadius = profileButton.frame.width / 2
         profileCameraLogo.layer.cornerRadius = profileCameraLogo.frame.width/2
         nicknameTextfield.layer.addBorder([.bottom], color: .lightGray, width: 1)
-    }
-    
-    @objc func profileButtonTapped() {
-        let vc = SelectProfileViewController()
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
-        navigationController?.pushViewController(vc, animated: true)
+        navigationController?.navigationBar.layer.addBorder([.bottom], color: .systemGray4, width: 1)
+        
     }
     
     @objc func nicknameDidChange() {
@@ -76,34 +71,33 @@ class ProfileSettingViewController: UIViewController {
             return
         }
         if text.count >= 2 && text.count < 8 {
-            warningTextfield.text = "사용할 수 있는 닉네임이에요."
-            if text.contains("@") || text.contains("#") || text.contains("$") || text.contains("%") {
-                warningTextfield.text = "닉네임에 @, #, $, % 는 포함할 수 없어요."
-                completeButton.isEnabled = false
+            warningTextfield.text = Constant.warningMessage.pass.rawValue
+            if text.contains(Constant.SpecialCharacters.hashSymbol.rawValue) || text.contains(Constant.SpecialCharacters.atTheRateSignSymbol.rawValue) || text.contains(Constant.SpecialCharacters.dollarSymbol.rawValue) || text.contains(Constant.SpecialCharacters.percentSymbol.rawValue) {
+                warningTextfield.text = Constant.warningMessage.specialCharactersFail.rawValue
             }
-            if text.contains(" ") {
-                warningTextfield.text = "공백은 불가능해요."
-                completeButton.isEnabled = false
+            if text.contains(Constant.SpecialCharacters.blankSymbol.rawValue) {
+                warningTextfield.text = Constant.warningMessage.blankFail.rawValue
             }
             if Int(text) != nil  {
-                warningTextfield.text = "닉네임에 숫자는 포함할 수 없어요"
-                completeButton.isEnabled = false
+                warningTextfield.text = Constant.warningMessage.numberFail.rawValue
             }
         } else {
-            warningTextfield.text = "2글자 이상 10글자 미만으로 설정해주세요"
-            completeButton.isEnabled = false
+            warningTextfield.text = Constant.warningMessage.countFail.rawValue
         }
         
         
-        if warningTextfield.text != "사용할 수 있는 닉네임이에요." {
-            completeButton.isEnabled = false
-        } else {
+        if warningTextfield.text == Constant.warningMessage.pass.rawValue {
             completeButton.isEnabled = true
+        } else {
+            completeButton.isEnabled = false
         }
-                
         
     }
-    
+    @objc func profileButtonTapped() {
+        let vc = SelectViewController()
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        navigationController?.pushViewController(vc, animated: true)
+    }
     @objc func completeButtonTapped() {
         Variable.user = nicknameTextfield.text ?? "위에서 통과하고 온 닉네임이라 nil의 경우는 없음. 고로 이 문장도 나올 일이 없음."
        
