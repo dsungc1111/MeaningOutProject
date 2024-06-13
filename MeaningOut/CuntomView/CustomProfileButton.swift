@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CustomImages: UIButton {
+class CustomProfileButton: UIButton {
     
     
     override init(frame: CGRect) {
@@ -20,12 +20,14 @@ class CustomImages: UIButton {
     }
     
     func configureImage() {
+        
+        
+        setImage(UIImage(named: profileImages.allCases.randomElement()!.rawValue), for: .normal)
         clipsToBounds = true
         contentMode = .scaleAspectFit
-        layer.frame.size.width = 100
-        layer.frame.size.height = 100
-        layer.cornerRadius = frame.width/2
         layer.borderWidth = 3
         layer.borderColor = UIColor.mainColor.cgColor
+        
+        
     }
 }

@@ -40,7 +40,10 @@ class OnBoardingViewController: UIViewController {
     }
     
     @objc func startButtonTapped() {
-        
+        let vc = ProfileSettingViewController()
+        navigationController?.navigationBar.tintColor = .black
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func configureHierarchy() {
@@ -51,11 +54,12 @@ class OnBoardingViewController: UIViewController {
     func configureLayout() {
         launchImageView.snp.makeConstraints { make in
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
-            make.verticalEdges.equalTo(view.safeAreaLayoutGuide).inset(220)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(220)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(185)
             
         }
         projectTitle.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).inset(120)
+            make.top.equalTo(view.safeAreaLayoutGuide).inset(105)
             make.bottom.equalTo(launchImageView.snp.top)
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
         }

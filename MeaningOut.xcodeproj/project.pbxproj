@@ -18,6 +18,15 @@
 		8B71E19B2C1AE1E3000BCB72 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8B71E19A2C1AE1E3000BCB72 /* SnapKit */; };
 		8B71E19E2C1AE275000BCB72 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E19D2C1AE275000BCB72 /* UIColor+Extension.swift */; };
 		8B71E1A02C1AE62B000BCB72 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 8B71E19F2C1AE62B000BCB72 /* .gitignore */; };
+		8B71E1A32C1AE7B4000BCB72 /* BigSizeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1A22C1AE7B4000BCB72 /* BigSizeButton.swift */; };
+		8B71E1A72C1AED76000BCB72 /* ProfileSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1A62C1AED76000BCB72 /* ProfileSettingViewController.swift */; };
+		8B71E1AC2C1AF895000BCB72 /* Enum+Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1AB2C1AF895000BCB72 /* Enum+Constant.swift */; };
+		8B71E1AE2C1AFB2B000BCB72 /* CustomProfileButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1AD2C1AFB2B000BCB72 /* CustomProfileButton.swift */; };
+		8B71E1B02C1B13EC000BCB72 /* Enum+Variable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1AF2C1B13EC000BCB72 /* Enum+Variable.swift */; };
+		8B71E1B22C1B1598000BCB72 /* CALayer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1B12C1B1598000BCB72 /* CALayer+Extension.swift */; };
+		8B71E1B42C1B176B000BCB72 /* TextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1B32C1B176B000BCB72 /* TextField+Extension.swift */; };
+		8B71E1B62C1B1D0D000BCB72 /* SelectProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1B52C1B1D0D000BCB72 /* SelectProfileViewController.swift */; };
+		8B71E1B82C1B2825000BCB72 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1B72C1B2825000BCB72 /* MainViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +39,15 @@
 		8B71E1852C1AD984000BCB72 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B71E19D2C1AE275000BCB72 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		8B71E19F2C1AE62B000BCB72 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		8B71E1A22C1AE7B4000BCB72 /* BigSizeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigSizeButton.swift; sourceTree = "<group>"; };
+		8B71E1A62C1AED76000BCB72 /* ProfileSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingViewController.swift; sourceTree = "<group>"; };
+		8B71E1AB2C1AF895000BCB72 /* Enum+Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Enum+Constant.swift"; sourceTree = "<group>"; };
+		8B71E1AD2C1AFB2B000BCB72 /* CustomProfileButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProfileButton.swift; sourceTree = "<group>"; };
+		8B71E1AF2C1B13EC000BCB72 /* Enum+Variable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Enum+Variable.swift"; sourceTree = "<group>"; };
+		8B71E1B12C1B1598000BCB72 /* CALayer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Extension.swift"; sourceTree = "<group>"; };
+		8B71E1B32C1B176B000BCB72 /* TextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextField+Extension.swift"; sourceTree = "<group>"; };
+		8B71E1B52C1B1D0D000BCB72 /* SelectProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectProfileViewController.swift; sourceTree = "<group>"; };
+		8B71E1B72C1B2825000BCB72 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,10 +85,13 @@
 		8B71E1762C1AD983000BCB72 /* MeaningOut */ = {
 			isa = PBXGroup;
 			children = (
+				8B71E1AA2C1AF885000BCB72 /* Enum */,
+				8B71E1A52C1AED55000BCB72 /* ViewController */,
+				8B71E1A42C1AEA8E000BCB72 /* New Group */,
+				8B71E1A12C1AE794000BCB72 /* CuntomView */,
 				8B71E19C2C1AE265000BCB72 /* Extension */,
 				8B71E1772C1AD983000BCB72 /* AppDelegate.swift */,
 				8B71E1792C1AD983000BCB72 /* SceneDelegate.swift */,
-				8B71E17B2C1AD983000BCB72 /* OnBoardingViewController.swift */,
 				8B71E1802C1AD984000BCB72 /* Assets.xcassets */,
 				8B71E1822C1AD984000BCB72 /* LaunchScreen.storyboard */,
 				8B71E1852C1AD984000BCB72 /* Info.plist */,
@@ -82,8 +103,46 @@
 			isa = PBXGroup;
 			children = (
 				8B71E19D2C1AE275000BCB72 /* UIColor+Extension.swift */,
+				8B71E1B12C1B1598000BCB72 /* CALayer+Extension.swift */,
+				8B71E1B32C1B176B000BCB72 /* TextField+Extension.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		8B71E1A12C1AE794000BCB72 /* CuntomView */ = {
+			isa = PBXGroup;
+			children = (
+				8B71E1A22C1AE7B4000BCB72 /* BigSizeButton.swift */,
+				8B71E1AD2C1AFB2B000BCB72 /* CustomProfileButton.swift */,
+			);
+			path = CuntomView;
+			sourceTree = "<group>";
+		};
+		8B71E1A42C1AEA8E000BCB72 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		8B71E1A52C1AED55000BCB72 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8B71E17B2C1AD983000BCB72 /* OnBoardingViewController.swift */,
+				8B71E1A62C1AED76000BCB72 /* ProfileSettingViewController.swift */,
+				8B71E1B52C1B1D0D000BCB72 /* SelectProfileViewController.swift */,
+				8B71E1B72C1B2825000BCB72 /* MainViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		8B71E1AA2C1AF885000BCB72 /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				8B71E1AB2C1AF895000BCB72 /* Enum+Constant.swift */,
+				8B71E1AF2C1B13EC000BCB72 /* Enum+Variable.swift */,
+			);
+			path = Enum;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -170,9 +229,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B71E17C2C1AD983000BCB72 /* OnBoardingViewController.swift in Sources */,
+				8B71E1B82C1B2825000BCB72 /* MainViewController.swift in Sources */,
 				8B71E1782C1AD983000BCB72 /* AppDelegate.swift in Sources */,
+				8B71E1AC2C1AF895000BCB72 /* Enum+Constant.swift in Sources */,
+				8B71E1B22C1B1598000BCB72 /* CALayer+Extension.swift in Sources */,
+				8B71E1B62C1B1D0D000BCB72 /* SelectProfileViewController.swift in Sources */,
+				8B71E1B42C1B176B000BCB72 /* TextField+Extension.swift in Sources */,
+				8B71E1A32C1AE7B4000BCB72 /* BigSizeButton.swift in Sources */,
 				8B71E17A2C1AD983000BCB72 /* SceneDelegate.swift in Sources */,
 				8B71E19E2C1AE275000BCB72 /* UIColor+Extension.swift in Sources */,
+				8B71E1AE2C1AFB2B000BCB72 /* CustomProfileButton.swift in Sources */,
+				8B71E1B02C1B13EC000BCB72 /* Enum+Variable.swift in Sources */,
+				8B71E1A72C1AED76000BCB72 /* ProfileSettingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,6 +391,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -354,6 +423,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

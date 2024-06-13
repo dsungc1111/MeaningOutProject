@@ -6,3 +6,19 @@
 //
 
 import Foundation
+
+enum Variable {
+    
+    static let username = "user"
+    
+    static var user: String {
+        get {
+            return UserDefaults.standard.string(forKey: username) ?? ""
+        }
+        set {
+            UserDefaults.standard.setValue(newValue, forKey: username)
+        }
+    }
+    
+    
+}
