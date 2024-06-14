@@ -43,6 +43,7 @@ class SearchViewController: UIViewController {
         button.setTitleColor(.mainColor, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 13)
         button.isHidden = true
+        button.addTarget(self, action: #selector(removeAllButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -58,6 +59,10 @@ class SearchViewController: UIViewController {
         configureLayout()
         selectedWindow()
     }
+    @objc func removeAllButtonTapped() {
+            Variable.researchList.removeAll()
+            selectedWindow()
+        }
     
     func configureHierarchy() {
         view.addSubview(searchBar)
@@ -127,6 +132,8 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         cell.resultButton.tag = indexPath.row
         cell.resultButton.setTitle(Variable.researchList[indexPath.row], for: .normal)
         cell.resultButton.addTarget(self, action: #selector(resultButtonTapped(sender:)), for: .touchUpInside)
+
+        
         return cell
     }
 
