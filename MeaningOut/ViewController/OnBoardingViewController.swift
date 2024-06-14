@@ -44,6 +44,8 @@ class OnBoardingViewController: UIViewController {
         navigationController?.navigationBar.tintColor = .black
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         navigationController?.pushViewController(vc, animated: true)
+        Variable.profileImage = ""
+        Variable.user = ""
     }
     
     func configureHierarchy() {

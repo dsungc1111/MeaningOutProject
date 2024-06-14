@@ -14,6 +14,7 @@ enum Constant{
     enum saveKeyWord: String {
         case username
         case profileImage
+        case image
     }
     
     enum profileImages: String, CaseIterable {

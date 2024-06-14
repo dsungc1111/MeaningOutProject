@@ -12,7 +12,7 @@ class ProfileViewController: UIViewController {
     
     lazy var profileButton = {
         let button = CustomProfileButton()
-        Variable.profileImage = button.imageString
+//        Variable.profileImage = button.imageString
         button.addTarget(self, action: #selector(profileButtonTapped), for: .touchUpInside)
         return button
     }()
@@ -52,6 +52,7 @@ class ProfileViewController: UIViewController {
         configureHierarchy()
         configureLayout()
         completeButton.isEnabled = false
+        
     }
     
     override func viewDidLayoutSubviews() {

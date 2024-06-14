@@ -9,12 +9,13 @@ import UIKit
 
 class SelectCollectionViewCell: UICollectionViewCell {
     
+    
     lazy var profileImageButton = {
-        let image = UIButton()
+        let button = UIButton()
         let select = false
-        image.alpha = 0.5
-        image.addTarget(self, action: #selector(profileButtonTapped), for: .touchUpInside)
-        return image
+        button.alpha = 0.5
+        button.backgroundColor = .white
+        return button
     }()
     
     override init(frame: CGRect) {
@@ -27,24 +28,22 @@ class SelectCollectionViewCell: UICollectionViewCell {
         profileImageButton.layer.cornerRadius = frame.width/2
         configureLayout()
     }
-    @objc func profileButtonTapped() {
-        isSelected.toggle()
-        let color = isSelected ? UIColor.mainColor : UIColor.black
-        layer.borderColor = color.cgColor
-//        profileImageButton.
-        
-        Variable.profileImage = Constant.profileImages.allCases[profileImageButton.tag].rawValue
-        let vc = SelectViewController()
-        vc.profileButton.setImage(UIImage(named: Variable.profileImage), for: .normal)
-    
-    }
+   
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     func configureCell(data: IndexPath) {
+        
         profileImageButton.setImage(UIImage(named: Constant.profileImages.allCases[data.row].rawValue), for: .normal)
-        profileImageButton.tag = data.row
+        if Variable.profileImage == Constant.profileImages.allCases[data.row].rawValue {
+            layer.borderColor = UIColor.mainColor.cgColor
+            profileImageButton.alpha = 1
+        } else {
+            layer.borderColor = UIColor.black.cgColor
+            profileImageButton.alpha = 0.5
+        }
     }
     
     func configureLayout() {

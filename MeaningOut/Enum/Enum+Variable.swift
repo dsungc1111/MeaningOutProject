@@ -47,6 +47,4 @@ enum Variable {
             UserDefaults.standard.setValue(newValue, forKey: Constant.saveKeyWord.username.rawValue)
         }
     }
-    
-    
 }

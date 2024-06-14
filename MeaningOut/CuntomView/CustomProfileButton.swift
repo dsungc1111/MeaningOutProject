@@ -9,7 +9,7 @@ import UIKit
 
 class CustomProfileButton: UIButton {
     
-    var imageString = ""
+//    var imageString = ""
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -22,8 +22,14 @@ class CustomProfileButton: UIButton {
     
     func configureImage() {
         
-        imageString = Constant.profileImages.allCases.randomElement()!.rawValue
-        setImage(UIImage(named: imageString), for: .normal)
+//        imageString = Constant.profileImages.allCases.randomElement()!.rawValue
+//        setImage(UIImage(named: imageString), for: .normal)
+//        
+        if Variable.profileImage == "" {
+            Variable.profileImage = Constant.profileImages.allCases.randomElement()!.rawValue
+            setImage(UIImage(named: Variable.profileImage), for: .normal)
+        }
+        
         clipsToBounds = true
         contentMode = .scaleAspectFit
         layer.borderWidth = 3

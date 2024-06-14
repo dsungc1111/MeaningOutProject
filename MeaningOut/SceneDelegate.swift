@@ -16,7 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
-        
+        Variable.user = ""
         if Variable.user != "" {
             let vc = TabBarController()
             window?.rootViewController = vc
