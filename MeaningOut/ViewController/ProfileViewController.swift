@@ -59,6 +59,11 @@ class ProfileViewController: UIViewController {
         profileCameraLogo.layer.cornerRadius = profileCameraLogo.frame.width/2
         nicknameTextfield.layer.addBorder([.bottom], color: .lightGray, width: 1)
         navigationController?.navigationBar.layer.addBorder([.bottom], color: .systemGray4, width: 1)
+        profileButton.setImage(UIImage(named: Variable.profileImage), for: .normal)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        profileButton.setImage(UIImage(named: Variable.profileImage), for: .normal)
     }
     
     @objc func nicknameDidChange() {
@@ -102,10 +107,8 @@ class ProfileViewController: UIViewController {
         
         let sceneDelegate = windowScene?.delegate as? SceneDelegate
         
-        
-        let vc = UINavigationController(rootViewController: MainViewController())
-        
-        vc.navigationBar.tintColor = .black
+        let vc = TabBarController()
+//        vc.navigationBar.tintColor = .black
         sceneDelegate?.window?.rootViewController = vc
         sceneDelegate?.window?.makeKeyAndVisible()
         

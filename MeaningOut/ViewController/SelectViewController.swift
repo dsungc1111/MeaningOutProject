@@ -41,7 +41,7 @@ class SelectViewController: UIViewController {
         navigationItem.title = "Profile Setting"
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.register(ProfileCollectionViewCell.self, forCellWithReuseIdentifier: ProfileCollectionViewCell.identifier)
+        collectionView.register(SelectCollectionViewCell.self, forCellWithReuseIdentifier: SelectCollectionViewCell.identifier)
         collectionView.showsVerticalScrollIndicator = false
         configureHierarchy()
         configureLayout()
@@ -50,6 +50,11 @@ class SelectViewController: UIViewController {
         profileButton.layer.cornerRadius = profileButton.frame.width / 2
         profileCameraLogo.layer.cornerRadius = profileCameraLogo.frame.width/2
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        print("선택창", Variable.profileImage)
+        profileButton.setImage(UIImage(named: Variable.profileImage), for: .normal)
     }
     
     func configureHierarchy() {
@@ -83,11 +88,12 @@ extension SelectViewController : UICollectionViewDelegate, UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProfileCollectionViewCell.identifier, for: indexPath) as? ProfileCollectionViewCell else { return ProfileCollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SelectCollectionViewCell.identifier, for: indexPath) as? SelectCollectionViewCell else { return SelectCollectionViewCell() }
         
         cell.configureCell(data: indexPath)
+
         return cell
     }
-   
+
     
 }

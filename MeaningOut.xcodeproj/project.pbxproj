@@ -26,11 +26,14 @@
 		8B71E1B22C1B1598000BCB72 /* CALayer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1B12C1B1598000BCB72 /* CALayer+Extension.swift */; };
 		8B71E1B42C1B176B000BCB72 /* TextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1B32C1B176B000BCB72 /* TextField+Extension.swift */; };
 		8B71E1B62C1B1D0D000BCB72 /* SelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1B52C1B1D0D000BCB72 /* SelectViewController.swift */; };
-		8B71E1B82C1B2825000BCB72 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1B72C1B2825000BCB72 /* MainViewController.swift */; };
+		8B71E1B82C1B2825000BCB72 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1B72C1B2825000BCB72 /* SearchViewController.swift */; };
 		8B71E1BA2C1BC1B4000BCB72 /* CameraLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1B92C1BC1B4000BCB72 /* CameraLogo.swift */; };
 		8B71E1BD2C1BC2E1000BCB72 /* SetMainColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1BC2C1BC2E1000BCB72 /* SetMainColor.swift */; };
-		8B71E1C12C1BC9AF000BCB72 /* IdentiFier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1C02C1BC9AF000BCB72 /* IdentiFier.swift */; };
-		8B71E1C32C1BCBAB000BCB72 /* ProfileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1C22C1BCBAB000BCB72 /* ProfileCollectionViewCell.swift */; };
+		8B71E1C12C1BC9AF000BCB72 /* Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1C02C1BC9AF000BCB72 /* Identifier.swift */; };
+		8B71E1C32C1BCBAB000BCB72 /* SelectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1C22C1BCBAB000BCB72 /* SelectCollectionViewCell.swift */; };
+		8B71E1C52C1C078C000BCB72 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1C42C1C078C000BCB72 /* TabBarController.swift */; };
+		8B71E1C72C1C07DD000BCB72 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1C62C1C07DD000BCB72 /* SettingViewController.swift */; };
+		8B71E1CB2C1C0B46000BCB72 /* SearchResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1CA2C1C0B46000BCB72 /* SearchResultTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,11 +54,14 @@
 		8B71E1B12C1B1598000BCB72 /* CALayer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Extension.swift"; sourceTree = "<group>"; };
 		8B71E1B32C1B176B000BCB72 /* TextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextField+Extension.swift"; sourceTree = "<group>"; };
 		8B71E1B52C1B1D0D000BCB72 /* SelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectViewController.swift; sourceTree = "<group>"; };
-		8B71E1B72C1B2825000BCB72 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		8B71E1B72C1B2825000BCB72 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		8B71E1B92C1BC1B4000BCB72 /* CameraLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraLogo.swift; sourceTree = "<group>"; };
 		8B71E1BC2C1BC2E1000BCB72 /* SetMainColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetMainColor.swift; sourceTree = "<group>"; };
-		8B71E1C02C1BC9AF000BCB72 /* IdentiFier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentiFier.swift; sourceTree = "<group>"; };
-		8B71E1C22C1BCBAB000BCB72 /* ProfileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCollectionViewCell.swift; sourceTree = "<group>"; };
+		8B71E1C02C1BC9AF000BCB72 /* Identifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifier.swift; sourceTree = "<group>"; };
+		8B71E1C22C1BCBAB000BCB72 /* SelectCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCollectionViewCell.swift; sourceTree = "<group>"; };
+		8B71E1C42C1C078C000BCB72 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		8B71E1C62C1C07DD000BCB72 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		8B71E1CA2C1C0B46000BCB72 /* SearchResultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,7 +109,8 @@
 				8B71E1802C1AD984000BCB72 /* Assets.xcassets */,
 				8B71E1822C1AD984000BCB72 /* LaunchScreen.storyboard */,
 				8B71E1852C1AD984000BCB72 /* Info.plist */,
-				8B71E1C22C1BCBAB000BCB72 /* ProfileCollectionViewCell.swift */,
+				8B71E1C22C1BCBAB000BCB72 /* SelectCollectionViewCell.swift */,
+				8B71E1CA2C1C0B46000BCB72 /* SearchResultTableViewCell.swift */,
 			);
 			path = MeaningOut;
 			sourceTree = "<group>";
@@ -134,7 +141,9 @@
 				8B71E17B2C1AD983000BCB72 /* OnBoardingViewController.swift */,
 				8B71E1A62C1AED76000BCB72 /* ProfileViewController.swift */,
 				8B71E1B52C1B1D0D000BCB72 /* SelectViewController.swift */,
-				8B71E1B72C1B2825000BCB72 /* MainViewController.swift */,
+				8B71E1C42C1C078C000BCB72 /* TabBarController.swift */,
+				8B71E1B72C1B2825000BCB72 /* SearchViewController.swift */,
+				8B71E1C62C1C07DD000BCB72 /* SettingViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -152,7 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				8B71E1BC2C1BC2E1000BCB72 /* SetMainColor.swift */,
-				8B71E1C02C1BC9AF000BCB72 /* IdentiFier.swift */,
+				8B71E1C02C1BC9AF000BCB72 /* Identifier.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -241,20 +250,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B71E17C2C1AD983000BCB72 /* OnBoardingViewController.swift in Sources */,
-				8B71E1B82C1B2825000BCB72 /* MainViewController.swift in Sources */,
-				8B71E1C32C1BCBAB000BCB72 /* ProfileCollectionViewCell.swift in Sources */,
+				8B71E1B82C1B2825000BCB72 /* SearchViewController.swift in Sources */,
+				8B71E1C32C1BCBAB000BCB72 /* SelectCollectionViewCell.swift in Sources */,
 				8B71E1782C1AD983000BCB72 /* AppDelegate.swift in Sources */,
 				8B71E1AC2C1AF895000BCB72 /* Enum+Constant.swift in Sources */,
 				8B71E1B22C1B1598000BCB72 /* CALayer+Extension.swift in Sources */,
-				8B71E1C12C1BC9AF000BCB72 /* IdentiFier.swift in Sources */,
+				8B71E1C12C1BC9AF000BCB72 /* Identifier.swift in Sources */,
 				8B71E1B62C1B1D0D000BCB72 /* SelectViewController.swift in Sources */,
 				8B71E1B42C1B176B000BCB72 /* TextField+Extension.swift in Sources */,
 				8B71E1BA2C1BC1B4000BCB72 /* CameraLogo.swift in Sources */,
 				8B71E1A32C1AE7B4000BCB72 /* BigSizeButton.swift in Sources */,
 				8B71E17A2C1AD983000BCB72 /* SceneDelegate.swift in Sources */,
 				8B71E19E2C1AE275000BCB72 /* UIColor+Extension.swift in Sources */,
+				8B71E1CB2C1C0B46000BCB72 /* SearchResultTableViewCell.swift in Sources */,
+				8B71E1C52C1C078C000BCB72 /* TabBarController.swift in Sources */,
 				8B71E1AE2C1AFB2B000BCB72 /* CustomProfileButton.swift in Sources */,
 				8B71E1BD2C1BC2E1000BCB72 /* SetMainColor.swift in Sources */,
+				8B71E1C72C1C07DD000BCB72 /* SettingViewController.swift in Sources */,
 				8B71E1B02C1B13EC000BCB72 /* Enum+Variable.swift in Sources */,
 				8B71E1A72C1AED76000BCB72 /* ProfileViewController.swift in Sources */,
 			);

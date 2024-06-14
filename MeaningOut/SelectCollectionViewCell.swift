@@ -7,9 +7,9 @@
 
 import UIKit
 
-class ProfileCollectionViewCell: UICollectionViewCell {
+class SelectCollectionViewCell: UICollectionViewCell {
     
-    lazy var profileImageSelect = {
+    lazy var profileImageButton = {
         let image = UIButton()
         let select = false
         image.alpha = 0.5
@@ -17,31 +17,34 @@ class ProfileCollectionViewCell: UICollectionViewCell {
         return image
     }()
     
-    
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .lightGray
-        contentView.addSubview(profileImageSelect)
-        profileImageSelect.snp.makeConstraints { make in
+        contentView.addSubview(profileImageButton)
+        profileImageButton.snp.makeConstraints { make in
             make.edges.equalTo(contentView.safeAreaLayoutGuide)
         }
-        profileImageSelect.layer.cornerRadius = frame.width/2
+        profileImageButton.layer.cornerRadius = frame.width/2
         configureLayout()
     }
-    
     @objc func profileButtonTapped() {
         isSelected.toggle()
         let color = isSelected ? UIColor.mainColor : UIColor.black
         layer.borderColor = color.cgColor
-        profileImageSelect.setImage(UIImage(named: Constant.profileImages.allCases[tag].rawValue), for: .normal)
+//        profileImageButton.
+        
+        Variable.profileImage = Constant.profileImages.allCases[profileImageButton.tag].rawValue
+        let vc = SelectViewController()
+        vc.profileButton.setImage(UIImage(named: Variable.profileImage), for: .normal)
+    
     }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     func configureCell(data: IndexPath) {
-        profileImageSelect.setImage(UIImage(named: Constant.profileImages.allCases[data.row].rawValue), for: .normal)
-        tag = data.row
+        profileImageButton.setImage(UIImage(named: Constant.profileImages.allCases[data.row].rawValue), for: .normal)
+        profileImageButton.tag = data.row
     }
     
     func configureLayout() {

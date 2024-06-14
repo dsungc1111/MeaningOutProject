@@ -9,7 +9,16 @@ import Foundation
 
 enum Variable {
 
+//    static var list: [String] = []
     
+    static var researchList: [String] {
+        get {
+            return UserDefaults.standard.stringArray(forKey: "research") ?? [""]
+        }
+        set {
+            UserDefaults.standard.setValue(newValue, forKey: "research")
+        }
+    }
     
     static var profileImage: String {
         get {
