@@ -30,4 +30,8 @@ class TabBarController: UITabBarController {
         
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        tabBar.layer.addBorder([.top], color: .lightGray, width: 1)
+    }
+    
 }

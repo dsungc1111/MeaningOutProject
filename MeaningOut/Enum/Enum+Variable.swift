@@ -9,7 +9,17 @@ import Foundation
 
 enum Variable {
 
-//    static var list: [String] = []
+    static var index: Int {
+        get {
+            return UserDefaults.standard.integer(forKey: "index")
+        }
+        set {
+            UserDefaults.standard.setValue(newValue, forKey: "index")
+        }
+    }
+    
+    
+    
     
     static var researchList: [String] {
         get {

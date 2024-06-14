@@ -9,24 +9,32 @@ import UIKit
 
 class SearchResultTableViewCell: UITableViewCell {
 
-    let timelogo = {
-        let logo = UIImageView()
-        logo.image = UIImage(systemName: "clock")
-        logo.tintColor = .black
-        return logo
-    }()
-    let resultLable = {
-       let label = UILabel()
-        label.font = .systemFont(ofSize: 14)
-        return label
-    }()
-    lazy var removeButton = {
+    
+    let timelogoButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "xmark"), for: .normal)
-        button.tintColor = .darkGray
-//        button.addTarget(self, action: #selector(removeButtonTapped), for: .touchUpInside)
+        button.setImage(UIImage(systemName: "clock"), for: .normal)
+        button.tintColor = .black
+        button.configuration?.titlePadding = 10
+        button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 0)
         return button
     }()
+    lazy var resultButton = {
+        let button = UIButton()
+        button.titleLabel?.font = .systemFont(ofSize: 14)
+        button.contentHorizontalAlignment = .left
+        button.setTitleColor(.black, for: .normal)
+        button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
+        return button
+    }()
+   lazy var removeButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "xmark"), for: .normal)
+        button.backgroundColor = .clear
+        button.tintColor = .darkGray
+        button.isUserInteractionEnabled = false
+        return button
+    }()
+  
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -37,34 +45,36 @@ class SearchResultTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-//    
-//    @objc func removeButtonTapped(sender: UIBU) {
-//        
-//    }
-//    
+    
+ 
     
     func configureHierarchy() {
-        contentView.addSubview(timelogo)
-        contentView.addSubview(resultLable)
         contentView.addSubview(removeButton)
+        contentView.addSubview(timelogoButton)
+        contentView.addSubview(resultButton)
+      
 
     }
     func configureLayout() {
-        timelogo.snp.makeConstraints { make in
+        timelogoButton.snp.makeConstraints { make in
             make.centerY.equalTo(contentView.safeAreaLayoutGuide)
-            make.leading.equalTo(contentView.snp.leading).inset(10)
-            make.size.equalTo(18)
-        }
-        resultLable.snp.makeConstraints { make in
-            make.leading.equalTo(timelogo.snp.trailing).offset(10)
-            make.width.equalTo(300)
-            make.centerY.equalTo(contentView.safeAreaLayoutGuide)
+            make.leading.equalTo(contentView.safeAreaLayoutGuide)
+            make.verticalEdges.equalTo(contentView.safeAreaLayoutGuide)
+            make.width.equalTo(30)
+            
         }
         removeButton.snp.makeConstraints { make in
+             make.centerY.equalTo(contentView.safeAreaLayoutGuide)
+             make.trailing.equalTo(contentView.safeAreaLayoutGuide).inset(10)
+             make.size.equalTo(18)
+         }
+        resultButton.snp.makeConstraints { make in
+            make.leading.equalTo(timelogoButton.snp.trailing)
+            make.trailing.equalTo(removeButton.snp.leading)
+            make.verticalEdges.equalTo(contentView.safeAreaLayoutGuide)
             make.centerY.equalTo(contentView.safeAreaLayoutGuide)
-            make.trailing.equalTo(contentView.safeAreaLayoutGuide).inset(10)
-            make.size.equalTo(18)
         }
+   
         
     }
    

@@ -10,7 +10,7 @@ import UIKit
 class SearchViewController: UIViewController {
     
     let tableView = UITableView()
-    
+    static var resultText: [Int : String] = [:]
     let searchBar = {
         let bar = UISearchBar()
         bar.placeholder = "브랜드, 상품 등을 입력하세요."
@@ -43,7 +43,6 @@ class SearchViewController: UIViewController {
         button.setTitleColor(.mainColor, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 13)
         button.isHidden = true
-        button.addTarget(self, action: #selector(removeAllButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -57,10 +56,6 @@ class SearchViewController: UIViewController {
         tableView.register(SearchResultTableViewCell.self, forCellReuseIdentifier: SearchResultTableViewCell.identifier)
         configureHierarchy()
         configureLayout()
-        selectedWindow()
-    }
-    @objc func removeAllButtonTapped() {
-        Variable.researchList.removeAll()
         selectedWindow()
     }
     
@@ -121,8 +116,6 @@ class SearchViewController: UIViewController {
     
 }
 
-
-
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Variable.researchList.count
@@ -131,35 +124,36 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: SearchResultTableViewCell.identifier, for: indexPath) as?
                 SearchResultTableViewCell else { return SearchResultTableViewCell() }
-        cell.removeButton.tag = indexPath.row
-        print(cell.removeButton.tag)
-        
-        cell.resultLable.text = Variable.researchList.reversed()[indexPath.row]
-        
-        cell.removeButton.addTarget(self, action: #selector(removeButtonTapped), for: .touchUpInside)
-        
+        cell.resultButton.tag = indexPath.row
+        cell.resultButton.setTitle(Variable.researchList[indexPath.row], for: .normal)
+        cell.resultButton.addTarget(self, action: #selector(resultButtonTapped(sender:)), for: .touchUpInside)
         return cell
     }
-    
-    @objc func removeButtonTapped() {
-        let cell = SearchResultTableViewCell()
-     
-        Variable.researchList.reverse()
-        Variable.researchList.remove(at: cell.removeButton.tag)
-        Variable.researchList.reverse()
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        Variable.researchList.remove(at: indexPath.row)
         selectedWindow()
         tableView.reloadData()
-        
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            tableView.reloadRows(at: [indexPath], with: .automatic)
-        }
+    @objc func resultButtonTapped(sender: UIButton) {
+        let vc = ResultViewController()
+        vc.navigationItem.title = "\(Variable.researchList[sender.tag])"
+        navigationItem.backButtonTitle = ""
+        navigationController?.navigationBar.tintColor = .black
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    
+    
+    
+    
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 40
+    }
+    
 }
-
-
-
-
 
 extension SearchViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
@@ -168,9 +162,19 @@ extension SearchViewController: UISearchBarDelegate {
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        Variable.researchList.append(searchBar.text!)
+        Variable.researchList.insert(searchBar.text!, at: 0)
+        configureNextNavigation()
         searchBar.text = nil
         selectedWindow()
         tableView.reloadData()
     }
+    func configureNextNavigation() {
+        let vc = ResultViewController()
+        vc.navigationItem.title = "\(searchBar.text!)"
+        navigationController?.pushViewController(vc, animated: true)
+        navigationItem.backButtonTitle = ""
+        navigationController?.navigationBar.tintColor = .black
+    }
+    
+    
 }

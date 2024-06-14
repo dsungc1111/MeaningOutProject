@@ -34,6 +34,7 @@
 		8B71E1C52C1C078C000BCB72 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1C42C1C078C000BCB72 /* TabBarController.swift */; };
 		8B71E1C72C1C07DD000BCB72 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1C62C1C07DD000BCB72 /* SettingViewController.swift */; };
 		8B71E1CB2C1C0B46000BCB72 /* SearchResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1CA2C1C0B46000BCB72 /* SearchResultTableViewCell.swift */; };
+		8B71E1CD2C1C2EED000BCB72 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1CC2C1C2EED000BCB72 /* ResultViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		8B71E1C42C1C078C000BCB72 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		8B71E1C62C1C07DD000BCB72 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		8B71E1CA2C1C0B46000BCB72 /* SearchResultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultTableViewCell.swift; sourceTree = "<group>"; };
+		8B71E1CC2C1C2EED000BCB72 /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +146,7 @@
 				8B71E1C42C1C078C000BCB72 /* TabBarController.swift */,
 				8B71E1B72C1B2825000BCB72 /* SearchViewController.swift */,
 				8B71E1C62C1C07DD000BCB72 /* SettingViewController.swift */,
+				8B71E1CC2C1C2EED000BCB72 /* ResultViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -251,6 +254,7 @@
 			files = (
 				8B71E17C2C1AD983000BCB72 /* OnBoardingViewController.swift in Sources */,
 				8B71E1B82C1B2825000BCB72 /* SearchViewController.swift in Sources */,
+				8B71E1CD2C1C2EED000BCB72 /* ResultViewController.swift in Sources */,
 				8B71E1C32C1BCBAB000BCB72 /* SelectCollectionViewCell.swift in Sources */,
 				8B71E1782C1AD983000BCB72 /* AppDelegate.swift in Sources */,
 				8B71E1AC2C1AF895000BCB72 /* Enum+Constant.swift in Sources */,
