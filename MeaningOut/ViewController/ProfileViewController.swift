@@ -49,9 +49,6 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         navigationItem.title = "Profile Setting"
-        
-     
-        
         configureHierarchy()
         configureLayout()
         completeButton.isEnabled = false

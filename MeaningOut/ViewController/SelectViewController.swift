@@ -9,6 +9,21 @@ import UIKit
 
 class SelectViewController: UIViewController {
 
+    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: CollectionViewLayout())
+    
+    
+    static func CollectionViewLayout() -> UICollectionViewLayout{
+        let layout = UICollectionViewFlowLayout()
+        let sectionSpacing: CGFloat = 30
+        let cellSpacing: CGFloat = 10
+        let width = UIScreen.main.bounds.width - (sectionSpacing*2 + cellSpacing*3)
+        layout.itemSize = CGSize(width: width/4, height: width/4)
+        layout.scrollDirection = .vertical
+        layout.minimumInteritemSpacing = cellSpacing
+        layout.minimumLineSpacing = cellSpacing
+        layout.sectionInset = UIEdgeInsets(top: sectionSpacing, left: sectionSpacing, bottom: sectionSpacing, right: sectionSpacing)
+        return layout
+    }
     
     let profileButton = {
         let button = CustomProfileButton()
@@ -24,17 +39,23 @@ class SelectViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         navigationItem.title = "Profile Setting"
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(ProfileCollectionViewCell.self, forCellWithReuseIdentifier: ProfileCollectionViewCell.identifier)
+        collectionView.showsVerticalScrollIndicator = false
         configureHierarchy()
         configureLayout()
     }
     override func viewDidLayoutSubviews() {
         profileButton.layer.cornerRadius = profileButton.frame.width / 2
         profileCameraLogo.layer.cornerRadius = profileCameraLogo.frame.width/2
+        
     }
     
     func configureHierarchy() {
         view.addSubview(profileButton)
         view.addSubview(profileCameraLogo)
+        view.addSubview(collectionView)
     }
     func configureLayout() {
         profileButton.snp.makeConstraints { make in
@@ -47,11 +68,26 @@ class SelectViewController: UIViewController {
             make.trailing.equalTo(profileButton.snp.trailing)
             make.size.equalTo(30)
         }
+        collectionView.snp.makeConstraints { make in
+            make.top.equalTo(profileButton.snp.bottom).offset(30)
+            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
+            make.height.equalTo(300)
+        }
+    }
+}
+
+
+extension SelectViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return Constant.profileImages.allCases.count
     }
     
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProfileCollectionViewCell.identifier, for: indexPath) as? ProfileCollectionViewCell else { return ProfileCollectionViewCell() }
+        
+        cell.configureCell(data: indexPath)
+        return cell
+    }
+   
     
-    
-
-  
-
 }
