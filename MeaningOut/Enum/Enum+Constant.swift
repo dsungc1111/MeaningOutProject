@@ -9,6 +9,13 @@ import Foundation
 
 enum Constant{
 
+    static var number = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
+    
+    enum saveKeyWord: String {
+        case username
+        case profileImage
+    }
+    
     enum profileImages: String, CaseIterable {
         case profile_0
         case profile_1

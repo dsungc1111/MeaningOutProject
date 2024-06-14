@@ -27,6 +27,8 @@
 		8B71E1B42C1B176B000BCB72 /* TextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1B32C1B176B000BCB72 /* TextField+Extension.swift */; };
 		8B71E1B62C1B1D0D000BCB72 /* SelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1B52C1B1D0D000BCB72 /* SelectViewController.swift */; };
 		8B71E1B82C1B2825000BCB72 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1B72C1B2825000BCB72 /* MainViewController.swift */; };
+		8B71E1BA2C1BC1B4000BCB72 /* CameraLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1B92C1BC1B4000BCB72 /* CameraLogo.swift */; };
+		8B71E1BD2C1BC2E1000BCB72 /* SetMainColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1BC2C1BC2E1000BCB72 /* SetMainColor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +50,8 @@
 		8B71E1B32C1B176B000BCB72 /* TextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextField+Extension.swift"; sourceTree = "<group>"; };
 		8B71E1B52C1B1D0D000BCB72 /* SelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectViewController.swift; sourceTree = "<group>"; };
 		8B71E1B72C1B2825000BCB72 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		8B71E1B92C1BC1B4000BCB72 /* CameraLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraLogo.swift; sourceTree = "<group>"; };
+		8B71E1BC2C1BC2E1000BCB72 /* SetMainColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetMainColor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +89,7 @@
 		8B71E1762C1AD983000BCB72 /* MeaningOut */ = {
 			isa = PBXGroup;
 			children = (
+				8B71E1BB2C1BC2CF000BCB72 /* Protocol */,
 				8B71E1AA2C1AF885000BCB72 /* Enum */,
 				8B71E1A52C1AED55000BCB72 /* ViewController */,
 				8B71E1A12C1AE794000BCB72 /* CuntomView */,
@@ -113,6 +118,7 @@
 			children = (
 				8B71E1A22C1AE7B4000BCB72 /* BigSizeButton.swift */,
 				8B71E1AD2C1AFB2B000BCB72 /* CustomProfileButton.swift */,
+				8B71E1B92C1BC1B4000BCB72 /* CameraLogo.swift */,
 			);
 			path = CuntomView;
 			sourceTree = "<group>";
@@ -135,6 +141,14 @@
 				8B71E1AF2C1B13EC000BCB72 /* Enum+Variable.swift */,
 			);
 			path = Enum;
+			sourceTree = "<group>";
+		};
+		8B71E1BB2C1BC2CF000BCB72 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				8B71E1BC2C1BC2E1000BCB72 /* SetMainColor.swift */,
+			);
+			path = Protocol;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -227,10 +241,12 @@
 				8B71E1B22C1B1598000BCB72 /* CALayer+Extension.swift in Sources */,
 				8B71E1B62C1B1D0D000BCB72 /* SelectViewController.swift in Sources */,
 				8B71E1B42C1B176B000BCB72 /* TextField+Extension.swift in Sources */,
+				8B71E1BA2C1BC1B4000BCB72 /* CameraLogo.swift in Sources */,
 				8B71E1A32C1AE7B4000BCB72 /* BigSizeButton.swift in Sources */,
 				8B71E17A2C1AD983000BCB72 /* SceneDelegate.swift in Sources */,
 				8B71E19E2C1AE275000BCB72 /* UIColor+Extension.swift in Sources */,
 				8B71E1AE2C1AFB2B000BCB72 /* CustomProfileButton.swift in Sources */,
+				8B71E1BD2C1BC2E1000BCB72 /* SetMainColor.swift in Sources */,
 				8B71E1B02C1B13EC000BCB72 /* Enum+Variable.swift in Sources */,
 				8B71E1A72C1AED76000BCB72 /* ProfileViewController.swift in Sources */,
 			);

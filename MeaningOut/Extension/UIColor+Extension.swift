@@ -7,7 +7,11 @@
 
 import UIKit
 
-extension UIColor {
+extension UIColor: MainThemeColorProtocol {
+    
+    static var mainColor: UIColor {
+        return UIColor(hexCode: "EF8947", alpha: 1)
+    }
     
     convenience init(hexCode: String, alpha: CGFloat = 1.0) {
         var hexFormatted: String = hexCode.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).uppercased()
@@ -28,13 +32,5 @@ extension UIColor {
     }
 }
 
-protocol MainThemeColorProtocol {
-    static var mainColor: UIColor { get }
-}
 
-extension UIColor: MainThemeColorProtocol {
-    static var mainColor: UIColor {
-        
-        return UIColor(hexCode: "EF8947", alpha: 1)
-    }
-}
+

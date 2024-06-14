@@ -8,15 +8,24 @@
 import Foundation
 
 enum Variable {
+
     
-    static let username = "user"
+    
+    static var profileImage: String {
+        get {
+            return UserDefaults.standard.string(forKey: Constant.saveKeyWord.profileImage.rawValue) ?? ""
+        }
+        set {
+            UserDefaults.standard.setValue(newValue, forKey: Constant.saveKeyWord.profileImage.rawValue)
+        }
+    }
     
     static var user: String {
         get {
-            return UserDefaults.standard.string(forKey: username) ?? ""
+            return UserDefaults.standard.string(forKey: Constant.saveKeyWord.username.rawValue) ?? ""
         }
         set {
-            UserDefaults.standard.setValue(newValue, forKey: username)
+            UserDefaults.standard.setValue(newValue, forKey: Constant.saveKeyWord.username.rawValue)
         }
     }
     

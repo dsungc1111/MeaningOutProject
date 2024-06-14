@@ -12,15 +12,12 @@ class ProfileViewController: UIViewController {
     
     lazy var profileButton = {
         let button = CustomProfileButton()
+        Variable.profileImage = button.imageString
         button.addTarget(self, action: #selector(profileButtonTapped), for: .touchUpInside)
         return button
     }()
     let profileCameraLogo = {
-        let logo = UIImageView()
-        logo.image = UIImage(systemName: "camera.fill")
-        logo.backgroundColor = UIColor.mainColor
-        logo.tintColor = .white
-        logo.contentMode = .center
+        let logo = CameraLogo(frame: .zero)
         return logo
     }()
     lazy var nicknameTextfield = {
@@ -52,6 +49,9 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         navigationItem.title = "Profile Setting"
+        
+     
+        
         configureHierarchy()
         configureLayout()
         completeButton.isEnabled = false
@@ -62,7 +62,6 @@ class ProfileViewController: UIViewController {
         profileCameraLogo.layer.cornerRadius = profileCameraLogo.frame.width/2
         nicknameTextfield.layer.addBorder([.bottom], color: .lightGray, width: 1)
         navigationController?.navigationBar.layer.addBorder([.bottom], color: .systemGray4, width: 1)
-        
     }
     
     @objc func nicknameDidChange() {
@@ -78,13 +77,14 @@ class ProfileViewController: UIViewController {
             if text.contains(Constant.SpecialCharacters.blankSymbol.rawValue) {
                 warningTextfield.text = Constant.warningMessage.blankFail.rawValue
             }
-            if Int(text) != nil  {
-                warningTextfield.text = Constant.warningMessage.numberFail.rawValue
+            for i in Constant.number {
+                if text.contains(i)  {
+                    warningTextfield.text = Constant.warningMessage.numberFail.rawValue
+                }
             }
         } else {
             warningTextfield.text = Constant.warningMessage.countFail.rawValue
         }
-        
         
         if warningTextfield.text == Constant.warningMessage.pass.rawValue {
             completeButton.isEnabled = true
@@ -127,7 +127,6 @@ class ProfileViewController: UIViewController {
             make.top.equalTo(view.safeAreaLayoutGuide).inset(20)
             make.centerX.equalTo(view.safeAreaLayoutGuide)
             make.size.equalTo(100)
-
         }
         profileCameraLogo.snp.makeConstraints { make in
             make.bottom.equalTo(profileButton.snp.bottom).inset(10)
