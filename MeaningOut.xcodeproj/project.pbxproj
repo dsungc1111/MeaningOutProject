@@ -35,6 +35,7 @@
 		8B71E1C72C1C07DD000BCB72 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1C62C1C07DD000BCB72 /* SettingViewController.swift */; };
 		8B71E1CB2C1C0B46000BCB72 /* SearchResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1CA2C1C0B46000BCB72 /* SearchResultTableViewCell.swift */; };
 		8B71E1CD2C1C2EED000BCB72 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1CC2C1C2EED000BCB72 /* ResultViewController.swift */; };
+		8B71E1CF2C1D38B2000BCB72 /* ResultCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1CE2C1D38B2000BCB72 /* ResultCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +65,7 @@
 		8B71E1C62C1C07DD000BCB72 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		8B71E1CA2C1C0B46000BCB72 /* SearchResultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultTableViewCell.swift; sourceTree = "<group>"; };
 		8B71E1CC2C1C2EED000BCB72 /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
+		8B71E1CE2C1D38B2000BCB72 /* ResultCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 				8B71E1852C1AD984000BCB72 /* Info.plist */,
 				8B71E1C22C1BCBAB000BCB72 /* SelectCollectionViewCell.swift */,
 				8B71E1CA2C1C0B46000BCB72 /* SearchResultTableViewCell.swift */,
+				8B71E1CE2C1D38B2000BCB72 /* ResultCollectionViewCell.swift */,
 			);
 			path = MeaningOut;
 			sourceTree = "<group>";
@@ -271,6 +274,7 @@
 				8B71E1AE2C1AFB2B000BCB72 /* CustomProfileButton.swift in Sources */,
 				8B71E1BD2C1BC2E1000BCB72 /* SetMainColor.swift in Sources */,
 				8B71E1C72C1C07DD000BCB72 /* SettingViewController.swift in Sources */,
+				8B71E1CF2C1D38B2000BCB72 /* ResultCollectionViewCell.swift in Sources */,
 				8B71E1B02C1B13EC000BCB72 /* Enum+Variable.swift in Sources */,
 				8B71E1A72C1AED76000BCB72 /* ProfileViewController.swift in Sources */,
 			);

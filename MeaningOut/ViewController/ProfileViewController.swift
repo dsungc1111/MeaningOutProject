@@ -109,7 +109,6 @@ class ProfileViewController: UIViewController {
         let sceneDelegate = windowScene?.delegate as? SceneDelegate
         
         let vc = TabBarController()
-//        vc.navigationBar.tintColor = .black
         sceneDelegate?.window?.rootViewController = vc
         sceneDelegate?.window?.makeKeyAndVisible()
         
