@@ -13,7 +13,6 @@ class SettingViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         navigationItem.title = "Setting"
-        
     }
     
 

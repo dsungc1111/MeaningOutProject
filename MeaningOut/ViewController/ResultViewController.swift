@@ -23,6 +23,13 @@ struct ProductInfo: Decodable{
     let lprice: String
 }
 
+enum Category: String, CaseIterable {
+    case accuracy = "정확도"
+    case byDate = "날짜순"
+    case highPrice = "높은가격순"
+    case lowPrice = "낮은가격순"
+}
+
 
 
 class ResultViewController: UIViewController {
@@ -37,52 +44,114 @@ class ResultViewController: UIViewController {
         return label
     }()
     
-    let categoryCollectionView = UICollectionView(frame: .zero, collectionViewLayout: CategoryCollectionViewLayout())
+    let accuracyButton = {
+        let button = UIButton()
+        button.setTitle("정확성", for: .normal)
+        button.layer.cornerRadius = 15
+        button.layer.borderWidth = 1
+        button.backgroundColor = .systemGray
+        return button
+    }()
+    let dateButton = {
+       let button = UIButton()
+        button.setTitle("날짜순", for: .normal)
+        button.layer.cornerRadius = 15
+        button.layer.borderWidth = 1
+        button.backgroundColor = .systemGray
+        return button
+    }()
+    let highPriceButton = {
+        let button = UIButton()
+         button.setTitle("높은가격순", for: .normal)
+         button.layer.cornerRadius = 15
+         button.layer.borderWidth = 1
+         button.backgroundColor = .systemGray
+         return button
+    }()
+    let lowPriceButton = {
+        let button = UIButton()
+         button.setTitle("낮은가격순", for: .normal)
+         button.layer.cornerRadius = 15
+         button.layer.borderWidth = 1
+         button.backgroundColor = .systemGray
+         return button
+    }()
     
-    static func CategoryCollectionViewLayout() -> UICollectionViewLayout{
+    
+    
+    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
+    
+    static func collectionViewLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewFlowLayout()
-        let sectionSpacing: CGFloat = 30
+        let sectionSpacing: CGFloat = 10
         let cellSpacing: CGFloat = 10
-        let width = UIScreen.main.bounds.width - (sectionSpacing*2 + cellSpacing*3)
-        layout.itemSize = CGSize(width: width/4, height: width/4)
-        layout.scrollDirection = .horizontal
+        let width = UIScreen.main.bounds.width - (sectionSpacing*2 + cellSpacing*2)
+        layout.itemSize = CGSize(width: width/2, height: width - sectionSpacing - cellSpacing)
+        layout.scrollDirection = .vertical
         layout.minimumInteritemSpacing = cellSpacing
         layout.minimumLineSpacing = cellSpacing
+        // 실수하기 좋음
         layout.sectionInset = UIEdgeInsets(top: sectionSpacing, left: sectionSpacing, bottom: sectionSpacing, right: sectionSpacing)
         return layout
     }
     
     
+   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        categoryCollectionView.dataSource = self
-        categoryCollectionView.delegate = self
-        categoryCollectionView.register(ResultCollectionViewCell.self, forCellWithReuseIdentifier: ResultCollectionViewCell.identifier)
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.register(ResultCollectionViewCell.self, forCellWithReuseIdentifier: ResultCollectionViewCell.identifier)
         callRequest()
         configurehierarchy()
         configureLayout()
     }
     override func viewDidLayoutSubviews() {
         navigationController?.navigationBar.layer.addBorder([.bottom], color: .systemGray4, width: 1)
+        collectionView.showsHorizontalScrollIndicator = false
     }
     
     func configurehierarchy() {
         view.addSubview(numberOfSearch)
-        view.addSubview(categoryCollectionView)
+        view.addSubview(accuracyButton)
+        view.addSubview(dateButton)
+        view.addSubview(highPriceButton)
+        view.addSubview(lowPriceButton)
+        view.addSubview(collectionView)
     }
     func configureLayout() {
         numberOfSearch.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).inset(20)
             make.leading.equalTo(view.safeAreaLayoutGuide).inset(20)
         }
-        categoryCollectionView.snp.makeConstraints { make in
+        accuracyButton.snp.makeConstraints { make in
             make.top.equalTo(numberOfSearch.snp.bottom).offset(10)
-            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(20)
-            
-            make.height.equalTo(50)
+            make.leading.equalTo(view.safeAreaLayoutGuide).inset(10)
+            make.width.equalTo(70)
         }
-        categoryCollectionView.backgroundColor = .systemBlue
+        dateButton.snp.makeConstraints { make in
+            make.top.equalTo(numberOfSearch.snp.bottom).offset(10)
+            make.leading.equalTo(accuracyButton.snp.trailing).offset(10)
+            make.width.equalTo(70)
+        }
+        highPriceButton.snp.makeConstraints { make in
+            make.top.equalTo(numberOfSearch.snp.bottom).offset(10)
+            make.leading.equalTo(dateButton.snp.trailing).offset(10)
+            make.width.equalTo(100)
+        }
+        lowPriceButton.snp.makeConstraints { make in
+            make.top.equalTo(numberOfSearch.snp.bottom).offset(10)
+            make.leading.equalTo(highPriceButton.snp.trailing).offset(10)
+            make.width.equalTo(100)
+        }
+        collectionView.snp.makeConstraints { make in
+            make.top.equalTo(lowPriceButton.snp.bottom).offset(10)
+            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
+            make.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+        collectionView.backgroundColor = .brown
     }
     
     
@@ -96,8 +165,8 @@ class ResultViewController: UIViewController {
             switch response.result {
             case .success(let value):
                 self.mySearch = value.items
-                print(self.mySearch)
-                print(value)
+//                print(self.mySearch)
+//                print(value)
             case .failure(let error):
                 print(error)
             }
@@ -109,15 +178,15 @@ class ResultViewController: UIViewController {
 
 extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return 20
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = categoryCollectionView.dequeueReusableCell(withReuseIdentifier: ResultCollectionViewCell.identifier, for: indexPath) as? ResultCollectionViewCell else { return ResultCollectionViewCell() }
-        
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ResultCollectionViewCell.identifier, for: indexPath) as? ResultCollectionViewCell else { return ResultCollectionViewCell() }
+      
         
         return cell
     }
     
-    
+   
 }
