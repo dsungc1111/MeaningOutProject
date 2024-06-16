@@ -58,9 +58,9 @@ class ResultCollectionViewCell: UICollectionViewCell {
     }
     
     @objc func likeButtonTapped(sender: UIButton) {
-        var like = UserDefaults.standard.bool(forKey: "\(Variable.mySearch[sender.tag].title)")
-        like.toggle()
-        if like {
+        ResultViewController.like = UserDefaults.standard.bool(forKey: "\(Variable.mySearch[sender.tag].title)")
+        ResultViewController.like.toggle()
+        if ResultViewController.like {
             likeButton.setImage(UIImage(named: "like_selected"), for: .normal)
             likeButton.backgroundColor = UIColor(hexCode: "FFFFFF", alpha: 0.5)
             Variable.temporaryBasket = Variable.myBasket
@@ -78,7 +78,8 @@ class ResultCollectionViewCell: UICollectionViewCell {
                 
             }
         }
-        UserDefaults.standard.setValue(like, forKey: "\(Variable.mySearch[sender.tag].title)")
+        UserDefaults.standard.setValue(ResultViewController.like, forKey: "\(Variable.mySearch[sender.tag].title)")
+        print("ㅇ", ResultViewController.like)
     }
     
     

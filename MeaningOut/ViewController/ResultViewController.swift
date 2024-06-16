@@ -35,7 +35,7 @@ enum Category: String, CaseIterable {
 class ResultViewController: UIViewController {
     
     
-    
+    static var like = false
 
     var page = 1
     let numberOfSearch = {
@@ -131,7 +131,6 @@ class ResultViewController: UIViewController {
         layout.scrollDirection = .vertical
         layout.minimumInteritemSpacing = cellSpacing
         layout.minimumLineSpacing = cellSpacing
-        // 실수하기 좋음
         layout.sectionInset = UIEdgeInsets(top: sectionSpacing, left: sectionSpacing, bottom: sectionSpacing, right: sectionSpacing)
         return layout
     }
@@ -205,7 +204,7 @@ class ResultViewController: UIViewController {
         
         let url = "https://openapi.naver.com/v1/search/shop.json?query=\(Variable.searchText)=String&page=\(page)&display=30&sort=\(sort)"
         
-        let header: HTTPHeaders = ["X-Naver-Client-Id" : "Hc5_csSXTiRg9TJ7xTXh", "X-Naver-Client-Secret" : "6ykniciEiv"]
+        let header: HTTPHeaders = [ APIKey().id : APIKey().clientId, APIKey().secret : APIKey().secretKey]
         
         AF.request(url, method: .get, headers: header).responseDecodable(of: Shopping.self) { response in
             switch response.result {
@@ -239,8 +238,29 @@ extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ResultCollectionViewCell.identifier, for: indexPath) as? ResultCollectionViewCell else { return ResultCollectionViewCell() }
+        
+        ResultViewController.like = UserDefaults.standard.bool(forKey: "\(Variable.mySearch[indexPath.item].title)")
+        
+        if ResultViewController.like {
+            cell.likeButton.setImage(UIImage(named: "like_selected"), for: .normal)
+            cell.likeButton.backgroundColor = UIColor(hexCode: "FFFFFF", alpha: 0.5)
+        } else {
+            cell.likeButton.setImage(UIImage(named: "like_unselected"), for: .normal)
+            cell.likeButton.backgroundColor = UIColor(hexCode: "828282", alpha: 0.5)
+        }
+        
         cell.configureCell(data: indexPath)
+    
+        
+        
         return cell
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let vc = ProductViewController()
+        vc.navigationItem.title = Variable.mySearch[indexPath.item].title
+        Variable.searchItem = Variable.mySearch[indexPath.item].link
+        navigationController?.pushViewController(vc, animated: true)
+        
     }
     
 }

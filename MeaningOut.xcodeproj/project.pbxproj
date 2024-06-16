@@ -37,6 +37,8 @@
 		8B71E1CD2C1C2EED000BCB72 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1CC2C1C2EED000BCB72 /* ResultViewController.swift */; };
 		8B71E1CF2C1D38B2000BCB72 /* ResultCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1CE2C1D38B2000BCB72 /* ResultCollectionViewCell.swift */; };
 		8B71E1D12C1EC2C6000BCB72 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1D02C1EC2C6000BCB72 /* String+Extension.swift */; };
+		8B71E1D52C1F1D2D000BCB72 /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1D42C1F1D2D000BCB72 /* ProductViewController.swift */; };
+		8B71E1D72C1F29A4000BCB72 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1D62C1F29A4000BCB72 /* APIKey.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +70,8 @@
 		8B71E1CC2C1C2EED000BCB72 /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		8B71E1CE2C1D38B2000BCB72 /* ResultCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultCollectionViewCell.swift; sourceTree = "<group>"; };
 		8B71E1D02C1EC2C6000BCB72 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		8B71E1D42C1F1D2D000BCB72 /* ProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewController.swift; sourceTree = "<group>"; };
+		8B71E1D62C1F29A4000BCB72 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +122,7 @@
 				8B71E1C22C1BCBAB000BCB72 /* SelectCollectionViewCell.swift */,
 				8B71E1CA2C1C0B46000BCB72 /* SearchResultTableViewCell.swift */,
 				8B71E1CE2C1D38B2000BCB72 /* ResultCollectionViewCell.swift */,
+				8B71E1D62C1F29A4000BCB72 /* APIKey.swift */,
 			);
 			path = MeaningOut;
 			sourceTree = "<group>";
@@ -150,6 +155,7 @@
 				8B71E1D32C1F1BA3000BCB72 /* Profile */,
 				8B71E1D22C1F1B91000BCB72 /* Main */,
 				8B71E1CC2C1C2EED000BCB72 /* ResultViewController.swift */,
+				8B71E1D42C1F1D2D000BCB72 /* ProductViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -279,6 +285,7 @@
 				8B71E1CD2C1C2EED000BCB72 /* ResultViewController.swift in Sources */,
 				8B71E1C32C1BCBAB000BCB72 /* SelectCollectionViewCell.swift in Sources */,
 				8B71E1782C1AD983000BCB72 /* AppDelegate.swift in Sources */,
+				8B71E1D52C1F1D2D000BCB72 /* ProductViewController.swift in Sources */,
 				8B71E1AC2C1AF895000BCB72 /* Enum+Constant.swift in Sources */,
 				8B71E1B22C1B1598000BCB72 /* CALayer+Extension.swift in Sources */,
 				8B71E1C12C1BC9AF000BCB72 /* Identifier.swift in Sources */,
@@ -292,6 +299,7 @@
 				8B71E1CB2C1C0B46000BCB72 /* SearchResultTableViewCell.swift in Sources */,
 				8B71E1C52C1C078C000BCB72 /* TabBarController.swift in Sources */,
 				8B71E1AE2C1AFB2B000BCB72 /* CustomProfileButton.swift in Sources */,
+				8B71E1D72C1F29A4000BCB72 /* APIKey.swift in Sources */,
 				8B71E1BD2C1BC2E1000BCB72 /* SetMainColor.swift in Sources */,
 				8B71E1C72C1C07DD000BCB72 /* SettingViewController.swift in Sources */,
 				8B71E1CF2C1D38B2000BCB72 /* ResultCollectionViewCell.swift in Sources */,

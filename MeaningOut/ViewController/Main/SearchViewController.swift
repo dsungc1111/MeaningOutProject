@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import IQKeyboardManagerSwift
 
 class SearchViewController: UIViewController {
     
@@ -58,6 +59,7 @@ class SearchViewController: UIViewController {
         configureHierarchy()
         configureLayout()
         selectedWindow()
+        
     }
     @objc func removeAllButtonTapped() {
             Variable.researchList.removeAll()
@@ -118,7 +120,9 @@ class SearchViewController: UIViewController {
             removeAll.isHidden = false
         }
     }
-    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
 }
 
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {

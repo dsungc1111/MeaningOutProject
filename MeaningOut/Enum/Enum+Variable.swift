@@ -9,6 +9,7 @@ import Foundation
 
 enum Variable {
 
+    static var searchItem = ""
 
     
     static var mySearch: [ProductInfo] = []
