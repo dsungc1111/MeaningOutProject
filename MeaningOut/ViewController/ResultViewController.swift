@@ -36,7 +36,7 @@ class ResultViewController: UIViewController {
     
     
     
-    var mySearch: [ProductInfo] = []
+
     var page = 1
     let numberOfSearch = {
         let label = UILabel()
@@ -216,9 +216,9 @@ class ResultViewController: UIViewController {
                     i.title = i.title.removeHtmlTag
                     products.append(i)
                     if self.page == 1{
-                        self.mySearch = products
+                        Variable.mySearch = products
                     } else {
-                        self.mySearch.append(contentsOf: products)
+                        Variable.mySearch.append(contentsOf: products)
                     }
                 }
                 self.numberOfSearch.text = "\(value.total.formatted())개의 검색결과"
@@ -234,28 +234,38 @@ class ResultViewController: UIViewController {
 
 extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return mySearch.count
+        return Variable.mySearch.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ResultCollectionViewCell.identifier, for: indexPath) as? ResultCollectionViewCell else { return ResultCollectionViewCell() }
         
-        let url = URL(string: mySearch[indexPath.row].image)
+        let like = UserDefaults.standard.bool(forKey: "\(Variable.mySearch[indexPath.item].title)")
+       
+        let url = URL(string: Variable.mySearch[indexPath.row].image)
         cell.imageView.kf.setImage(with: url)
+        cell.likeButton.tag = indexPath.row
+        cell.companyNameLabel.text = Variable.mySearch[indexPath.row].mallName
+        cell.productNameLabel.text = Variable.mySearch[indexPath.row].title
+        cell.priceLabel.text = "\(Int(Variable.mySearch[indexPath.row].lprice)?.formatted() ?? "0")원"
         
-        cell.companyNameLabel.text = mySearch[indexPath.row].mallName
-        cell.productNameLabel.text = mySearch[indexPath.row].title
-        cell.priceLabel.text = "\(Int(mySearch[indexPath.row].lprice)?.formatted() ?? "0")원"
-        
+        if like {
+            cell.likeButton.setImage(UIImage(named: "like_selected"), for: .normal)
+            cell.likeButton.backgroundColor = UIColor(hexCode: "FFFFFF", alpha: 0.5)
+        } else {
+            cell.likeButton.setImage(UIImage(named: "like_unselected"), for: .normal)
+            cell.likeButton.backgroundColor = UIColor(hexCode: "828282", alpha: 0.5)
+        }
         
         return cell
     }
+    
 }
 
 extension ResultViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         for item in indexPaths {
-            if mySearch.count - 8 == item.row {
+            if Variable.mySearch.count - 8 == item.row {
                 page += 1
                 callRequest(sort: "sim")
                 buttonList[0].backgroundColor = .darkGray

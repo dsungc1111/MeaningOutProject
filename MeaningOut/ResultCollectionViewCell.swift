@@ -34,13 +34,16 @@ class ResultCollectionViewCell: UICollectionViewCell {
         label.font = .boldSystemFont(ofSize: 15)
         return label
     }()
+       
     lazy var likeButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "like_unselected"), for: .normal)
         button.contentMode = .scaleAspectFill
-        button.backgroundColor = UIColor(hexCode: "828282", alpha: 0.5)
         button.layer.cornerRadius = 10
-        button.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
+//        button.isUserInteractionEnabled = false
+        button.addTarget(self, action: #selector(likeButtonTapped(sender:)), for: .touchUpInside)
+        
+        
+        
         return button
     }()
     
@@ -54,12 +57,28 @@ class ResultCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    @objc func likeButtonTapped() {
-        
-        
-        
-        likeButton.setImage(UIImage(named: "like_selected"), for: .normal)
-        likeButton.backgroundColor = UIColor(hexCode: "FFFFFF", alpha: 0.5)
+    @objc func likeButtonTapped(sender: UIButton) {
+        var like = UserDefaults.standard.bool(forKey: "\(Variable.mySearch[sender.tag].title)")
+        like.toggle()
+        if like {
+            likeButton.setImage(UIImage(named: "like_selected"), for: .normal)
+            likeButton.backgroundColor = UIColor(hexCode: "FFFFFF", alpha: 0.5)
+            Variable.temporaryBasket = Variable.myBasket
+            Variable.temporaryBasket.append(Variable.mySearch[sender.tag].title)
+            Variable.myBasket = Variable.temporaryBasket
+        } else {
+            likeButton.setImage(UIImage(named: "like_unselected"), for: .normal)
+            likeButton.backgroundColor = UIColor(hexCode: "828282", alpha: 0.5)
+            if Variable.myBasket.count != 0 {
+                for i in 0..<Variable.myBasket.count {
+                    if Variable.myBasket[i] == Variable.mySearch[sender.tag].title {
+                        Variable.myBasket.remove(at: i)
+                    }
+                }
+                
+            }
+        }
+        UserDefaults.standard.setValue(like, forKey: "\(Variable.mySearch[sender.tag].title)")
     }
     
     
