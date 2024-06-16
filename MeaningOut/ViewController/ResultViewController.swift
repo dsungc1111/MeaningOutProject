@@ -7,6 +7,7 @@
 
 import UIKit
 import Alamofire
+import Kingfisher
 
 struct Shopping: Decodable {
     let total: Int
@@ -16,7 +17,7 @@ struct Shopping: Decodable {
 }
 
 struct ProductInfo: Decodable{
-    let title: String
+    var title: String
     let link: String
     let mallName: String
     let image: String
@@ -33,12 +34,14 @@ enum Category: String, CaseIterable {
 
 
 class ResultViewController: UIViewController {
+  
+    
 
     var mySearch: [ProductInfo] = []
-    
+    var page = 1
     let numberOfSearch = {
        let label = UILabel()
-        label.text = "21개의 검색결과"
+        label.text = "0개의 검색결과"
         label.font = .boldSystemFont(ofSize: 15)
         label.textColor = UIColor.mainColor
         return label
@@ -103,6 +106,7 @@ class ResultViewController: UIViewController {
         view.backgroundColor = .white
         collectionView.dataSource = self
         collectionView.delegate = self
+        collectionView.prefetchDataSource = self
         collectionView.register(ResultCollectionViewCell.self, forCellWithReuseIdentifier: ResultCollectionViewCell.identifier)
         callRequest()
         configurehierarchy()
@@ -151,22 +155,31 @@ class ResultViewController: UIViewController {
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
             make.bottom.equalTo(view.safeAreaLayoutGuide)
         }
-        collectionView.backgroundColor = .brown
     }
     
     
     func callRequest() {
         
-        let url = "https://openapi.naver.com/v1/search/shop.json?query=String&display=30"
+        let url = "https://openapi.naver.com/v1/search/shop.json?query=\(Variable.searchText)=String&page=\(page)&display=30"
         
         let header: HTTPHeaders = ["X-Naver-Client-Id" : "Hc5_csSXTiRg9TJ7xTXh", "X-Naver-Client-Secret" : "6ykniciEiv"]
         
         AF.request(url, method: .get, headers: header).responseDecodable(of: Shopping.self) { response in
             switch response.result {
             case .success(let value):
-                self.mySearch = value.items
-//                print(self.mySearch)
-//                print(value)
+                var products: [ProductInfo] = []
+                
+                for var i in value.items {
+                    i.title = i.title.removeHtmlTag
+                    products.append(i)
+                    if self.page == 1{
+                        self.mySearch = products
+                    } else {
+                        self.mySearch.append(contentsOf: products)
+                    }
+                }
+                self.numberOfSearch.text = "\(value.total.formatted())개의 검색결과"
+                self.collectionView.reloadData()
             case .failure(let error):
                 print(error)
             }
@@ -178,15 +191,33 @@ class ResultViewController: UIViewController {
 
 extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return mySearch.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ResultCollectionViewCell.identifier, for: indexPath) as? ResultCollectionViewCell else { return ResultCollectionViewCell() }
       
+        let url = URL(string: mySearch[indexPath.row].image)
+        cell.imageView.kf.setImage(with: url)
+        
+        cell.companyNameLabel.text = mySearch[indexPath.row].mallName
+        cell.productNameLabel.text = mySearch[indexPath.row].title
+        cell.priceLabel.text = "\(Int(mySearch[indexPath.row].lprice)?.formatted() ?? "0")원"
+        
         
         return cell
     }
+}
+
+extension ResultViewController: UICollectionViewDataSourcePrefetching {
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        for item in indexPaths {
+            if mySearch.count - 8 == item.row {
+                page += 1
+                callRequest()
+            }
+        }
+    }
     
-   
+    
 }

@@ -36,6 +36,7 @@
 		8B71E1CB2C1C0B46000BCB72 /* SearchResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1CA2C1C0B46000BCB72 /* SearchResultTableViewCell.swift */; };
 		8B71E1CD2C1C2EED000BCB72 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1CC2C1C2EED000BCB72 /* ResultViewController.swift */; };
 		8B71E1CF2C1D38B2000BCB72 /* ResultCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1CE2C1D38B2000BCB72 /* ResultCollectionViewCell.swift */; };
+		8B71E1D12C1EC2C6000BCB72 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1D02C1EC2C6000BCB72 /* String+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +67,7 @@
 		8B71E1CA2C1C0B46000BCB72 /* SearchResultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultTableViewCell.swift; sourceTree = "<group>"; };
 		8B71E1CC2C1C2EED000BCB72 /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		8B71E1CE2C1D38B2000BCB72 /* ResultCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultCollectionViewCell.swift; sourceTree = "<group>"; };
+		8B71E1D02C1EC2C6000BCB72 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +128,7 @@
 				8B71E19D2C1AE275000BCB72 /* UIColor+Extension.swift */,
 				8B71E1B12C1B1598000BCB72 /* CALayer+Extension.swift */,
 				8B71E1B32C1B176B000BCB72 /* TextField+Extension.swift */,
+				8B71E1D02C1EC2C6000BCB72 /* String+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -267,6 +270,7 @@
 				8B71E1B42C1B176B000BCB72 /* TextField+Extension.swift in Sources */,
 				8B71E1BA2C1BC1B4000BCB72 /* CameraLogo.swift in Sources */,
 				8B71E1A32C1AE7B4000BCB72 /* BigSizeButton.swift in Sources */,
+				8B71E1D12C1EC2C6000BCB72 /* String+Extension.swift in Sources */,
 				8B71E17A2C1AD983000BCB72 /* SceneDelegate.swift in Sources */,
 				8B71E19E2C1AE275000BCB72 /* UIColor+Extension.swift in Sources */,
 				8B71E1CB2C1C0B46000BCB72 /* SearchResultTableViewCell.swift in Sources */,

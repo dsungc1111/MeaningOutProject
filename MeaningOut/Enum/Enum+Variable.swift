@@ -9,6 +9,16 @@ import Foundation
 
 enum Variable {
 
+    static var searchText: String {
+        get {
+            return UserDefaults.standard.string(forKey: "searchBarText") ?? ""
+        }
+        set {
+            UserDefaults.standard.setValue(newValue, forKey: "searchBarText")
+        }
+    }
+    
+    
     static var index: Int {
         get {
             return UserDefaults.standard.integer(forKey: "index")

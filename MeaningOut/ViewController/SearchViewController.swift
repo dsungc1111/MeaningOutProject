@@ -145,7 +145,8 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     @objc func resultButtonTapped(sender: UIButton) {
         let vc = ResultViewController()
-        vc.navigationItem.title = "\(Variable.researchList[sender.tag])"
+        Variable.searchText = Variable.researchList[sender.tag]
+        vc.navigationItem.title = Variable.searchText
         navigationItem.backButtonTitle = ""
         navigationController?.navigationBar.tintColor = .black
         navigationController?.pushViewController(vc, animated: true)
@@ -177,7 +178,8 @@ extension SearchViewController: UISearchBarDelegate {
     }
     func configureNextNavigation() {
         let vc = ResultViewController()
-        vc.navigationItem.title = "\(searchBar.text!)"
+        Variable.searchText = searchBar.text!
+        vc.navigationItem.title = Variable.searchText
         navigationController?.pushViewController(vc, animated: true)
         navigationItem.backButtonTitle = ""
         navigationController?.navigationBar.tintColor = .black
