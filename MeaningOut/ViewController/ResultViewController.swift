@@ -32,53 +32,91 @@ enum Category: String, CaseIterable {
 }
 
 
-
 class ResultViewController: UIViewController {
-  
     
-
+    
+    
     var mySearch: [ProductInfo] = []
     var page = 1
     let numberOfSearch = {
-       let label = UILabel()
+        let label = UILabel()
         label.text = "0개의 검색결과"
         label.font = .boldSystemFont(ofSize: 15)
         label.textColor = UIColor.mainColor
         return label
     }()
     
-    let accuracyButton = {
+    lazy var accuracyButton = {
         let button = UIButton()
-        button.setTitle("정확성", for: .normal)
+        button.tag = 0
+        button.setTitle(Category.accuracy.rawValue, for: .normal)
         button.layer.cornerRadius = 15
         button.layer.borderWidth = 1
-        button.backgroundColor = .systemGray
+        button.setTitleColor(.black, for: .normal)
+        button.addTarget(self, action: #selector(filterButtonTapped(sender:)), for: .touchUpInside)
         return button
     }()
-    let dateButton = {
-       let button = UIButton()
-        button.setTitle("날짜순", for: .normal)
+    lazy var dateButton = {
+        let button = UIButton()
+        button.tag = 1
+        button.setTitle(Category.byDate.rawValue, for: .normal)
         button.layer.cornerRadius = 15
         button.layer.borderWidth = 1
-        button.backgroundColor = .systemGray
+        button.setTitleColor(.black, for: .normal)
+        button.addTarget(self, action: #selector(filterButtonTapped(sender:)), for: .touchUpInside)
         return button
     }()
-    let highPriceButton = {
+    lazy var highPriceButton = {
         let button = UIButton()
-         button.setTitle("높은가격순", for: .normal)
-         button.layer.cornerRadius = 15
-         button.layer.borderWidth = 1
-         button.backgroundColor = .systemGray
-         return button
+        button.tag = 2
+        button.setTitle(Category.highPrice.rawValue, for: .normal)
+        button.layer.cornerRadius = 15
+        button.layer.borderWidth = 1
+        button.setTitleColor(.black, for: .normal)
+        button.addTarget(self, action: #selector(filterButtonTapped(sender:)), for: .touchUpInside)
+        return button
     }()
-    let lowPriceButton = {
+    lazy var lowPriceButton = {
         let button = UIButton()
-         button.setTitle("낮은가격순", for: .normal)
-         button.layer.cornerRadius = 15
-         button.layer.borderWidth = 1
-         button.backgroundColor = .systemGray
-         return button
+        button.tag = 3
+        button.setTitle(Category.lowPrice.rawValue, for: .normal)
+        button.layer.cornerRadius = 15
+        button.layer.borderWidth = 1
+        button.setTitleColor(.black, for: .normal)
+        button.addTarget(self, action: #selector(filterButtonTapped(sender:)), for: .touchUpInside)
+        return button
     }()
+    
+    lazy var buttonList: [UIButton] = [accuracyButton, dateButton, highPriceButton, lowPriceButton]
+    
+    @objc func filterButtonTapped(sender: UIButton) {
+        
+        for i in 0..<buttonList.count {
+            buttonList[i].backgroundColor = .white
+            buttonList[i].setTitleColor(.black, for: .normal)
+        }
+        
+        switch sender.tag {
+        case 0:
+            buttonList[sender.tag].backgroundColor = .darkGray
+            buttonList[sender.tag].setTitleColor(.white, for: .normal)
+            callRequest(sort: "sim")
+        case 1:
+            buttonList[sender.tag].backgroundColor = .darkGray
+            buttonList[sender.tag].setTitleColor(.white, for: .normal)
+            callRequest(sort: "date")
+        case 2:
+            buttonList[sender.tag].backgroundColor = .darkGray
+            buttonList[sender.tag].setTitleColor(.white, for: .normal)
+            callRequest(sort: "dsc")
+        case 3:
+            buttonList[sender.tag].backgroundColor = .darkGray
+            buttonList[sender.tag].setTitleColor(.white, for: .normal)
+            callRequest(sort: "asc")
+        default:
+            break
+        }
+    }
     
     
     
@@ -98,17 +136,14 @@ class ResultViewController: UIViewController {
         return layout
     }
     
-    
-   
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        collectionView.prefetchDataSource = self
-        collectionView.register(ResultCollectionViewCell.self, forCellWithReuseIdentifier: ResultCollectionViewCell.identifier)
-        callRequest()
+        configureCollecionView()
+        callRequest(sort: "sim")
+        buttonList[0].backgroundColor = .darkGray
+        buttonList[0].setTitleColor(.white, for: .normal)
         configurehierarchy()
         configureLayout()
     }
@@ -116,6 +151,14 @@ class ResultViewController: UIViewController {
         navigationController?.navigationBar.layer.addBorder([.bottom], color: .systemGray4, width: 1)
         collectionView.showsHorizontalScrollIndicator = false
     }
+    
+    func configureCollecionView() {
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.prefetchDataSource = self
+        collectionView.register(ResultCollectionViewCell.self, forCellWithReuseIdentifier: ResultCollectionViewCell.identifier)
+    }
+    
     
     func configurehierarchy() {
         view.addSubview(numberOfSearch)
@@ -158,9 +201,9 @@ class ResultViewController: UIViewController {
     }
     
     
-    func callRequest() {
+    func callRequest(sort: String) {
         
-        let url = "https://openapi.naver.com/v1/search/shop.json?query=\(Variable.searchText)=String&page=\(page)&display=30"
+        let url = "https://openapi.naver.com/v1/search/shop.json?query=\(Variable.searchText)=String&page=\(page)&display=30&sort=\(sort)"
         
         let header: HTTPHeaders = ["X-Naver-Client-Id" : "Hc5_csSXTiRg9TJ7xTXh", "X-Naver-Client-Secret" : "6ykniciEiv"]
         
@@ -196,7 +239,7 @@ extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ResultCollectionViewCell.identifier, for: indexPath) as? ResultCollectionViewCell else { return ResultCollectionViewCell() }
-      
+        
         let url = URL(string: mySearch[indexPath.row].image)
         cell.imageView.kf.setImage(with: url)
         
@@ -214,7 +257,10 @@ extension ResultViewController: UICollectionViewDataSourcePrefetching {
         for item in indexPaths {
             if mySearch.count - 8 == item.row {
                 page += 1
-                callRequest()
+                callRequest(sort: "sim")
+                buttonList[0].backgroundColor = .darkGray
+                buttonList[0].setTitleColor(.white, for: .normal)
+               
             }
         }
     }

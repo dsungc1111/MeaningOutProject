@@ -9,6 +9,27 @@ import Foundation
 
 enum Variable {
 
+    static var productNameSave: String  = ""
+    
+    static var productName: String {
+        get {
+            return productNameSave
+        } set {
+            productNameSave = newValue
+        }
+    }
+    
+    var userLike: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: "\(Variable.productName)")
+        }
+        set {
+            UserDefaults.standard.setValue(newValue, forKey: "\(Variable.productName)")
+        }
+    }
+
+    
+    
     static var searchText: String {
         get {
             return UserDefaults.standard.string(forKey: "searchBarText") ?? ""

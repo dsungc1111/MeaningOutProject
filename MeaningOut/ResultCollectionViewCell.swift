@@ -34,6 +34,15 @@ class ResultCollectionViewCell: UICollectionViewCell {
         label.font = .boldSystemFont(ofSize: 15)
         return label
     }()
+    lazy var likeButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "like_unselected"), for: .normal)
+        button.contentMode = .scaleAspectFill
+        button.backgroundColor = UIColor(hexCode: "828282", alpha: 0.5)
+        button.layer.cornerRadius = 10
+        button.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
+        return button
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -45,11 +54,21 @@ class ResultCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    @objc func likeButtonTapped() {
+        
+        
+        
+        likeButton.setImage(UIImage(named: "like_selected"), for: .normal)
+        likeButton.backgroundColor = UIColor(hexCode: "FFFFFF", alpha: 0.5)
+    }
+    
+    
     func configureHierarchy() {
         contentView.addSubview(imageView)
         contentView.addSubview(companyNameLabel)
         contentView.addSubview(productNameLabel)
         contentView.addSubview(priceLabel)
+        contentView.addSubview(likeButton)
     }
     
     func configureLayout() {
@@ -70,6 +89,11 @@ class ResultCollectionViewCell: UICollectionViewCell {
         priceLabel.snp.makeConstraints { make in
             make.top.equalTo(productNameLabel.snp.bottom).offset(5)
             make.horizontalEdges.equalTo(contentView.safeAreaLayoutGuide).inset(5)
+        }
+        likeButton.snp.makeConstraints { make in
+            make.bottom.equalTo(imageView.snp.bottom).inset(10)
+            make.trailing.equalTo(imageView.snp.trailing).inset(10)
+            make.size.equalTo(40)
         }
         
         
