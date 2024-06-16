@@ -239,24 +239,7 @@ extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ResultCollectionViewCell.identifier, for: indexPath) as? ResultCollectionViewCell else { return ResultCollectionViewCell() }
-        
-        let like = UserDefaults.standard.bool(forKey: "\(Variable.mySearch[indexPath.item].title)")
-       
-        let url = URL(string: Variable.mySearch[indexPath.row].image)
-        cell.imageView.kf.setImage(with: url)
-        cell.likeButton.tag = indexPath.row
-        cell.companyNameLabel.text = Variable.mySearch[indexPath.row].mallName
-        cell.productNameLabel.text = Variable.mySearch[indexPath.row].title
-        cell.priceLabel.text = "\(Int(Variable.mySearch[indexPath.row].lprice)?.formatted() ?? "0")원"
-        
-        if like {
-            cell.likeButton.setImage(UIImage(named: "like_selected"), for: .normal)
-            cell.likeButton.backgroundColor = UIColor(hexCode: "FFFFFF", alpha: 0.5)
-        } else {
-            cell.likeButton.setImage(UIImage(named: "like_unselected"), for: .normal)
-            cell.likeButton.backgroundColor = UIColor(hexCode: "828282", alpha: 0.5)
-        }
-        
+        cell.configureCell(data: indexPath)
         return cell
     }
     

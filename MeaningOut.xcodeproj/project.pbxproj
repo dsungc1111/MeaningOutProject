@@ -147,11 +147,8 @@
 			isa = PBXGroup;
 			children = (
 				8B71E17B2C1AD983000BCB72 /* OnBoardingViewController.swift */,
-				8B71E1A62C1AED76000BCB72 /* ProfileViewController.swift */,
-				8B71E1B52C1B1D0D000BCB72 /* SelectViewController.swift */,
-				8B71E1C42C1C078C000BCB72 /* TabBarController.swift */,
-				8B71E1B72C1B2825000BCB72 /* SearchViewController.swift */,
-				8B71E1C62C1C07DD000BCB72 /* SettingViewController.swift */,
+				8B71E1D32C1F1BA3000BCB72 /* Profile */,
+				8B71E1D22C1F1B91000BCB72 /* Main */,
 				8B71E1CC2C1C2EED000BCB72 /* ResultViewController.swift */,
 			);
 			path = ViewController;
@@ -173,6 +170,25 @@
 				8B71E1C02C1BC9AF000BCB72 /* Identifier.swift */,
 			);
 			path = Protocol;
+			sourceTree = "<group>";
+		};
+		8B71E1D22C1F1B91000BCB72 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				8B71E1C42C1C078C000BCB72 /* TabBarController.swift */,
+				8B71E1B72C1B2825000BCB72 /* SearchViewController.swift */,
+				8B71E1C62C1C07DD000BCB72 /* SettingViewController.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		8B71E1D32C1F1BA3000BCB72 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				8B71E1A62C1AED76000BCB72 /* ProfileViewController.swift */,
+				8B71E1B52C1B1D0D000BCB72 /* SelectViewController.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

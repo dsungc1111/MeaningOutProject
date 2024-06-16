@@ -119,4 +119,24 @@ class ResultCollectionViewCell: UICollectionViewCell {
     }
     
     
+    
+    func configureCell(data: IndexPath) {
+        let like = UserDefaults.standard.bool(forKey: "\(Variable.mySearch[data.item].title)")
+       
+        let url = URL(string: Variable.mySearch[data.row].image)
+        imageView.kf.setImage(with: url)
+        likeButton.tag = data.row
+        companyNameLabel.text = Variable.mySearch[data.row].mallName
+        productNameLabel.text = Variable.mySearch[data.row].title
+        priceLabel.text = "\(Int(Variable.mySearch[data.row].lprice)?.formatted() ?? "0")원"
+        
+        if like {
+            likeButton.setImage(UIImage(named: "like_selected"), for: .normal)
+            likeButton.backgroundColor = UIColor(hexCode: "FFFFFF", alpha: 0.5)
+        } else {
+            likeButton.setImage(UIImage(named: "like_unselected"), for: .normal)
+            likeButton.backgroundColor = UIColor(hexCode: "828282", alpha: 0.5)
+        }
+    }
+    
 }
