@@ -39,6 +39,9 @@
 		8B71E1D12C1EC2C6000BCB72 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1D02C1EC2C6000BCB72 /* String+Extension.swift */; };
 		8B71E1D52C1F1D2D000BCB72 /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1D42C1F1D2D000BCB72 /* ProductViewController.swift */; };
 		8B71E1D72C1F29A4000BCB72 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1D62C1F29A4000BCB72 /* APIKey.swift */; };
+		8B71E2062C2005F9000BCB72 /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E2052C2005F9000BCB72 /* SettingTableViewCell.swift */; };
+		8B71E2082C200A0B000BCB72 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E2072C200A0B000BCB72 /* UIButton+Extension.swift */; };
+		8B71E20A2C201C6E000BCB72 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E2092C201C6E000BCB72 /* EditViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +75,9 @@
 		8B71E1D02C1EC2C6000BCB72 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		8B71E1D42C1F1D2D000BCB72 /* ProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewController.swift; sourceTree = "<group>"; };
 		8B71E1D62C1F29A4000BCB72 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
+		8B71E2052C2005F9000BCB72 /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
+		8B71E2072C200A0B000BCB72 /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
+		8B71E2092C201C6E000BCB72 /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,17 +117,15 @@
 			children = (
 				8B71E1BB2C1BC2CF000BCB72 /* Protocol */,
 				8B71E1AA2C1AF885000BCB72 /* Enum */,
+				8B71E19C2C1AE265000BCB72 /* Extension */,
+				8B71E2032C200555000BCB72 /* Cell */,
 				8B71E1A52C1AED55000BCB72 /* ViewController */,
 				8B71E1A12C1AE794000BCB72 /* CuntomView */,
-				8B71E19C2C1AE265000BCB72 /* Extension */,
 				8B71E1772C1AD983000BCB72 /* AppDelegate.swift */,
 				8B71E1792C1AD983000BCB72 /* SceneDelegate.swift */,
 				8B71E1802C1AD984000BCB72 /* Assets.xcassets */,
 				8B71E1822C1AD984000BCB72 /* LaunchScreen.storyboard */,
 				8B71E1852C1AD984000BCB72 /* Info.plist */,
-				8B71E1C22C1BCBAB000BCB72 /* SelectCollectionViewCell.swift */,
-				8B71E1CA2C1C0B46000BCB72 /* SearchResultTableViewCell.swift */,
-				8B71E1CE2C1D38B2000BCB72 /* ResultCollectionViewCell.swift */,
 				8B71E1D62C1F29A4000BCB72 /* APIKey.swift */,
 			);
 			path = MeaningOut;
@@ -134,6 +138,7 @@
 				8B71E1B12C1B1598000BCB72 /* CALayer+Extension.swift */,
 				8B71E1B32C1B176B000BCB72 /* TextField+Extension.swift */,
 				8B71E1D02C1EC2C6000BCB72 /* String+Extension.swift */,
+				8B71E2072C200A0B000BCB72 /* UIButton+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -156,6 +161,7 @@
 				8B71E1D22C1F1B91000BCB72 /* Main */,
 				8B71E1CC2C1C2EED000BCB72 /* ResultViewController.swift */,
 				8B71E1D42C1F1D2D000BCB72 /* ProductViewController.swift */,
+				8B71E2092C201C6E000BCB72 /* EditViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -195,6 +201,17 @@
 				8B71E1B52C1B1D0D000BCB72 /* SelectViewController.swift */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		8B71E2032C200555000BCB72 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				8B71E1CA2C1C0B46000BCB72 /* SearchResultTableViewCell.swift */,
+				8B71E1CE2C1D38B2000BCB72 /* ResultCollectionViewCell.swift */,
+				8B71E1C22C1BCBAB000BCB72 /* SelectCollectionViewCell.swift */,
+				8B71E2052C2005F9000BCB72 /* SettingTableViewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -294,10 +311,13 @@
 				8B71E1BA2C1BC1B4000BCB72 /* CameraLogo.swift in Sources */,
 				8B71E1A32C1AE7B4000BCB72 /* BigSizeButton.swift in Sources */,
 				8B71E1D12C1EC2C6000BCB72 /* String+Extension.swift in Sources */,
+				8B71E2082C200A0B000BCB72 /* UIButton+Extension.swift in Sources */,
+				8B71E2062C2005F9000BCB72 /* SettingTableViewCell.swift in Sources */,
 				8B71E17A2C1AD983000BCB72 /* SceneDelegate.swift in Sources */,
 				8B71E19E2C1AE275000BCB72 /* UIColor+Extension.swift in Sources */,
 				8B71E1CB2C1C0B46000BCB72 /* SearchResultTableViewCell.swift in Sources */,
 				8B71E1C52C1C078C000BCB72 /* TabBarController.swift in Sources */,
+				8B71E20A2C201C6E000BCB72 /* EditViewController.swift in Sources */,
 				8B71E1AE2C1AFB2B000BCB72 /* CustomProfileButton.swift in Sources */,
 				8B71E1D72C1F29A4000BCB72 /* APIKey.swift in Sources */,
 				8B71E1BD2C1BC2E1000BCB72 /* SetMainColor.swift in Sources */,

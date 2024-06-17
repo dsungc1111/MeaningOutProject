@@ -43,6 +43,7 @@ class OnBoardingViewController: UIViewController {
         let vc = ProfileViewController()
         navigationController?.navigationBar.tintColor = .black
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        vc.navigationItem.title = "PROFILE SETTING"
         navigationController?.pushViewController(vc, animated: true)
         Variable.profileImage = ""
         Variable.user = ""

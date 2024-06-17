@@ -10,10 +10,7 @@ import UIKit
 class SelectViewController: UIViewController {
 
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: CollectionViewLayout())
-    
-    var aaa: [Int : Bool] = [:]
-    
-    
+ 
     static func CollectionViewLayout() -> UICollectionViewLayout{
         let layout = UICollectionViewFlowLayout()
         let sectionSpacing: CGFloat = 30
@@ -41,7 +38,6 @@ class SelectViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        navigationItem.title = "Profile Setting"
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(SelectCollectionViewCell.self, forCellWithReuseIdentifier: SelectCollectionViewCell.identifier)

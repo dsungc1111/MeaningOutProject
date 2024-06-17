@@ -51,7 +51,6 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        navigationItem.title = "\(Variable.user)'s Meaning Out"
         searchBar.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
@@ -61,6 +60,10 @@ class SearchViewController: UIViewController {
         selectedWindow()
         
     }
+    override func viewWillAppear(_ animated: Bool) {
+        navigationItem.title = "\(Variable.user)'s Meaning Out"
+    }
+    
     @objc func removeAllButtonTapped() {
             Variable.researchList.removeAll()
             selectedWindow()

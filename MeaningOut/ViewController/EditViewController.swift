@@ -1,14 +1,13 @@
 //
-//  ProfileSettingViewController.swift
+//  EditViewController.swift
 //  MeaningOut
 //
-//  Created by 최대성 on 6/13/24.
+//  Created by 최대성 on 6/17/24.
 //
 
 import UIKit
 
-class ProfileViewController: UIViewController {
-
+class EditViewController: UIViewController {
     
     lazy var profileButton = {
         let button = CustomProfileButton()
@@ -24,35 +23,26 @@ class ProfileViewController: UIViewController {
         nickname.font = .systemFont(ofSize: 13)
         nickname.leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 10.0, height: 0.0))
         nickname.leftViewMode = .always
-        nickname.placeholder = "닉네임을 입력해주세요 :)"
+        nickname.text = Variable.user
         nickname.addTarget(self, action: #selector(nicknameDidChange), for: .editingChanged)
         return nickname
     }()
     let warningTextfield = {
         let warning = UITextField()
-        warning.text = Constant.warningMessage.basic.rawValue
-        warning.textColor = UIColor.mainColor
+        warning.text = "닉네임을 바꾸시겠어요?"
+        warning.textColor = UIColor.black
         warning.font = .systemFont(ofSize: 13)
         return warning
     }()
-    
-    lazy var completeButton = {
-        let button = BigSizeButton()
-        button.setTitle("Complete", for: .normal)
-        button.addTarget(self, action: #selector(completeButtonTapped), for: .touchUpInside)
-        return button
-    }()
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        navigationItem.title = "EDIT PROFILE"
+        navigationController?.navigationBar.tintColor = .black
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveEditedInfo))
         configureHierarchy()
         configureLayout()
-        completeButton.isEnabled = false
-        
     }
-    
     override func viewDidLayoutSubviews() {
         profileButton.layer.cornerRadius = profileButton.frame.width / 2
         profileCameraLogo.layer.cornerRadius = profileCameraLogo.frame.width/2
@@ -60,18 +50,19 @@ class ProfileViewController: UIViewController {
         navigationController?.navigationBar.layer.addBorder([.bottom], color: .systemGray4, width: 1)
         profileButton.setImage(UIImage(named: Variable.profileImage), for: .normal)
     }
-    
     override func viewWillAppear(_ animated: Bool) {
         profileButton.setImage(UIImage(named: Variable.profileImage), for: .normal)
     }
-    
+    @objc func saveEditedInfo() {
+        Variable.user = nicknameTextfield.text!
+        navigationController?.popViewController(animated: true)
+    }
     @objc func nicknameDidChange() {
-
         guard let text = nicknameTextfield.text else {
             return
         }
         if text.count >= 2 && text.count < 8 {
-            warningTextfield.text = Constant.warningMessage.pass.rawValue
+            warningTextfield.text = "사용가능한 닉네임이에요 :D"
             if text.contains(Constant.SpecialCharacters.hashSymbol.rawValue) || text.contains(Constant.SpecialCharacters.atTheRateSignSymbol.rawValue) || text.contains(Constant.SpecialCharacters.dollarSymbol.rawValue) || text.contains(Constant.SpecialCharacters.percentSymbol.rawValue) {
                 warningTextfield.text = Constant.warningMessage.specialCharactersFail.rawValue
             }
@@ -86,40 +77,19 @@ class ProfileViewController: UIViewController {
         } else {
             warningTextfield.text = Constant.warningMessage.countFail.rawValue
         }
-        
-        if warningTextfield.text == Constant.warningMessage.pass.rawValue {
-            completeButton.isEnabled = true
-        } else {
-            completeButton.isEnabled = false
-        }
-        
     }
     @objc func profileButtonTapped() {
         let vc = SelectViewController()
+        navigationController?.navigationBar.tintColor = .black
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
-        navigationItem.title = "Profile Setting"
+        vc.navigationItem.title = "EDIT PROFILE"
         navigationController?.pushViewController(vc, animated: true)
     }
-    @objc func completeButtonTapped() {
-        Variable.user = nicknameTextfield.text ?? "위에서 통과하고 온 닉네임이라 nil의 경우는 없음. 고로 이 문장도 나올 일이 없음."
-       
-        let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
-        
-        let sceneDelegate = windowScene?.delegate as? SceneDelegate
-        
-        let vc = TabBarController()
-        sceneDelegate?.window?.rootViewController = vc
-        sceneDelegate?.window?.makeKeyAndVisible()
-        
-    }
-        
-    
     func configureHierarchy() {
         view.addSubview(profileButton)
         view.addSubview(profileCameraLogo)
         view.addSubview(nicknameTextfield)
         view.addSubview(warningTextfield)
-        view.addSubview(completeButton)
     }
     func configureLayout() {
         profileButton.snp.makeConstraints { make in
@@ -141,15 +111,6 @@ class ProfileViewController: UIViewController {
             make.top.equalTo(nicknameTextfield.snp.bottom).offset(10)
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(30)
         }
-        completeButton.snp.makeConstraints { make in
-            make.top.equalTo(warningTextfield.snp.bottom).offset(25)
-            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(20)
-            make.height.equalTo(50)
-        }
     }
-    
-    
-    
-    
-    
+
 }

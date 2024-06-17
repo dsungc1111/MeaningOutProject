@@ -140,7 +140,6 @@ class ResultViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-   
         collectionView.reloadData()
     }
     func configureCollecionView() {
@@ -224,7 +223,9 @@ extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ResultCollectionViewCell.identifier, for: indexPath) as? ResultCollectionViewCell else { return ResultCollectionViewCell() }
         ResultViewController.like = UserDefaults.standard.bool(forKey: "\(Variable.mySearch[indexPath.item].title)")
+        
         cell.configureCell(data: indexPath)
+        
         if ResultViewController.like {
             cell.likeButton.setImage(UIImage(named: "like_selected"), for: .normal)
             cell.likeButton.backgroundColor = UIColor(hexCode: "FFFFFF", alpha: 0.5)
