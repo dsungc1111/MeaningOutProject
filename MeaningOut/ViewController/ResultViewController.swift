@@ -31,12 +31,9 @@ enum Category: String, CaseIterable {
     case lowPrice = "낮은가격순"
 }
 
-
 class ResultViewController: UIViewController {
     
-    
     static var like = false
-
     var page = 1
     let numberOfSearch = {
         let label = UILabel()
@@ -45,7 +42,6 @@ class ResultViewController: UIViewController {
         label.textColor = UIColor.mainColor
         return label
     }()
-    
     lazy var accuracyButton = {
         let button = UIButton()
         button.tag = 0
@@ -86,7 +82,6 @@ class ResultViewController: UIViewController {
         button.addTarget(self, action: #selector(filterButtonTapped(sender:)), for: .touchUpInside)
         return button
     }()
-    
     lazy var buttonList: [UIButton] = [accuracyButton, dateButton, highPriceButton, lowPriceButton]
     
     @objc func filterButtonTapped(sender: UIButton) {
@@ -95,7 +90,6 @@ class ResultViewController: UIViewController {
             buttonList[i].backgroundColor = .white
             buttonList[i].setTitleColor(.black, for: .normal)
         }
-        
         switch sender.tag {
         case 0:
             buttonList[sender.tag].backgroundColor = .darkGray
@@ -117,11 +111,7 @@ class ResultViewController: UIViewController {
             break
         }
     }
-    
-    
-    
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
-    
     static func collectionViewLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewFlowLayout()
         let sectionSpacing: CGFloat = 10
@@ -134,8 +124,6 @@ class ResultViewController: UIViewController {
         layout.sectionInset = UIEdgeInsets(top: sectionSpacing, left: sectionSpacing, bottom: sectionSpacing, right: sectionSpacing)
         return layout
     }
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -151,14 +139,16 @@ class ResultViewController: UIViewController {
         collectionView.showsHorizontalScrollIndicator = false
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+   
+        collectionView.reloadData()
+    }
     func configureCollecionView() {
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.prefetchDataSource = self
         collectionView.register(ResultCollectionViewCell.self, forCellWithReuseIdentifier: ResultCollectionViewCell.identifier)
     }
-    
-    
     func configurehierarchy() {
         view.addSubview(numberOfSearch)
         view.addSubview(accuracyButton)
@@ -201,16 +191,12 @@ class ResultViewController: UIViewController {
     
     
     func callRequest(sort: String) {
-        
         let url = "https://openapi.naver.com/v1/search/shop.json?query=\(Variable.searchText)=String&page=\(page)&display=30&sort=\(sort)"
-        
         let header: HTTPHeaders = [ APIKey().id : APIKey().clientId, APIKey().secret : APIKey().secretKey]
-        
         AF.request(url, method: .get, headers: header).responseDecodable(of: Shopping.self) { response in
             switch response.result {
             case .success(let value):
                 var products: [ProductInfo] = []
-                
                 for var i in value.items {
                     i.title = i.title.removeHtmlTag
                     products.append(i)
@@ -235,12 +221,10 @@ extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return Variable.mySearch.count
     }
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ResultCollectionViewCell.identifier, for: indexPath) as? ResultCollectionViewCell else { return ResultCollectionViewCell() }
-        
         ResultViewController.like = UserDefaults.standard.bool(forKey: "\(Variable.mySearch[indexPath.item].title)")
-        
+        cell.configureCell(data: indexPath)
         if ResultViewController.like {
             cell.likeButton.setImage(UIImage(named: "like_selected"), for: .normal)
             cell.likeButton.backgroundColor = UIColor(hexCode: "FFFFFF", alpha: 0.5)
@@ -248,11 +232,6 @@ extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSo
             cell.likeButton.setImage(UIImage(named: "like_unselected"), for: .normal)
             cell.likeButton.backgroundColor = UIColor(hexCode: "828282", alpha: 0.5)
         }
-        
-        cell.configureCell(data: indexPath)
-    
-        
-        
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -260,9 +239,7 @@ extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSo
         vc.navigationItem.title = Variable.mySearch[indexPath.item].title
         Variable.searchItem = Variable.mySearch[indexPath.item].link
         navigationController?.pushViewController(vc, animated: true)
-        
     }
-    
 }
 
 extension ResultViewController: UICollectionViewDataSourcePrefetching {
@@ -273,7 +250,6 @@ extension ResultViewController: UICollectionViewDataSourcePrefetching {
                 callRequest(sort: "sim")
                 buttonList[0].backgroundColor = .darkGray
                 buttonList[0].setTitleColor(.white, for: .normal)
-               
             }
         }
     }

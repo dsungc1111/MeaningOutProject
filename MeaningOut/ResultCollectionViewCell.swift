@@ -34,31 +34,24 @@ class ResultCollectionViewCell: UICollectionViewCell {
         label.font = .boldSystemFont(ofSize: 15)
         return label
     }()
-       
     lazy var likeButton = {
         let button = UIButton()
         button.contentMode = .scaleAspectFill
         button.layer.cornerRadius = 10
-//        button.isUserInteractionEnabled = false
         button.addTarget(self, action: #selector(likeButtonTapped(sender:)), for: .touchUpInside)
-        
-        
-        
         return button
     }()
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureHierarchy()
         configureLayout()
     }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     @objc func likeButtonTapped(sender: UIButton) {
         ResultViewController.like = UserDefaults.standard.bool(forKey: "\(Variable.mySearch[sender.tag].title)")
+        Variable.temporaryBasket = []
         ResultViewController.like.toggle()
         if ResultViewController.like {
             likeButton.setImage(UIImage(named: "like_selected"), for: .normal)
@@ -73,13 +66,13 @@ class ResultCollectionViewCell: UICollectionViewCell {
                 for i in 0..<Variable.myBasket.count {
                     if Variable.myBasket[i] == Variable.mySearch[sender.tag].title {
                         Variable.myBasket.remove(at: i)
+                        break
                     }
                 }
                 
             }
         }
         UserDefaults.standard.setValue(ResultViewController.like, forKey: "\(Variable.mySearch[sender.tag].title)")
-        print("ㅇ", ResultViewController.like)
     }
     
     
@@ -122,8 +115,8 @@ class ResultCollectionViewCell: UICollectionViewCell {
     
     
     func configureCell(data: IndexPath) {
-        let like = UserDefaults.standard.bool(forKey: "\(Variable.mySearch[data.item].title)")
-       
+//        ResultViewController.like = UserDefaults.standard.bool(forKey: "\(Variable.mySearch[data.item].title)")
+        
         let url = URL(string: Variable.mySearch[data.row].image)
         imageView.kf.setImage(with: url)
         likeButton.tag = data.row
@@ -131,13 +124,13 @@ class ResultCollectionViewCell: UICollectionViewCell {
         productNameLabel.text = Variable.mySearch[data.row].title
         priceLabel.text = "\(Int(Variable.mySearch[data.row].lprice)?.formatted() ?? "0")원"
         
-        if like {
-            likeButton.setImage(UIImage(named: "like_selected"), for: .normal)
-            likeButton.backgroundColor = UIColor(hexCode: "FFFFFF", alpha: 0.5)
-        } else {
-            likeButton.setImage(UIImage(named: "like_unselected"), for: .normal)
-            likeButton.backgroundColor = UIColor(hexCode: "828282", alpha: 0.5)
-        }
+//        if ResultViewController.like {
+//            likeButton.setImage(UIImage(named: "like_selected"), for: .normal)
+//            likeButton.backgroundColor = UIColor(hexCode: "FFFFFF", alpha: 0.5)
+//        } else {
+//            likeButton.setImage(UIImage(named: "like_unselected"), for: .normal)
+//            likeButton.backgroundColor = UIColor(hexCode: "828282", alpha: 0.5)
+//        }
     }
     
 }
