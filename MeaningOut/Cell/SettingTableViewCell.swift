@@ -18,7 +18,7 @@ class SettingTableViewCell: UITableViewCell {
     }()
     var basketButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "like_selected"), for: .normal)
+        button.setImage(UIImage(named: Constant.likeImage.select.rawValue), for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 14)
         button.setTitleColor(.black, for: .normal)
         button.isHidden = true
@@ -48,7 +48,6 @@ class SettingTableViewCell: UITableViewCell {
             make.centerY.equalTo(contentView.safeAreaLayoutGuide)
         }
     }
-    
     func configureCell(data: IndexPath) {
         
         settingButton.setTitle(SettingMenu.allCases[data.row].rawValue, for: .normal)

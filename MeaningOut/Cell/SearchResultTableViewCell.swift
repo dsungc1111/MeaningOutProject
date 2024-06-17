@@ -41,19 +41,13 @@ class SearchResultTableViewCell: UITableViewCell {
         configureHierarchy()
         configureLayout()
     }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
- 
-    
     func configureHierarchy() {
         contentView.addSubview(removeButton)
         contentView.addSubview(timelogoButton)
         contentView.addSubview(resultButton)
-      
-
     }
     func configureLayout() {
         timelogoButton.snp.makeConstraints { make in
@@ -61,7 +55,6 @@ class SearchResultTableViewCell: UITableViewCell {
             make.leading.equalTo(contentView.safeAreaLayoutGuide)
             make.verticalEdges.equalTo(contentView.safeAreaLayoutGuide)
             make.width.equalTo(30)
-            
         }
         removeButton.snp.makeConstraints { make in
              make.centerY.equalTo(contentView.safeAreaLayoutGuide)
@@ -74,9 +67,5 @@ class SearchResultTableViewCell: UITableViewCell {
             make.verticalEdges.equalTo(contentView.safeAreaLayoutGuide)
             make.centerY.equalTo(contentView.safeAreaLayoutGuide)
         }
-   
-        
     }
-   
-    
 }

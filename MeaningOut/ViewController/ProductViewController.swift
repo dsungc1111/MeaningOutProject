@@ -18,24 +18,18 @@ class ProductViewController: UIViewController {
         
         guard let title = navigationItem.title else { return }
         var count = 0
-        print(title)
         for i in 0..<Variable.myBasket.count {
             if title == Variable.myBasket[i] {
                 count += 1
             }
         }
-        print(count)
         if count == 0 {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "like_unselected"), style: .plain, target: self, action: #selector(likeButtonTapped))
+            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: Constant.likeImage.unselect.rawValue), style: .plain, target: self, action: #selector(likeButtonTapped))
         } else {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "like_selected"), style: .plain, target: self, action: #selector(likeButtonTapped))
+            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: Constant.likeImage.select.rawValue), style: .plain, target: self, action: #selector(likeButtonTapped))
         }
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
-        
-        
         navigationItem.rightBarButtonItem?.tintColor = .black
-        
-        
         let url = URL(string: Variable.searchItem)!
         let request = URLRequest(url: url)
         webView.load(request)
@@ -48,12 +42,12 @@ class ProductViewController: UIViewController {
         Variable.temporaryBasket = []
         ResultViewController.like.toggle()
         if ResultViewController.like {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "like_selected"), style: .plain, target: self, action: nil)
+            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: Constant.likeImage.select.rawValue), style: .plain, target: self, action: nil)
             Variable.temporaryBasket = Variable.myBasket
             Variable.temporaryBasket.append(navigationItem.title!)
             Variable.myBasket = Variable.temporaryBasket
         } else {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "like_unselected"), style: .plain, target: self, action: nil)
+            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: Constant.likeImage.unselect.rawValue), style: .plain, target: self, action: nil)
             if Variable.myBasket.count != 0 {
                 for i in 0..<Variable.myBasket.count {
                     if Variable.myBasket[i] == navigationItem.title! {

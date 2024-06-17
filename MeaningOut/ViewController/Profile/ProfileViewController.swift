@@ -9,6 +9,7 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
+    static var dateFormatter = DateFormatter()
     
     lazy var profileButton = {
         let button = CustomProfileButton()
@@ -35,24 +36,19 @@ class ProfileViewController: UIViewController {
         warning.font = .systemFont(ofSize: 13)
         return warning
     }()
-    
     lazy var completeButton = {
         let button = BigSizeButton()
         button.setTitle("Complete", for: .normal)
         button.addTarget(self, action: #selector(completeButtonTapped), for: .touchUpInside)
         return button
     }()
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         configureHierarchy()
         configureLayout()
         completeButton.isEnabled = false
-        
     }
-    
     override func viewDidLayoutSubviews() {
         profileButton.layer.cornerRadius = profileButton.frame.width / 2
         profileCameraLogo.layer.cornerRadius = profileCameraLogo.frame.width/2
@@ -60,11 +56,9 @@ class ProfileViewController: UIViewController {
         navigationController?.navigationBar.layer.addBorder([.bottom], color: .systemGray4, width: 1)
         profileButton.setImage(UIImage(named: Variable.profileImage), for: .normal)
     }
-    
     override func viewWillAppear(_ animated: Bool) {
         profileButton.setImage(UIImage(named: Variable.profileImage), for: .normal)
     }
-    
     @objc func nicknameDidChange() {
 
         guard let text = nicknameTextfield.text else {
@@ -101,6 +95,7 @@ class ProfileViewController: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     @objc func completeButtonTapped() {
+        getDateString()
         Variable.user = nicknameTextfield.text ?? "위에서 통과하고 온 닉네임이라 nil의 경우는 없음. 고로 이 문장도 나올 일이 없음."
         let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
         let sceneDelegate = windowScene?.delegate as? SceneDelegate
@@ -108,6 +103,20 @@ class ProfileViewController: UIViewController {
         sceneDelegate?.window?.rootViewController = vc
         sceneDelegate?.window?.makeKeyAndVisible()
     }
+    func getDateString() {
+        let dateFormat = "2024-06-17 22:03"
+        let signInDate = Date()
+        let toDate = ProfileViewController.dateFormatter
+        toDate.dateFormat = "yyyy-MM-dd HH:mm"
+        let convertDate = toDate.date(from: dateFormat)
+        let toString = ProfileViewController.dateFormatter
+        toString.dateFormat = "MM/dd/yy HH:mm"
+        let convertStr = toString.string(from: convertDate!)
+        let convertNowStr = toString.string(from: signInDate)
+        Constant.signInTime = convertNowStr
+    }
+    
+    
     func configureHierarchy() {
         view.addSubview(profileButton)
         view.addSubview(profileCameraLogo)
@@ -141,9 +150,4 @@ class ProfileViewController: UIViewController {
             make.height.equalTo(50)
         }
     }
-    
-    
-    
-    
-    
 }

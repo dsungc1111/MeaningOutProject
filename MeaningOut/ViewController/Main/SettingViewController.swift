@@ -25,7 +25,7 @@ class SettingViewController: UIViewController {
     let signInDate = {
         let label = UILabel()
         label.textColor = .darkGray
-        label.text = "가입"
+        label.text = "\(Constant.signInTime)에 가입"
         label.font = .systemFont(ofSize: 13)
         return label
     }()

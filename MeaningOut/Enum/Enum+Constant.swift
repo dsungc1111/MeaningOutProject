@@ -19,12 +19,19 @@ enum SettingMenu: String, CaseIterable {
 
 enum Constant{
 
+    static var signInTime = ""
+    
     static var number = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
     
     enum saveKeyWord: String {
         case username
         case profileImage
         case image
+    }
+    
+    enum likeImage: String {
+        case select =  "like_selected"
+        case unselect = "like_unselected"
     }
     
     enum profileImages: String, CaseIterable {

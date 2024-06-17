@@ -52,13 +52,13 @@ class ResultCollectionViewCell: UICollectionViewCell {
         Variable.temporaryBasket = []
         ResultViewController.like.toggle()
         if ResultViewController.like {
-            likeButton.setImage(UIImage(named: "like_selected"), for: .normal)
+            likeButton.setImage(UIImage(named: Constant.likeImage.select.rawValue), for: .normal)
             likeButton.backgroundColor = UIColor(hexCode: "FFFFFF", alpha: 0.5)
             Variable.temporaryBasket = Variable.myBasket
             Variable.temporaryBasket.append(Variable.mySearch[sender.tag].title)
             Variable.myBasket = Variable.temporaryBasket
         } else {
-            likeButton.setImage(UIImage(named: "like_unselected"), for: .normal)
+            likeButton.setImage(UIImage(named: Constant.likeImage.unselect.rawValue), for: .normal)
             likeButton.backgroundColor = UIColor(hexCode: "828282", alpha: 0.5)
             if Variable.myBasket.count != 0 {
                 for i in 0..<Variable.myBasket.count {

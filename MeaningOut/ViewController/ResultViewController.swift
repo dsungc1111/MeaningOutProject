@@ -222,10 +222,10 @@ extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSo
         ResultViewController.like = UserDefaults.standard.bool(forKey: "\(Variable.mySearch[indexPath.item].title)")
         cell.configureCell(data: indexPath)
         if ResultViewController.like {
-            cell.likeButton.setImage(UIImage(named: "like_selected"), for: .normal)
+            cell.likeButton.setImage(UIImage(named: Constant.likeImage.select.rawValue), for: .normal)
             cell.likeButton.backgroundColor = UIColor(hexCode: "FFFFFF", alpha: 0.5)
         } else {
-            cell.likeButton.setImage(UIImage(named: "like_unselected"), for: .normal)
+            cell.likeButton.setImage(UIImage(named: Constant.likeImage.unselect.rawValue), for: .normal)
             cell.likeButton.backgroundColor = UIColor(hexCode: "828282", alpha: 0.5)
         }
         return cell
