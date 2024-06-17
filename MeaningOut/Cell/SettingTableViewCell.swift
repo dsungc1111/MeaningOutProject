@@ -16,12 +16,13 @@ class SettingTableViewCell: UITableViewCell {
         button.setTitleColor(.black, for: .normal)
         return button
     }()
-    var basketLabel = {
-        let label = UILabel()
-        label.text = "장바구니 개수"
-        label.font = .systemFont(ofSize: 14)
-        label.isHidden = true
-        return label
+    var basketButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "like_selected"), for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 14)
+        button.setTitleColor(.black, for: .normal)
+        button.isHidden = true
+        return button
     }()
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -35,14 +36,14 @@ class SettingTableViewCell: UITableViewCell {
     
     func configureHierarchy() {
         contentView.addSubview(settingButton)
-        contentView.addSubview(basketLabel)
+        contentView.addSubview(basketButton)
     }
     func configureLayout() {
         settingButton.snp.makeConstraints { make in
             make.leading.equalTo(contentView.safeAreaLayoutGuide).inset(25)
             make.centerY.equalTo(contentView.safeAreaLayoutGuide)
         }
-        basketLabel.snp.makeConstraints { make in
+        basketButton.snp.makeConstraints { make in
             make.trailing.equalTo(contentView.snp.trailing).inset(25)
             make.centerY.equalTo(contentView.safeAreaLayoutGuide)
         }
@@ -51,12 +52,11 @@ class SettingTableViewCell: UITableViewCell {
     func configureCell(data: IndexPath) {
         
         settingButton.setTitle(SettingMenu.allCases[data.row].rawValue, for: .normal)
-        
-        if data.row == 0 {
-            basketLabel.isHidden = false
-            basketLabel.text = "\(Variable.myBasket.count)개의 장바구니"
+        if SettingMenu.allCases[data.row].rawValue == "나의 장바구니 목록" {
+                basketButton.isHidden = false
+                basketButton.setTitle("\(Variable.myBasket.count)개의 장바구니", for: .normal)
         } else {
-            basketLabel.text = ""
+            basketButton.isHidden = true
         }
     }
     

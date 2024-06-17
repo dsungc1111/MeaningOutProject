@@ -65,7 +65,7 @@ class SearchViewController: UIViewController {
     }
     
     @objc func removeAllButtonTapped() {
-            Variable.researchList.removeAll()
+            Variable.searchList.removeAll()
             selectedWindow()
         }
     
@@ -109,7 +109,7 @@ class SearchViewController: UIViewController {
     }
     
     func selectedWindow() {
-        if Variable.researchList.count == 0 {
+        if Variable.searchList.count == 0 {
             tableView.isHidden = true
             noRecordImage.isHidden = false
             noSearchLabel.isHidden = false
@@ -123,21 +123,19 @@ class SearchViewController: UIViewController {
             removeAll.isHidden = false
         }
     }
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        view.endEditing(true)
-    }
 }
 
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Variable.researchList.count
+        return Variable.searchList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: SearchResultTableViewCell.identifier, for: indexPath) as?
                 SearchResultTableViewCell else { return SearchResultTableViewCell() }
         cell.resultButton.tag = indexPath.row
-        cell.resultButton.setTitle(Variable.researchList[indexPath.row], for: .normal)
+        
+        cell.resultButton.setTitle(Variable.searchList[indexPath.row], for: .normal)
         cell.resultButton.addTarget(self, action: #selector(resultButtonTapped(sender:)), for: .touchUpInside)
 
         
@@ -145,25 +143,19 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        Variable.researchList.remove(at: indexPath.row)
+        Variable.searchList.remove(at: indexPath.row)
         selectedWindow()
         tableView.reloadData()
     }
     
     @objc func resultButtonTapped(sender: UIButton) {
         let vc = ResultViewController()
-        Variable.searchText = Variable.researchList[sender.tag]
+        Variable.searchText = Variable.searchList[sender.tag]
         vc.navigationItem.title = Variable.searchText
-        navigationItem.backButtonTitle = ""
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         navigationController?.navigationBar.tintColor = .black
         navigationController?.pushViewController(vc, animated: true)
     }
-    
-    
-    
-    
-    
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 40
     }
@@ -177,7 +169,21 @@ extension SearchViewController: UISearchBarDelegate {
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        Variable.researchList.insert(searchBar.text!, at: 0)
+        var count = 0
+        
+        guard let text = searchBar.text else { return }
+        if text.contains(Constant.SpecialCharacters.blankSymbol.rawValue) {
+            searchBar.placeholder = "빈칸 안돼"
+        } else {
+            if Variable.searchList.count == 0 {
+                Variable.searchList.insert(text, at: 0)
+            } else {
+                for item in Variable.searchList {
+                    if text == item { count += 1 }
+                }
+                if count == 0 { Variable.searchList.insert(text, at: 0) }
+            }
+        }
         configureNextNavigation()
         searchBar.text = nil
         selectedWindow()
@@ -188,9 +194,7 @@ extension SearchViewController: UISearchBarDelegate {
         Variable.searchText = searchBar.text!
         vc.navigationItem.title = Variable.searchText
         navigationController?.pushViewController(vc, animated: true)
-        navigationItem.backButtonTitle = ""
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         navigationController?.navigationBar.tintColor = .black
     }
-    
-    
 }

@@ -27,7 +27,6 @@ class SelectViewController: UIViewController {
     let profileButton = {
         let button = CustomProfileButton()
         button.setImage(UIImage(named: Variable.profileImage), for: .normal)
-        print(Variable.profileImage)
         return button
     }()
     let profileCameraLogo = {
@@ -74,7 +73,7 @@ class SelectViewController: UIViewController {
         collectionView.snp.makeConstraints { make in
             make.top.equalTo(profileButton.snp.bottom).offset(30)
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
-            make.height.equalTo(300)
+            make.height.equalTo(350)
         }
     }
 }

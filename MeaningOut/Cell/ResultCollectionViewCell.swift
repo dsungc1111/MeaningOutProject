@@ -8,8 +8,6 @@
 import UIKit
 
 class ResultCollectionViewCell: UICollectionViewCell {
-    
-    
     let imageView = {
         let image = UIImageView()
         image.clipsToBounds = true
@@ -74,8 +72,6 @@ class ResultCollectionViewCell: UICollectionViewCell {
         }
         UserDefaults.standard.setValue(ResultViewController.like, forKey: "\(Variable.mySearch[sender.tag].title)")
     }
-    
-    
     func configureHierarchy() {
         contentView.addSubview(imageView)
         contentView.addSubview(companyNameLabel)
@@ -83,7 +79,6 @@ class ResultCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(priceLabel)
         contentView.addSubview(likeButton)
     }
-    
     func configureLayout() {
         imageView.snp.makeConstraints { make in
             make.top.equalTo(contentView.safeAreaLayoutGuide)
@@ -108,29 +103,14 @@ class ResultCollectionViewCell: UICollectionViewCell {
             make.trailing.equalTo(imageView.snp.trailing).inset(10)
             make.size.equalTo(40)
         }
-        
-        
     }
-    
-    
-    
     func configureCell(data: IndexPath) {
-//        ResultViewController.like = UserDefaults.standard.bool(forKey: "\(Variable.mySearch[data.item].title)")
-        
         let url = URL(string: Variable.mySearch[data.row].image)
         imageView.kf.setImage(with: url)
         likeButton.tag = data.row
         companyNameLabel.text = Variable.mySearch[data.row].mallName
         productNameLabel.text = Variable.mySearch[data.row].title
         priceLabel.text = "\(Int(Variable.mySearch[data.row].lprice)?.formatted() ?? "0")원"
-        
-//        if ResultViewController.like {
-//            likeButton.setImage(UIImage(named: "like_selected"), for: .normal)
-//            likeButton.backgroundColor = UIColor(hexCode: "FFFFFF", alpha: 0.5)
-//        } else {
-//            likeButton.setImage(UIImage(named: "like_unselected"), for: .normal)
-//            likeButton.backgroundColor = UIColor(hexCode: "828282", alpha: 0.5)
-//        }
     }
     
 }

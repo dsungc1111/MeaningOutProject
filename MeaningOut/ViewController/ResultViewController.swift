@@ -9,6 +9,7 @@ import UIKit
 import Alamofire
 import Kingfisher
 
+
 struct Shopping: Decodable {
     let total: Int
     let start: Int
@@ -24,12 +25,6 @@ struct ProductInfo: Decodable{
     let lprice: String
 }
 
-enum Category: String, CaseIterable {
-    case accuracy = "정확도"
-    case byDate = "날짜순"
-    case highPrice = "높은가격순"
-    case lowPrice = "낮은가격순"
-}
 
 class ResultViewController: UIViewController {
     
@@ -187,11 +182,16 @@ class ResultViewController: UIViewController {
             make.bottom.equalTo(view.safeAreaLayoutGuide)
         }
     }
-    
-    
     func callRequest(sort: String) {
-        let url = "https://openapi.naver.com/v1/search/shop.json?query=\(Variable.searchText)=String&page=\(page)&display=30&sort=\(sort)"
-        let header: HTTPHeaders = [ APIKey().id : APIKey().clientId, APIKey().secret : APIKey().secretKey]
+        
+       
+        let url = "https://openapi.naver.com/v1/search/shop.json?query=\(Variable.searchText)&page=\(page)&display=30&sort=\(sort)"
+        
+    
+        
+        let header: HTTPHeaders = [
+            "X-Naver-Client-Id" : APIKey().clientId, "X-Naver-Client-Secret" : APIKey().secretKey]
+        
         AF.request(url, method: .get, headers: header).responseDecodable(of: Shopping.self) { response in
             switch response.result {
             case .success(let value):
@@ -211,11 +211,8 @@ class ResultViewController: UIViewController {
                 print(error)
             }
         }
-        
     }
 }
-
-
 extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return Variable.mySearch.count
@@ -223,9 +220,7 @@ extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ResultCollectionViewCell.identifier, for: indexPath) as? ResultCollectionViewCell else { return ResultCollectionViewCell() }
         ResultViewController.like = UserDefaults.standard.bool(forKey: "\(Variable.mySearch[indexPath.item].title)")
-        
         cell.configureCell(data: indexPath)
-        
         if ResultViewController.like {
             cell.likeButton.setImage(UIImage(named: "like_selected"), for: .normal)
             cell.likeButton.backgroundColor = UIColor(hexCode: "FFFFFF", alpha: 0.5)
@@ -242,7 +237,6 @@ extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSo
         navigationController?.pushViewController(vc, animated: true)
     }
 }
-
 extension ResultViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         for item in indexPaths {
@@ -254,6 +248,4 @@ extension ResultViewController: UICollectionViewDataSourcePrefetching {
             }
         }
     }
-    
-    
 }

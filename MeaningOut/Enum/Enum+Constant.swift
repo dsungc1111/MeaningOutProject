@@ -7,6 +7,16 @@
 
 import Foundation
 
+
+enum SettingMenu: String, CaseIterable {
+    case myBasket = "나의 장바구니 목록"
+    case question = "자주 묻는 질문"
+    case inquiry = "1:1 문의"
+    case notificationSetting = "알림 설정"
+    case withdraw = "탈퇴하기"
+}
+
+
 enum Constant{
 
     static var number = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
@@ -48,4 +58,11 @@ enum Constant{
         case dollarSymbol = "$"
         case blankSymbol = " "
     }
+}
+
+enum Category: String, CaseIterable {
+    case accuracy = "정확도"
+    case byDate = "날짜순"
+    case highPrice = "높은가격순"
+    case lowPrice = "낮은가격순"
 }

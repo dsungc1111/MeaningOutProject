@@ -7,14 +7,6 @@
 
 import UIKit
 
-enum SettingMenu: String, CaseIterable {
-    case myBasket = "나의 장바구니 목록"
-    case question = "자주 묻는 질문"
-    case inquiry = "1:1 문의"
-    case notificationSetting = "알림 설정"
-    case withdraw = "탈퇴하기"
-}
-
 
 class SettingViewController: UIViewController {
     
@@ -124,40 +116,28 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
         cell.settingButton.tag = indexPath.row
         cell.configureCell(data: indexPath)
         
-//        cell.settingButton.addTarget(self, action: #selector(resetButtonTapped(sender:)), for: .touchUpInside)
         return cell
     }
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        return 50// 원하는 셀 높이 설정
+        return 50
     }
-  
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         if indexPath.row == 4 {
             let alert = UIAlertController(title: "탈퇴하기", message: "탈퇴를 하면 데이터가 모두 초기화됩니다. 탈퇴하시겠습니까?", preferredStyle: .actionSheet)
-            
             let okButton = UIAlertAction(title: "확인", style: .default) {_ in 
                 Variable.user = ""
                 Variable.profileImage = ""
-                
+                Variable.searchList = []
+                Variable.myBasket = []
                 let vc = UINavigationController(rootViewController: OnBoardingViewController())
                 vc.modalPresentationStyle = .fullScreen
                 self.present(vc, animated: true)
             }
             let cancelButton = UIAlertAction(title: "취소", style: .cancel)
-            
             alert.addAction(cancelButton)
             alert.addAction(okButton)
-            
             present(alert, animated: true)
         }
-        
-        
-        
         tableView.reloadRows(at: [indexPath], with: .automatic)
     }
-    
 }

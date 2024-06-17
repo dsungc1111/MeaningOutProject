@@ -97,23 +97,17 @@ class ProfileViewController: UIViewController {
     @objc func profileButtonTapped() {
         let vc = SelectViewController()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
-        navigationItem.title = "Profile Setting"
+        vc.navigationItem.title = "PROFILE SETTING"
         navigationController?.pushViewController(vc, animated: true)
     }
     @objc func completeButtonTapped() {
         Variable.user = nicknameTextfield.text ?? "위에서 통과하고 온 닉네임이라 nil의 경우는 없음. 고로 이 문장도 나올 일이 없음."
-       
         let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
-        
         let sceneDelegate = windowScene?.delegate as? SceneDelegate
-        
         let vc = TabBarController()
         sceneDelegate?.window?.rootViewController = vc
         sceneDelegate?.window?.makeKeyAndVisible()
-        
     }
-        
-    
     func configureHierarchy() {
         view.addSubview(profileButton)
         view.addSubview(profileCameraLogo)

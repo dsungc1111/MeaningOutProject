@@ -48,12 +48,12 @@ enum Variable {
     
     
     
-    static var researchList: [String] {
+    static var searchList: [String] {
         get {
-            return UserDefaults.standard.stringArray(forKey: "research") ?? [""]
+            return UserDefaults.standard.stringArray(forKey: "search") ?? [""]
         }
         set {
-            UserDefaults.standard.setValue(newValue, forKey: "research")
+            UserDefaults.standard.setValue(newValue, forKey: "search")
         }
     }
     

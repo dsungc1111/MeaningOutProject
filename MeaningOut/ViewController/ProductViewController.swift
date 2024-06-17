@@ -12,19 +12,27 @@ import WebKit
 class ProductViewController: UIViewController {
 
     let webView = WKWebView()
-    var image = " "
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-      
+        
+        guard let title = navigationItem.title else { return }
+        var count = 0
+        print(title)
         for i in 0..<Variable.myBasket.count {
-            if navigationItem.title! == Variable.myBasket[i] {
-                image = "like_selected"
-            } else {
-                image = "like_unselected"
+            if title == Variable.myBasket[i] {
+                count += 1
             }
         }
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: image), style: .plain, target: self, action: #selector(likeButtonTapped))
+        print(count)
+        if count == 0 {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "like_unselected"), style: .plain, target: self, action: #selector(likeButtonTapped))
+        } else {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "like_selected"), style: .plain, target: self, action: #selector(likeButtonTapped))
+        }
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        
+        
         navigationItem.rightBarButtonItem?.tintColor = .black
         
         
