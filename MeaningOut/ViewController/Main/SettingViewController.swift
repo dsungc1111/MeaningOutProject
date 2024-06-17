@@ -125,10 +125,21 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
         if indexPath.row == 4 {
             let alert = UIAlertController(title: "탈퇴하기", message: "탈퇴를 하면 데이터가 모두 초기화됩니다. 탈퇴하시겠습니까?", preferredStyle: .actionSheet)
             let okButton = UIAlertAction(title: "확인", style: .default) {_ in 
+                for i in 0..<Variable.mySearch.count {
+                    UserDefaults.standard.setValue(false, forKeyPath: "\(Variable.mySearch[i].title)")
+                }
+                
                 Variable.user = ""
                 Variable.profileImage = ""
                 Variable.searchList = []
                 Variable.myBasket = []
+                
+
+                
+                
+                UserDefaults.standard.bool(forKey: "\(Variable.mySearch[indexPath.item].title)")
+                
+                
                 let vc = UINavigationController(rootViewController: OnBoardingViewController())
                 vc.modalPresentationStyle = .fullScreen
                 self.present(vc, animated: true)

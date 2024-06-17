@@ -183,12 +183,7 @@ class ResultViewController: UIViewController {
         }
     }
     func callRequest(sort: String) {
-        
-       
         let url = "https://openapi.naver.com/v1/search/shop.json?query=\(Variable.searchText)&page=\(page)&display=30&sort=\(sort)"
-        
-    
-        
         let header: HTTPHeaders = [
             "X-Naver-Client-Id" : APIKey().clientId, "X-Naver-Client-Secret" : APIKey().secretKey]
         
@@ -219,6 +214,7 @@ extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ResultCollectionViewCell.identifier, for: indexPath) as? ResultCollectionViewCell else { return ResultCollectionViewCell() }
+        
         ResultViewController.like = UserDefaults.standard.bool(forKey: "\(Variable.mySearch[indexPath.item].title)")
         cell.configureCell(data: indexPath)
         if ResultViewController.like {
