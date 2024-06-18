@@ -39,6 +39,7 @@ class EditViewController: UIViewController {
         view.backgroundColor = .white
         navigationItem.title = "EDIT PROFILE"
         navigationController?.navigationBar.tintColor = .black
+        navigationItem.rightBarButtonItem?.isEnabled = false
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveEditedInfo))
         configureHierarchy()
         configureLayout()
@@ -62,7 +63,7 @@ class EditViewController: UIViewController {
             return
         }
         if text.count >= 2 && text.count < 8 {
-            warningTextfield.text = "사용가능한 닉네임이에요 :D"
+            warningTextfield.text = Constant.warningMessage.pass.rawValue
             if text.contains(Constant.SpecialCharacters.hashSymbol.rawValue) || text.contains(Constant.SpecialCharacters.atTheRateSignSymbol.rawValue) || text.contains(Constant.SpecialCharacters.dollarSymbol.rawValue) || text.contains(Constant.SpecialCharacters.percentSymbol.rawValue) {
                 warningTextfield.text = Constant.warningMessage.specialCharactersFail.rawValue
             }
@@ -76,6 +77,12 @@ class EditViewController: UIViewController {
             }
         } else {
             warningTextfield.text = Constant.warningMessage.countFail.rawValue
+        }
+        
+        if warningTextfield.text == Constant.warningMessage.pass.rawValue {
+            navigationItem.rightBarButtonItem?.isEnabled = true
+        } else {
+            navigationItem.rightBarButtonItem?.isEnabled = false
         }
     }
     @objc func profileButtonTapped() {

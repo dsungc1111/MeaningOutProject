@@ -13,6 +13,8 @@ enum Variable {
     static var mySearch: [ProductInfo] = []
     static var temporaryBasket: [String] = []
     
+    
+    
     static var myBasket: [String] {
         get {
             return UserDefaults.standard.array(forKey: "my") as? [String] ?? []
@@ -45,6 +47,8 @@ enum Variable {
             UserDefaults.standard.setValue(newValue, forKey: "search")
         }
     }
+    
+    
     static var profileImage: String {
         get {
             return UserDefaults.standard.string(forKey: Constant.saveKeyWord.profileImage.rawValue) ?? ""

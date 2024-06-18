@@ -87,25 +87,15 @@ extension SelectViewController : UICollectionViewDelegate, UICollectionViewDataS
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SelectCollectionViewCell.identifier, for: indexPath) as? SelectCollectionViewCell else { return SelectCollectionViewCell() }
         cell.profileImageButton.tag = indexPath.row
-        
         cell.profileImageButton.addTarget(self, action: #selector(profileIamgeButtonTapped(sender:)), for: .touchUpInside)
-        
         cell.configureCell(data: indexPath)
-        
         return cell
     }
     
     @objc func profileIamgeButtonTapped(sender: UIButton) {
-        
         Variable.profileImage = Constant.profileImages.allCases[sender.tag].rawValue
-        
         profileButton.setImage(UIImage(named: Variable.profileImage), for: .normal)
-        
-        
         collectionView.reloadData()
     }
 
-    
-    
-    
 }

@@ -184,11 +184,18 @@ class ResultViewController: UIViewController {
         }
     }
     func callRequest(sort: String) {
-        let url = "https://openapi.naver.com/v1/search/shop.json?query=\(Variable.searchText)&page=\(page)&display=30&sort=\(sort)"
+        let url = "https://openapi.naver.com/v1/search/shop.json?"
+        
+        let param: Parameters = [
+            "query" : Variable.searchText,
+            "page" : "\(page)",
+            "sort" : sort
+        ]
+        
         let header: HTTPHeaders = [
             "X-Naver-Client-Id" : APIKey().clientId, "X-Naver-Client-Secret" : APIKey().secretKey]
         
-        AF.request(url, method: .get, headers: header).responseDecodable(of: Shopping.self) { response in
+        AF.request(url, method: .get, parameters: param, headers: header).responseDecodable(of: Shopping.self) { response in
             switch response.result {
             case .success(let value):
                 if value.items.count == 0 {
@@ -236,7 +243,7 @@ extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSo
 extension ResultViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         for item in indexPaths {
-            if Variable.mySearch.count - 8 == item.row {
+            if Variable.mySearch.count - 2 == item.row {
                 page += 1
                 callRequest(sort: "sim")
                 buttonList[0].backgroundColor = .darkGray

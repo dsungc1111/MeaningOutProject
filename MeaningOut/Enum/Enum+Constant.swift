@@ -19,7 +19,14 @@ enum SettingMenu: String, CaseIterable {
 
 enum Constant{
 
-    static var signInTime = ""
+    static var signInTime: String {
+        get {
+            return UserDefaults.standard.string(forKey: "signInTime") ?? ""
+        }
+        set {
+            UserDefaults.standard.setValue(newValue, forKey: "signInTime")
+        }
+    }
     
     static var number = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
     

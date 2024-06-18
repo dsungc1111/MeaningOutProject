@@ -104,15 +104,9 @@ class ProfileViewController: UIViewController {
         sceneDelegate?.window?.makeKeyAndVisible()
     }
     func getDateString() {
-        let dateFormat = "2024-06-17 22:03"
-        let signInDate = Date()
-        let toDate = ProfileViewController.dateFormatter
-        toDate.dateFormat = "yyyy-MM-dd HH:mm"
-        let convertDate = toDate.date(from: dateFormat)
-        let toString = ProfileViewController.dateFormatter
+        let toString = DateFormatter()
         toString.dateFormat = "MM/dd/yy HH:mm"
-        let convertStr = toString.string(from: convertDate!)
-        let convertNowStr = toString.string(from: signInDate)
+        let convertNowStr = toString.string(from: Date())
         Constant.signInTime = convertNowStr
     }
     

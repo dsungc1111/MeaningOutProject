@@ -12,6 +12,8 @@ class SettingViewController: UIViewController {
     
     let tableView = UITableView()
     
+    
+    
     lazy var profileButton = {
         let button = CustomProfileButton()
         return button
@@ -19,12 +21,13 @@ class SettingViewController: UIViewController {
     let userNickname = {
         let label = UILabel()
         label.text = Variable.user
-        label.font = .boldSystemFont(ofSize: 16) 
+        label.font = .boldSystemFont(ofSize: 16)
         return label
     }()
     let signInDate = {
         let label = UILabel()
         label.textColor = .darkGray
+        label.text = "\(Constant.signInTime)에 가입"
         label.font = .systemFont(ofSize: 13)
         return label
     }()
@@ -59,7 +62,6 @@ class SettingViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         profileButton.setImage(UIImage(named: Variable.profileImage), for: .normal)
         userNickname.text = Variable.user
-        signInDate.text = "\(Constant.signInTime)에 가입"
         tableView.reloadData()
     }
     @objc func editButtonTapped() {
