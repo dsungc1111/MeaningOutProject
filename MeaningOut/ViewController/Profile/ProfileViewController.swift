@@ -64,7 +64,7 @@ class ProfileViewController: UIViewController {
         guard let text = nicknameTextfield.text else {
             return
         }
-        if text.count >= 2 && text.count < 8 {
+        if text.count >= 2 && text.count < 10 {
             warningTextfield.text = Constant.warningMessage.pass.rawValue
             if text.contains(Constant.SpecialCharacters.hashSymbol.rawValue) || text.contains(Constant.SpecialCharacters.atTheRateSignSymbol.rawValue) || text.contains(Constant.SpecialCharacters.dollarSymbol.rawValue) || text.contains(Constant.SpecialCharacters.percentSymbol.rawValue) {
                 warningTextfield.text = Constant.warningMessage.specialCharactersFail.rawValue

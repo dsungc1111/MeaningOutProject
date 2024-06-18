@@ -48,7 +48,6 @@ enum Variable {
         }
     }
     
-    
     static var profileImage: String {
         get {
             return UserDefaults.standard.string(forKey: Constant.saveKeyWord.profileImage.rawValue) ?? ""

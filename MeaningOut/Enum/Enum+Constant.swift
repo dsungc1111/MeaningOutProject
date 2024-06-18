@@ -19,6 +19,7 @@ enum SettingMenu: String, CaseIterable {
 
 enum Constant{
 
+    
     static var signInTime: String {
         get {
             return UserDefaults.standard.string(forKey: "signInTime") ?? ""
@@ -28,6 +29,7 @@ enum Constant{
         }
     }
     
+    static var like = false
     static var number = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
     
     enum saveKeyWord: String {

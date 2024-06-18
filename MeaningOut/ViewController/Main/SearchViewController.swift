@@ -149,12 +149,23 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     @objc func resultButtonTapped(sender: UIButton) {
-        let vc = ResultViewController()
         Variable.searchText = Variable.searchList[sender.tag]
+        searchBar.text = Variable.searchText
+        guard let text = searchBar.text else { return }
+        
+        for i in 0..<Variable.searchList.count {
+            if text == Variable.searchList[i] {
+                Variable.searchList.remove(at: i)
+                Variable.searchList.insert(text, at: 0)
+            }
+        }
+        let vc = ResultViewController()
         vc.navigationItem.title = Variable.searchText
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         navigationController?.navigationBar.tintColor = .black
         navigationController?.pushViewController(vc, animated: true)
+        searchBar.text = nil
+        tableView.reloadData()
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 40
@@ -169,8 +180,6 @@ extension SearchViewController: UISearchBarDelegate {
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        var count = 0
-        
         guard let text = searchBar.text else { return }
         if text.contains(Constant.SpecialCharacters.blankSymbol.rawValue) {
             searchBar.placeholder = "빈칸 안돼"
@@ -178,11 +187,18 @@ extension SearchViewController: UISearchBarDelegate {
             if Variable.searchList.count == 0 {
                 Variable.searchList.insert(text, at: 0)
             } else {
-                for item in Variable.searchList {
-                    if text == item { count += 1 }
+                for i in 0..<Variable.searchList.count {
+                    if text == Variable.searchList[i] {
+                        Variable.searchList.remove(at: i)
+                       
+                        Variable.searchList.insert(text, at: 0)
+                    } else {
+                        Variable.searchList.insert(text, at: 0)
+                        break
+                    }
                 }
-                if count == 0 { Variable.searchList.insert(text, at: 0) }
             }
+            
             configureNextNavigation()
         }
         searchBar.text = nil

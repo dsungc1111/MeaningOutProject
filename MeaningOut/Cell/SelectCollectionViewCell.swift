@@ -12,7 +12,6 @@ class SelectCollectionViewCell: UICollectionViewCell {
     
     lazy var profileImageButton = {
         let button = UIButton()
-        let select = false
         button.alpha = 0.5
         button.backgroundColor = .white
         return button
@@ -28,14 +27,11 @@ class SelectCollectionViewCell: UICollectionViewCell {
         profileImageButton.layer.cornerRadius = frame.width/2
         configureLayout()
     }
-   
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     func configureCell(data: IndexPath) {
-        
         profileImageButton.setImage(UIImage(named: Constant.profileImages.allCases[data.row].rawValue), for: .normal)
         if Variable.profileImage == Constant.profileImages.allCases[data.row].rawValue {
             layer.borderColor = UIColor.mainColor.cgColor

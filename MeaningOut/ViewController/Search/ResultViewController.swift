@@ -9,26 +9,21 @@ import UIKit
 import Alamofire
 import Kingfisher
 
-
 struct Shopping: Decodable {
     let total: Int
     let start: Int
     let display: Int
     let items: [ProductInfo]
 }
-
 struct ProductInfo: Decodable{
     var title: String
     let link: String
     let mallName: String
     let image: String
     let lprice: String
+    let productId: String
 }
-
-
 class ResultViewController: UIViewController {
-    
-    static var like = false
     var page = 1
     let numberOfSearch = {
         let label = UILabel()
@@ -78,9 +73,7 @@ class ResultViewController: UIViewController {
         return button
     }()
     lazy var buttonList: [UIButton] = [accuracyButton, dateButton, highPriceButton, lowPriceButton]
-    
     @objc func filterButtonTapped(sender: UIButton) {
-        
         for i in 0..<buttonList.count {
             buttonList[i].backgroundColor = .white
             buttonList[i].setTitleColor(.black, for: .normal)
@@ -212,9 +205,10 @@ class ResultViewController: UIViewController {
                         }
                     }
                     self.numberOfSearch.text = "\(value.total.formatted())개의 검색결과"
-                    self.collectionView.reloadData()
                 }
+                self.collectionView.reloadData()
             case .failure(let error):
+                self.numberOfSearch.text = "네트워크를 확인해주세요."
                 print(error)
             }
         }
@@ -227,8 +221,7 @@ extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ResultCollectionViewCell.identifier, for: indexPath) as? ResultCollectionViewCell else { return ResultCollectionViewCell() }
-        
-        ResultViewController.like = UserDefaults.standard.bool(forKey: "\(Variable.mySearch[indexPath.item].title)")
+        Constant.like = UserDefaults.standard.bool(forKey: "\(Variable.mySearch[indexPath.item].title)")
         cell.configureCell(data: indexPath)
         return cell
     }
@@ -236,6 +229,7 @@ extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSo
         let vc = ProductViewController()
         vc.navigationItem.title = Variable.mySearch[indexPath.item].title
         Variable.searchItem = Variable.mySearch[indexPath.item].link
+//        Variable.getNumber = indexPath.item
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         navigationController?.pushViewController(vc, animated: true)
     }

@@ -36,12 +36,11 @@ class ProductViewController: UIViewController {
         configureLayout()
     }
     
-    
     @objc func likeButtonTapped() {
-        ResultViewController.like = UserDefaults.standard.bool(forKey: "\(navigationItem.title!)")
+        Constant.like = UserDefaults.standard.bool(forKey: "\(navigationItem.title!)")
         Variable.temporaryBasket = []
-        ResultViewController.like.toggle()
-        if ResultViewController.like {
+        Constant.like.toggle()
+        if Constant.like {
             navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: Constant.likeImage.select.rawValue), style: .plain, target: self, action: nil)
             Variable.temporaryBasket = Variable.myBasket
             Variable.temporaryBasket.append(navigationItem.title!)
@@ -58,7 +57,7 @@ class ProductViewController: UIViewController {
                 
             }
         }
-        UserDefaults.standard.setValue(ResultViewController.like, forKey: "\(navigationItem.title!)")
+        UserDefaults.standard.setValue(Constant.like, forKey: "\(navigationItem.title!)")
     }
     
     

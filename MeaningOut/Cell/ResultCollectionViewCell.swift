@@ -48,10 +48,10 @@ class ResultCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     @objc func likeButtonTapped(sender: UIButton) {
-        ResultViewController.like = UserDefaults.standard.bool(forKey: "\(Variable.mySearch[sender.tag].title)")
+        Constant.like = UserDefaults.standard.bool(forKey: "\(Variable.mySearch[sender.tag].title)")
         Variable.temporaryBasket = []
-        ResultViewController.like.toggle()
-        if ResultViewController.like {
+        Constant.like.toggle()
+        if Constant.like {
             likeButton.setImage(UIImage(named: Constant.likeImage.select.rawValue), for: .normal)
             likeButton.backgroundColor = UIColor(hexCode: "FFFFFF", alpha: 0.5)
             Variable.temporaryBasket = Variable.myBasket
@@ -70,7 +70,7 @@ class ResultCollectionViewCell: UICollectionViewCell {
                 
             }
         }
-        UserDefaults.standard.setValue(ResultViewController.like, forKey: "\(Variable.mySearch[sender.tag].title)")
+        UserDefaults.standard.setValue(Constant.like, forKey: "\(Variable.mySearch[sender.tag].title)")
     }
     func configureHierarchy() {
         contentView.addSubview(imageView)
@@ -112,7 +112,7 @@ class ResultCollectionViewCell: UICollectionViewCell {
         productNameLabel.text = Variable.mySearch[data.row].title
         priceLabel.text = "\(Int(Variable.mySearch[data.row].lprice)?.formatted() ?? "0")원"
         
-        if ResultViewController.like {
+        if Constant.like {
             likeButton.setImage(UIImage(named: Constant.likeImage.select.rawValue), for: .normal)
             likeButton.backgroundColor = UIColor.customWhite.withAlphaComponent(1)
         } else {
@@ -120,6 +120,5 @@ class ResultCollectionViewCell: UICollectionViewCell {
             likeButton.backgroundColor = UIColor.customDarkGray.withAlphaComponent(0.5)
         }
     }
-    
     
 }
