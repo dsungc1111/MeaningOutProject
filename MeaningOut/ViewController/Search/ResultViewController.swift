@@ -137,6 +137,7 @@ class ResultViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         collectionView.reloadData()
     }
+    
     func configureCollecionView() {
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -190,22 +191,27 @@ class ResultViewController: UIViewController {
         AF.request(url, method: .get, headers: header).responseDecodable(of: Shopping.self) { response in
             switch response.result {
             case .success(let value):
-                var products: [ProductInfo] = []
-                for var i in value.items {
-                    i.title = i.title.removeHtmlTag
-                    products.append(i)
-                    if self.page == 1{
-                        Variable.mySearch = products
-                    } else {
-                        Variable.mySearch.append(contentsOf: products)
+                if value.items.count == 0 {
+                    Variable.mySearch = []
+                } else {
+                    var products: [ProductInfo] = []
+                    for var i in value.items {
+                        i.title = i.title.removeHtmlTag
+                        products.append(i)
+                        if self.page == 1{
+                            Variable.mySearch = products
+                        } else {
+                            Variable.mySearch.append(contentsOf: products)
+                        }
                     }
+                    self.numberOfSearch.text = "\(value.total.formatted())개의 검색결과"
+                    self.collectionView.reloadData()
                 }
-                self.numberOfSearch.text = "\(value.total.formatted())개의 검색결과"
-                self.collectionView.reloadData()
             case .failure(let error):
                 print(error)
             }
         }
+            
     }
 }
 extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -217,19 +223,13 @@ extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSo
         
         ResultViewController.like = UserDefaults.standard.bool(forKey: "\(Variable.mySearch[indexPath.item].title)")
         cell.configureCell(data: indexPath)
-        if ResultViewController.like {
-            cell.likeButton.setImage(UIImage(named: Constant.likeImage.select.rawValue), for: .normal)
-            cell.likeButton.backgroundColor = UIColor(hexCode: "FFFFFF", alpha: 0.5)
-        } else {
-            cell.likeButton.setImage(UIImage(named: Constant.likeImage.unselect.rawValue), for: .normal)
-            cell.likeButton.backgroundColor = UIColor(hexCode: "828282", alpha: 0.5)
-        }
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = ProductViewController()
         vc.navigationItem.title = Variable.mySearch[indexPath.item].title
         Variable.searchItem = Variable.mySearch[indexPath.item].link
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         navigationController?.pushViewController(vc, animated: true)
     }
 }

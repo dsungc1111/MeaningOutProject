@@ -30,10 +30,8 @@ class OnBoardingViewController: UIViewController {
         button.addTarget(self, action: #selector(startButtonTapped), for: .touchUpInside)
         return button
     }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.backgroundColor = .white
         configureHierarchy()
         configureLayout()
@@ -59,7 +57,6 @@ class OnBoardingViewController: UIViewController {
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
             make.bottom.equalTo(view.safeAreaLayoutGuide).inset(220)
             make.top.equalTo(view.safeAreaLayoutGuide).offset(185)
-            
         }
         projectTitle.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).inset(105)
@@ -72,9 +69,5 @@ class OnBoardingViewController: UIViewController {
             make.height.equalTo(50)
         }
     }
-
-    
-    
-
 }
 

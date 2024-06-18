@@ -11,16 +11,11 @@ extension UIButton.Configuration {
     
     static func settingButtons() -> UIButton.Configuration {
         var configuration = UIButton.Configuration.filled()
-        configuration.title = "로그인"
-        configuration.subtitle = "Df"
-        configuration.titleAlignment = .trailing
-        configuration.baseBackgroundColor = .systemBlue
-        configuration.baseForegroundColor = .darkGray
-        configuration.image = UIImage(systemName: "star")
+        configuration.baseBackgroundColor = .white
+        configuration.baseForegroundColor = .black
+        configuration.image = UIImage(systemName: "clock")
         configuration.imagePlacement = .leading
-        configuration.imagePadding = 100
-        configuration.cornerStyle = .capsule
-        
+        configuration.imagePadding = 10
         return configuration
     }
     

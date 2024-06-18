@@ -24,8 +24,6 @@ class TabBarController: UITabBarController {
         let nav2 = UINavigationController(rootViewController: birthday)
         nav2.tabBarItem = UITabBarItem(title: "설정", image: UIImage(systemName: "person"), tag: 1)
         
-//        navigationItem.title = "\(Variable.user)'s Meaning Out"
-        
         setViewControllers([nav1, nav2], animated: true)
         
     }

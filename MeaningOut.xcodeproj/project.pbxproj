@@ -159,9 +159,7 @@
 				8B71E17B2C1AD983000BCB72 /* OnBoardingViewController.swift */,
 				8B71E1D32C1F1BA3000BCB72 /* Profile */,
 				8B71E1D22C1F1B91000BCB72 /* Main */,
-				8B71E1CC2C1C2EED000BCB72 /* ResultViewController.swift */,
-				8B71E1D42C1F1D2D000BCB72 /* ProductViewController.swift */,
-				8B71E2092C201C6E000BCB72 /* EditViewController.swift */,
+				8B71E20B2C20F32F000BCB72 /* Search */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -190,6 +188,7 @@
 				8B71E1C42C1C078C000BCB72 /* TabBarController.swift */,
 				8B71E1B72C1B2825000BCB72 /* SearchViewController.swift */,
 				8B71E1C62C1C07DD000BCB72 /* SettingViewController.swift */,
+				8B71E2092C201C6E000BCB72 /* EditViewController.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -212,6 +211,15 @@
 				8B71E2052C2005F9000BCB72 /* SettingTableViewCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		8B71E20B2C20F32F000BCB72 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				8B71E1CC2C1C2EED000BCB72 /* ResultViewController.swift */,
+				8B71E1D42C1F1D2D000BCB72 /* ProductViewController.swift */,
+			);
+			path = Search;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

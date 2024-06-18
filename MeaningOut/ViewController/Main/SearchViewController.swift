@@ -183,8 +183,8 @@ extension SearchViewController: UISearchBarDelegate {
                 }
                 if count == 0 { Variable.searchList.insert(text, at: 0) }
             }
+            configureNextNavigation()
         }
-        configureNextNavigation()
         searchBar.text = nil
         selectedWindow()
         tableView.reloadData()

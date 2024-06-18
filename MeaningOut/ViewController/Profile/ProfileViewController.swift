@@ -116,7 +116,6 @@ class ProfileViewController: UIViewController {
         Constant.signInTime = convertNowStr
     }
     
-    
     func configureHierarchy() {
         view.addSubview(profileButton)
         view.addSubview(profileCameraLogo)

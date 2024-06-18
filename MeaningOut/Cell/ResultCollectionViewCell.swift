@@ -111,6 +111,15 @@ class ResultCollectionViewCell: UICollectionViewCell {
         companyNameLabel.text = Variable.mySearch[data.row].mallName
         productNameLabel.text = Variable.mySearch[data.row].title
         priceLabel.text = "\(Int(Variable.mySearch[data.row].lprice)?.formatted() ?? "0")원"
+        
+        if ResultViewController.like {
+            likeButton.setImage(UIImage(named: Constant.likeImage.select.rawValue), for: .normal)
+            likeButton.backgroundColor = UIColor.customWhite.withAlphaComponent(1)
+        } else {
+            likeButton.setImage(UIImage(named: Constant.likeImage.unselect.rawValue), for: .normal)
+            likeButton.backgroundColor = UIColor.customDarkGray.withAlphaComponent(0.5)
+        }
     }
+    
     
 }

@@ -19,13 +19,12 @@ class SettingViewController: UIViewController {
     let userNickname = {
         let label = UILabel()
         label.text = Variable.user
-        label.font = .boldSystemFont(ofSize: 16)
+        label.font = .boldSystemFont(ofSize: 16) 
         return label
     }()
     let signInDate = {
         let label = UILabel()
         label.textColor = .darkGray
-        label.text = "\(Constant.signInTime)에 가입"
         label.font = .systemFont(ofSize: 13)
         return label
     }()
@@ -57,20 +56,17 @@ class SettingViewController: UIViewController {
         tableView.layer.addBorder([.top], color: .systemGray4, width: 1)
     }
  
-    
     override func viewWillAppear(_ animated: Bool) {
         profileButton.setImage(UIImage(named: Variable.profileImage), for: .normal)
         userNickname.text = Variable.user
+        signInDate.text = "\(Constant.signInTime)에 가입"
         tableView.reloadData()
     }
-    
     @objc func editButtonTapped() {
         let vc  = EditViewController()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         navigationController?.pushViewController(vc, animated: true)
     }
-   
-    
     func configureHierarchy() {
         view.addSubview(profileButton)
         view.addSubview(tableView)
@@ -124,21 +120,15 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 4 {
             let alert = UIAlertController(title: "탈퇴하기", message: "탈퇴를 하면 데이터가 모두 초기화됩니다. 탈퇴하시겠습니까?", preferredStyle: .actionSheet)
-            let okButton = UIAlertAction(title: "확인", style: .default) {_ in 
+            let okButton = UIAlertAction(title: "확인", style: .default) {_ in
+                
                 for i in 0..<Variable.mySearch.count {
                     UserDefaults.standard.setValue(false, forKeyPath: "\(Variable.mySearch[i].title)")
                 }
-                
                 Variable.user = ""
                 Variable.profileImage = ""
                 Variable.searchList = []
                 Variable.myBasket = []
-                
-
-                
-                
-                UserDefaults.standard.bool(forKey: "\(Variable.mySearch[indexPath.item].title)")
-                
                 
                 let vc = UINavigationController(rootViewController: OnBoardingViewController())
                 vc.modalPresentationStyle = .fullScreen
