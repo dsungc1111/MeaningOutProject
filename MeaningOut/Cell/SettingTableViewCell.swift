@@ -14,6 +14,7 @@ class SettingTableViewCell: UITableViewCell {
         button.contentHorizontalAlignment = .left
         button.titleLabel?.font = .systemFont(ofSize: 14)
         button.setTitleColor(.black, for: .normal)
+        button.isEnabled = false
         return button
     }()
     var basketButton = {
@@ -40,7 +41,7 @@ class SettingTableViewCell: UITableViewCell {
     }
     func configureLayout() {
         settingButton.snp.makeConstraints { make in
-            make.horizontalEdges.equalTo(contentView.safeAreaLayoutGuide).inset(20)
+            make.leading.equalTo(contentView.safeAreaLayoutGuide).inset(20)
             make.centerY.equalTo(contentView.safeAreaLayoutGuide)
         }
         basketButton.snp.makeConstraints { make in
