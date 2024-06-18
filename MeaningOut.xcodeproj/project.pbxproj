@@ -47,6 +47,7 @@
 		8B71E2172C218B60000BCB72 /* LoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E2162C218B60000BCB72 /* LoginPage.swift */; };
 		8B71E2192C218EEF000BCB72 /* SettingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E2182C218EEF000BCB72 /* SettingPage.swift */; };
 		8B71E21B2C218F52000BCB72 /* Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E21A2C218F52000BCB72 /* Variables.swift */; };
+		8B71E21D2C2195E8000BCB72 /* FilterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E21C2C2195E8000BCB72 /* FilterButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -88,6 +89,7 @@
 		8B71E2162C218B60000BCB72 /* LoginPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPage.swift; sourceTree = "<group>"; };
 		8B71E2182C218EEF000BCB72 /* SettingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingPage.swift; sourceTree = "<group>"; };
 		8B71E21A2C218F52000BCB72 /* Variables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Variables.swift; sourceTree = "<group>"; };
+		8B71E21C2C2195E8000BCB72 /* FilterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,12 +127,12 @@
 		8B71E1762C1AD983000BCB72 /* MeaningOut */ = {
 			isa = PBXGroup;
 			children = (
+				8B71E1A12C1AE794000BCB72 /* CuntomView */,
 				8B71E2112C2184F9000BCB72 /* Resource */,
 				8B71E1BB2C1BC2CF000BCB72 /* Protocol */,
 				8B71E19C2C1AE265000BCB72 /* Extension */,
 				8B71E2032C200555000BCB72 /* Cell */,
 				8B71E1A52C1AED55000BCB72 /* ViewController */,
-				8B71E1A12C1AE794000BCB72 /* CuntomView */,
 				8B71E1772C1AD983000BCB72 /* AppDelegate.swift */,
 				8B71E1792C1AD983000BCB72 /* SceneDelegate.swift */,
 				8B71E1802C1AD984000BCB72 /* Assets.xcassets */,
@@ -159,6 +161,7 @@
 				8B71E1A22C1AE7B4000BCB72 /* BigSizeButton.swift */,
 				8B71E1AD2C1AFB2B000BCB72 /* CustomProfileButton.swift */,
 				8B71E1B92C1BC1B4000BCB72 /* CameraLogo.swift */,
+				8B71E21C2C2195E8000BCB72 /* FilterButton.swift */,
 			);
 			path = CuntomView;
 			sourceTree = "<group>";
@@ -345,6 +348,7 @@
 				8B71E2152C218AF1000BCB72 /* Image.swift in Sources */,
 				8B71E1C52C1C078C000BCB72 /* TabBarController.swift in Sources */,
 				8B71E20A2C201C6E000BCB72 /* EditViewController.swift in Sources */,
+				8B71E21D2C2195E8000BCB72 /* FilterButton.swift in Sources */,
 				8B71E1AE2C1AFB2B000BCB72 /* CustomProfileButton.swift in Sources */,
 				8B71E1D72C1F29A4000BCB72 /* APIKey.swift in Sources */,
 				8B71E2132C218506000BCB72 /* UserDefaultsManager.swift in Sources */,

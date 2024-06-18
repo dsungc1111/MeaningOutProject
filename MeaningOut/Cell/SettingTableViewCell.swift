@@ -8,7 +8,7 @@
 import UIKit
 
 class SettingTableViewCell: UITableViewCell {
-
+    
     var settingButton = {
         let button = UIButton()
         button.contentHorizontalAlignment = .left
@@ -52,11 +52,24 @@ class SettingTableViewCell: UITableViewCell {
         
         settingButton.setTitle(SettingMenu.allCases[data.row].rawValue, for: .normal)
         if SettingMenu.allCases[data.row].rawValue == "나의 장바구니 목록" {
-                basketButton.isHidden = false
-            basketButton.setTitle("\(UserDefaultManager.myBasket.count)", for: .normal)
+            basketButton.isHidden = false
+            configureBasket()
+            
         } else {
             basketButton.isHidden = true
         }
+    }
+    func configureBasket() {
+        let title = "\(UserDefaultManager.myBasket.count)개의 상품"
+        let highlighted = "\(UserDefaultManager.myBasket.count)개"
+        let attributedTitle = NSMutableAttributedString(string: title)
+        
+        if let range = title.range(of: highlighted) {
+            let nsRange = NSRange(range, in: title)
+            attributedTitle.addAttribute(.foregroundColor, value: UIColor.black, range: nsRange)
+            attributedTitle.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 15), range: nsRange)
+        }
+        basketButton.setAttributedTitle(attributedTitle, for: .normal)
     }
     
 }

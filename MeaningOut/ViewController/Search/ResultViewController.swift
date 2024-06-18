@@ -19,42 +19,31 @@ class ResultViewController: UIViewController {
         return label
     }()
     lazy var accuracyButton = {
-        let button = UIButton()
+        let button = FilterButton()
         button.tag = 0
         button.setTitle(Category.accuracy.rawValue, for: .normal)
-        button.layer.cornerRadius = 15
-        button.layer.borderWidth = 1
-        button.setTitleColor(.black, for: .normal)
+     
         button.addTarget(self, action: #selector(filterButtonTapped(sender:)), for: .touchUpInside)
         return button
     }()
     lazy var dateButton = {
-        let button = UIButton()
+        let button = FilterButton()
         button.tag = 1
         button.setTitle(Category.byDate.rawValue, for: .normal)
-        button.layer.cornerRadius = 15
-        button.layer.borderWidth = 1
-        button.setTitleColor(.black, for: .normal)
         button.addTarget(self, action: #selector(filterButtonTapped(sender:)), for: .touchUpInside)
         return button
     }()
     lazy var highPriceButton = {
-        let button = UIButton()
+        let button = FilterButton()
         button.tag = 2
         button.setTitle(Category.highPrice.rawValue, for: .normal)
-        button.layer.cornerRadius = 15
-        button.layer.borderWidth = 1
-        button.setTitleColor(.black, for: .normal)
         button.addTarget(self, action: #selector(filterButtonTapped(sender:)), for: .touchUpInside)
         return button
     }()
     lazy var lowPriceButton = {
-        let button = UIButton()
+        let button = FilterButton()
         button.tag = 3
         button.setTitle(Category.lowPrice.rawValue, for: .normal)
-        button.layer.cornerRadius = 15
-        button.layer.borderWidth = 1
-        button.setTitleColor(.black, for: .normal)
         button.addTarget(self, action: #selector(filterButtonTapped(sender:)), for: .touchUpInside)
         return button
     }()
@@ -101,7 +90,7 @@ class ResultViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        configureCollecionView()
+        CollecionViewSetting()
         callRequest(sort: "sim")
         buttonList[0].backgroundColor = .darkGray
         buttonList[0].setTitleColor(.white, for: .normal)
@@ -117,7 +106,7 @@ class ResultViewController: UIViewController {
         collectionView.reloadData()
     }
     
-    func configureCollecionView() {
+    func CollecionViewSetting() {
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.prefetchDataSource = self
@@ -164,13 +153,11 @@ class ResultViewController: UIViewController {
     }
     func callRequest(sort: String) {
         let url = "https://openapi.naver.com/v1/search/shop.json?"
-        
         let param: Parameters = [
             "query" : UserDefaultManager.searchText,
             "page" : "\(page)",
             "sort" : sort
         ]
-        
         let header: HTTPHeaders = [
             "X-Naver-Client-Id" : APIKey().clientId, "X-Naver-Client-Secret" : APIKey().secretKey]
         
