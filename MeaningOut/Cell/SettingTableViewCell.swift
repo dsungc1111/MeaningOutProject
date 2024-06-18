@@ -40,7 +40,7 @@ class SettingTableViewCell: UITableViewCell {
     }
     func configureLayout() {
         settingButton.snp.makeConstraints { make in
-            make.leading.equalTo(contentView.safeAreaLayoutGuide).inset(25)
+            make.horizontalEdges.equalTo(contentView.safeAreaLayoutGuide).inset(20)
             make.centerY.equalTo(contentView.safeAreaLayoutGuide)
         }
         basketButton.snp.makeConstraints { make in

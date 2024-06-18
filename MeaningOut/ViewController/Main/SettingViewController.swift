@@ -143,4 +143,7 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
         }
         tableView.reloadRows(at: [indexPath], with: .automatic)
     }
+    
+    
 }
+

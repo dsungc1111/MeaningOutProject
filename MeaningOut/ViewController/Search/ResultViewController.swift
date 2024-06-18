@@ -57,18 +57,23 @@ class ResultViewController: UIViewController {
         case 0:
             buttonList[sender.tag].backgroundColor = .darkGray
             buttonList[sender.tag].setTitleColor(.white, for: .normal)
+            page = 1
             callRequest(sort: "sim")
+            
         case 1:
             buttonList[sender.tag].backgroundColor = .darkGray
             buttonList[sender.tag].setTitleColor(.white, for: .normal)
+            page = 1
             callRequest(sort: "date")
         case 2:
             buttonList[sender.tag].backgroundColor = .darkGray
             buttonList[sender.tag].setTitleColor(.white, for: .normal)
+            page = 1
             callRequest(sort: "dsc")
         case 3:
             buttonList[sender.tag].backgroundColor = .darkGray
             buttonList[sender.tag].setTitleColor(.white, for: .normal)
+            page = 1
             callRequest(sort: "asc")
         default:
             break
@@ -180,6 +185,10 @@ class ResultViewController: UIViewController {
                     self.numberOfSearch.text = "\(value.total.formatted())개의 검색결과"
                 }
                 self.collectionView.reloadData()
+                
+                if self.page == 1{
+                    self.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
+                }
             case .failure(let error):
                 self.numberOfSearch.text = AlertMention.network.rawValue
                 let alert = UIAlertController(title: AlertMention.connectionError.rawValue, message: AlertMention.network.rawValue, preferredStyle: .alert)
@@ -214,7 +223,7 @@ extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSo
 extension ResultViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         for item in indexPaths {
-            if Variable.mySearch.count - 2 == item.row {
+            if Variable.mySearch.count - 5 == item.row {
                 page += 1
                 callRequest(sort: "sim")
                 buttonList[0].backgroundColor = .darkGray
