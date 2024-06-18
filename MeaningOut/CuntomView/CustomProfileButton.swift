@@ -19,9 +19,9 @@ class CustomProfileButton: UIButton {
     }
     
     func configureImage() {
-        if Variable.profileImage == "" {
-            Variable.profileImage = Constant.profileImages.allCases.randomElement()!.rawValue
-            setImage(UIImage(named: Variable.profileImage), for: .normal)
+        if UserDefaultManager.profileImage == "" {
+            UserDefaultManager.profileImage = ProfileImages.allCases.randomElement()!.rawValue
+            setImage(UIImage(named: UserDefaultManager.profileImage), for: .normal)
         }
         clipsToBounds = true
         contentMode = .scaleAspectFit

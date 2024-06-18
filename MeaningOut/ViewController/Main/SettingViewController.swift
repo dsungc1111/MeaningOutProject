@@ -11,27 +11,23 @@ import UIKit
 class SettingViewController: UIViewController {
     
     let tableView = UITableView()
-    
-    
-    
     lazy var profileButton = {
         let button = CustomProfileButton()
         return button
     }()
     let userNickname = {
         let label = UILabel()
-        label.text = Variable.user
+        label.text = UserDefaultManager.user
         label.font = .boldSystemFont(ofSize: 16)
         return label
     }()
     let signInDate = {
         let label = UILabel()
         label.textColor = .darkGray
-        label.text = "\(Constant.signInTime)에 가입"
+        label.text = "\(UserDefaultManager.signInTime)에 가입"
         label.font = .systemFont(ofSize: 13)
         return label
     }()
-    
     lazy var editButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "chevron.right"), for: .normal)
@@ -45,23 +41,22 @@ class SettingViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         navigationItem.title = "Setting"
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(SettingTableViewCell.self, forCellReuseIdentifier: SettingTableViewCell.identifier)
+        tableViewSetting()
         configureHierarchy()
         configureLayout()
     }
     
+    
     override func viewDidLayoutSubviews() {
         profileButton.layer.cornerRadius = profileButton.frame.width / 2
        navigationController?.navigationBar.layer.addBorder([.bottom], color: .systemGray4, width: 1)
-        profileButton.setImage(UIImage(named: Variable.profileImage), for: .normal)
+        profileButton.setImage(UIImage(named: UserDefaultManager.profileImage), for: .normal)
         tableView.layer.addBorder([.top], color: .systemGray4, width: 1)
     }
  
     override func viewWillAppear(_ animated: Bool) {
-        profileButton.setImage(UIImage(named: Variable.profileImage), for: .normal)
-        userNickname.text = Variable.user
+        profileButton.setImage(UIImage(named: UserDefaultManager.profileImage), for: .normal)
+        userNickname.text = UserDefaultManager.user
         tableView.reloadData()
     }
     @objc func editButtonTapped() {
@@ -69,6 +64,12 @@ class SettingViewController: UIViewController {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         navigationController?.pushViewController(vc, animated: true)
     }
+    func tableViewSetting() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(SettingTableViewCell.self, forCellReuseIdentifier: SettingTableViewCell.identifier)
+    }
+    
     func configureHierarchy() {
         view.addSubview(profileButton)
         view.addSubview(tableView)
@@ -113,7 +114,6 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingTableViewCell.identifier, for: indexPath) as? SettingTableViewCell else { return SettingTableViewCell() }
         cell.settingButton.tag = indexPath.row
         cell.configureCell(data: indexPath)
-        
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -127,10 +127,10 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
                 for i in 0..<Variable.mySearch.count {
                     UserDefaults.standard.setValue(false, forKeyPath: "\(Variable.mySearch[i].title)")
                 }
-                Variable.user = ""
-                Variable.profileImage = ""
-                Variable.searchList = []
-                Variable.myBasket = []
+                UserDefaultManager.user = ""
+                UserDefaultManager.profileImage = ""
+                UserDefaultManager.searchList = []
+                UserDefaultManager.myBasket = []
                 
                 let vc = UINavigationController(rootViewController: OnBoardingViewController())
                 vc.modalPresentationStyle = .fullScreen

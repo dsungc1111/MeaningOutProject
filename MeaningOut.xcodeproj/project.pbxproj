@@ -20,16 +20,16 @@
 		8B71E1A02C1AE62B000BCB72 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 8B71E19F2C1AE62B000BCB72 /* .gitignore */; };
 		8B71E1A32C1AE7B4000BCB72 /* BigSizeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1A22C1AE7B4000BCB72 /* BigSizeButton.swift */; };
 		8B71E1A72C1AED76000BCB72 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1A62C1AED76000BCB72 /* ProfileViewController.swift */; };
-		8B71E1AC2C1AF895000BCB72 /* Enum+Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1AB2C1AF895000BCB72 /* Enum+Constant.swift */; };
+		8B71E1AC2C1AF895000BCB72 /* KeyValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1AB2C1AF895000BCB72 /* KeyValue.swift */; };
 		8B71E1AE2C1AFB2B000BCB72 /* CustomProfileButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1AD2C1AFB2B000BCB72 /* CustomProfileButton.swift */; };
-		8B71E1B02C1B13EC000BCB72 /* Enum+Variable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1AF2C1B13EC000BCB72 /* Enum+Variable.swift */; };
+		8B71E1B02C1B13EC000BCB72 /* SearchPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1AF2C1B13EC000BCB72 /* SearchPage.swift */; };
 		8B71E1B22C1B1598000BCB72 /* CALayer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1B12C1B1598000BCB72 /* CALayer+Extension.swift */; };
 		8B71E1B42C1B176B000BCB72 /* TextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1B32C1B176B000BCB72 /* TextField+Extension.swift */; };
 		8B71E1B62C1B1D0D000BCB72 /* SelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1B52C1B1D0D000BCB72 /* SelectViewController.swift */; };
 		8B71E1B82C1B2825000BCB72 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1B72C1B2825000BCB72 /* SearchViewController.swift */; };
 		8B71E1BA2C1BC1B4000BCB72 /* CameraLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1B92C1BC1B4000BCB72 /* CameraLogo.swift */; };
-		8B71E1BD2C1BC2E1000BCB72 /* SetMainColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1BC2C1BC2E1000BCB72 /* SetMainColor.swift */; };
-		8B71E1C12C1BC9AF000BCB72 /* Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1C02C1BC9AF000BCB72 /* Identifier.swift */; };
+		8B71E1BD2C1BC2E1000BCB72 /* SetMainColorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1BC2C1BC2E1000BCB72 /* SetMainColorProtocol.swift */; };
+		8B71E1C12C1BC9AF000BCB72 /* IdentifierProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1C02C1BC9AF000BCB72 /* IdentifierProtocol.swift */; };
 		8B71E1C32C1BCBAB000BCB72 /* SelectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1C22C1BCBAB000BCB72 /* SelectCollectionViewCell.swift */; };
 		8B71E1C52C1C078C000BCB72 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1C42C1C078C000BCB72 /* TabBarController.swift */; };
 		8B71E1C72C1C07DD000BCB72 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1C62C1C07DD000BCB72 /* SettingViewController.swift */; };
@@ -42,6 +42,11 @@
 		8B71E2062C2005F9000BCB72 /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E2052C2005F9000BCB72 /* SettingTableViewCell.swift */; };
 		8B71E2082C200A0B000BCB72 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E2072C200A0B000BCB72 /* UIButton+Extension.swift */; };
 		8B71E20A2C201C6E000BCB72 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E2092C201C6E000BCB72 /* EditViewController.swift */; };
+		8B71E2132C218506000BCB72 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E2122C218506000BCB72 /* UserDefaultsManager.swift */; };
+		8B71E2152C218AF1000BCB72 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E2142C218AF1000BCB72 /* Image.swift */; };
+		8B71E2172C218B60000BCB72 /* LoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E2162C218B60000BCB72 /* LoginPage.swift */; };
+		8B71E2192C218EEF000BCB72 /* SettingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E2182C218EEF000BCB72 /* SettingPage.swift */; };
+		8B71E21B2C218F52000BCB72 /* Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E21A2C218F52000BCB72 /* Variables.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,16 +61,16 @@
 		8B71E19F2C1AE62B000BCB72 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		8B71E1A22C1AE7B4000BCB72 /* BigSizeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigSizeButton.swift; sourceTree = "<group>"; };
 		8B71E1A62C1AED76000BCB72 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		8B71E1AB2C1AF895000BCB72 /* Enum+Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Enum+Constant.swift"; sourceTree = "<group>"; };
+		8B71E1AB2C1AF895000BCB72 /* KeyValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyValue.swift; sourceTree = "<group>"; };
 		8B71E1AD2C1AFB2B000BCB72 /* CustomProfileButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProfileButton.swift; sourceTree = "<group>"; };
-		8B71E1AF2C1B13EC000BCB72 /* Enum+Variable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Enum+Variable.swift"; sourceTree = "<group>"; };
+		8B71E1AF2C1B13EC000BCB72 /* SearchPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPage.swift; sourceTree = "<group>"; };
 		8B71E1B12C1B1598000BCB72 /* CALayer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Extension.swift"; sourceTree = "<group>"; };
 		8B71E1B32C1B176B000BCB72 /* TextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextField+Extension.swift"; sourceTree = "<group>"; };
 		8B71E1B52C1B1D0D000BCB72 /* SelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectViewController.swift; sourceTree = "<group>"; };
 		8B71E1B72C1B2825000BCB72 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		8B71E1B92C1BC1B4000BCB72 /* CameraLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraLogo.swift; sourceTree = "<group>"; };
-		8B71E1BC2C1BC2E1000BCB72 /* SetMainColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetMainColor.swift; sourceTree = "<group>"; };
-		8B71E1C02C1BC9AF000BCB72 /* Identifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifier.swift; sourceTree = "<group>"; };
+		8B71E1BC2C1BC2E1000BCB72 /* SetMainColorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetMainColorProtocol.swift; sourceTree = "<group>"; };
+		8B71E1C02C1BC9AF000BCB72 /* IdentifierProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifierProtocol.swift; sourceTree = "<group>"; };
 		8B71E1C22C1BCBAB000BCB72 /* SelectCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCollectionViewCell.swift; sourceTree = "<group>"; };
 		8B71E1C42C1C078C000BCB72 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		8B71E1C62C1C07DD000BCB72 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
@@ -78,6 +83,11 @@
 		8B71E2052C2005F9000BCB72 /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
 		8B71E2072C200A0B000BCB72 /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
 		8B71E2092C201C6E000BCB72 /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
+		8B71E2122C218506000BCB72 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
+		8B71E2142C218AF1000BCB72 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		8B71E2162C218B60000BCB72 /* LoginPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPage.swift; sourceTree = "<group>"; };
+		8B71E2182C218EEF000BCB72 /* SettingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingPage.swift; sourceTree = "<group>"; };
+		8B71E21A2C218F52000BCB72 /* Variables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Variables.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,8 +125,8 @@
 		8B71E1762C1AD983000BCB72 /* MeaningOut */ = {
 			isa = PBXGroup;
 			children = (
+				8B71E2112C2184F9000BCB72 /* Resource */,
 				8B71E1BB2C1BC2CF000BCB72 /* Protocol */,
-				8B71E1AA2C1AF885000BCB72 /* Enum */,
 				8B71E19C2C1AE265000BCB72 /* Extension */,
 				8B71E2032C200555000BCB72 /* Cell */,
 				8B71E1A52C1AED55000BCB72 /* ViewController */,
@@ -164,20 +174,11 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
-		8B71E1AA2C1AF885000BCB72 /* Enum */ = {
-			isa = PBXGroup;
-			children = (
-				8B71E1AB2C1AF895000BCB72 /* Enum+Constant.swift */,
-				8B71E1AF2C1B13EC000BCB72 /* Enum+Variable.swift */,
-			);
-			path = Enum;
-			sourceTree = "<group>";
-		};
 		8B71E1BB2C1BC2CF000BCB72 /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
-				8B71E1BC2C1BC2E1000BCB72 /* SetMainColor.swift */,
-				8B71E1C02C1BC9AF000BCB72 /* Identifier.swift */,
+				8B71E1BC2C1BC2E1000BCB72 /* SetMainColorProtocol.swift */,
+				8B71E1C02C1BC9AF000BCB72 /* IdentifierProtocol.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -220,6 +221,20 @@
 				8B71E1D42C1F1D2D000BCB72 /* ProductViewController.swift */,
 			);
 			path = Search;
+			sourceTree = "<group>";
+		};
+		8B71E2112C2184F9000BCB72 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				8B71E21A2C218F52000BCB72 /* Variables.swift */,
+				8B71E1AB2C1AF895000BCB72 /* KeyValue.swift */,
+				8B71E2122C218506000BCB72 /* UserDefaultsManager.swift */,
+				8B71E1AF2C1B13EC000BCB72 /* SearchPage.swift */,
+				8B71E2142C218AF1000BCB72 /* Image.swift */,
+				8B71E2162C218B60000BCB72 /* LoginPage.swift */,
+				8B71E2182C218EEF000BCB72 /* SettingPage.swift */,
+			);
+			path = Resource;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -311,27 +326,32 @@
 				8B71E1C32C1BCBAB000BCB72 /* SelectCollectionViewCell.swift in Sources */,
 				8B71E1782C1AD983000BCB72 /* AppDelegate.swift in Sources */,
 				8B71E1D52C1F1D2D000BCB72 /* ProductViewController.swift in Sources */,
-				8B71E1AC2C1AF895000BCB72 /* Enum+Constant.swift in Sources */,
+				8B71E1AC2C1AF895000BCB72 /* KeyValue.swift in Sources */,
+				8B71E2192C218EEF000BCB72 /* SettingPage.swift in Sources */,
 				8B71E1B22C1B1598000BCB72 /* CALayer+Extension.swift in Sources */,
-				8B71E1C12C1BC9AF000BCB72 /* Identifier.swift in Sources */,
+				8B71E1C12C1BC9AF000BCB72 /* IdentifierProtocol.swift in Sources */,
 				8B71E1B62C1B1D0D000BCB72 /* SelectViewController.swift in Sources */,
 				8B71E1B42C1B176B000BCB72 /* TextField+Extension.swift in Sources */,
 				8B71E1BA2C1BC1B4000BCB72 /* CameraLogo.swift in Sources */,
 				8B71E1A32C1AE7B4000BCB72 /* BigSizeButton.swift in Sources */,
 				8B71E1D12C1EC2C6000BCB72 /* String+Extension.swift in Sources */,
 				8B71E2082C200A0B000BCB72 /* UIButton+Extension.swift in Sources */,
+				8B71E2172C218B60000BCB72 /* LoginPage.swift in Sources */,
 				8B71E2062C2005F9000BCB72 /* SettingTableViewCell.swift in Sources */,
+				8B71E21B2C218F52000BCB72 /* Variables.swift in Sources */,
 				8B71E17A2C1AD983000BCB72 /* SceneDelegate.swift in Sources */,
 				8B71E19E2C1AE275000BCB72 /* UIColor+Extension.swift in Sources */,
 				8B71E1CB2C1C0B46000BCB72 /* SearchResultTableViewCell.swift in Sources */,
+				8B71E2152C218AF1000BCB72 /* Image.swift in Sources */,
 				8B71E1C52C1C078C000BCB72 /* TabBarController.swift in Sources */,
 				8B71E20A2C201C6E000BCB72 /* EditViewController.swift in Sources */,
 				8B71E1AE2C1AFB2B000BCB72 /* CustomProfileButton.swift in Sources */,
 				8B71E1D72C1F29A4000BCB72 /* APIKey.swift in Sources */,
-				8B71E1BD2C1BC2E1000BCB72 /* SetMainColor.swift in Sources */,
+				8B71E2132C218506000BCB72 /* UserDefaultsManager.swift in Sources */,
+				8B71E1BD2C1BC2E1000BCB72 /* SetMainColorProtocol.swift in Sources */,
 				8B71E1C72C1C07DD000BCB72 /* SettingViewController.swift in Sources */,
 				8B71E1CF2C1D38B2000BCB72 /* ResultCollectionViewCell.swift in Sources */,
-				8B71E1B02C1B13EC000BCB72 /* Enum+Variable.swift in Sources */,
+				8B71E1B02C1B13EC000BCB72 /* SearchPage.swift in Sources */,
 				8B71E1A72C1AED76000BCB72 /* ProfileViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -480,6 +500,7 @@
 				DEVELOPMENT_TEAM = 83K785968Z;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MeaningOut/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "최대성";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -513,6 +534,7 @@
 				DEVELOPMENT_TEAM = 83K785968Z;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MeaningOut/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "최대성";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;

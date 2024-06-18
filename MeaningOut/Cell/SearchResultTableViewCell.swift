@@ -50,4 +50,9 @@ class SearchResultTableViewCell: UITableViewCell {
             make.centerY.equalTo(contentView.safeAreaLayoutGuide)
         }
     }
+    
+    
+    func configureCell(data: IndexPath) {
+        resultButton.setTitle(UserDefaultManager.searchList[data.row], for: .normal)
+    }
 }

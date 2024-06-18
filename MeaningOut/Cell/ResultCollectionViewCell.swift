@@ -8,6 +8,7 @@
 import UIKit
 
 class ResultCollectionViewCell: UICollectionViewCell {
+    var temporaryBasket: [String] = []
     let imageView = {
         let image = UIImageView()
         image.clipsToBounds = true
@@ -48,29 +49,29 @@ class ResultCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     @objc func likeButtonTapped(sender: UIButton) {
-        Constant.like = UserDefaults.standard.bool(forKey: "\(Variable.mySearch[sender.tag].title)")
-        Variable.temporaryBasket = []
-        Constant.like.toggle()
-        if Constant.like {
-            likeButton.setImage(UIImage(named: Constant.likeImage.select.rawValue), for: .normal)
+        Variable.like = UserDefaults.standard.bool(forKey: "\(Variable.mySearch[sender.tag].title)")
+        temporaryBasket = []
+        Variable.like.toggle()
+        if Variable.like {
+            likeButton.setImage(UIImage(named: LikeImage.select.rawValue), for: .normal)
             likeButton.backgroundColor = UIColor(hexCode: "FFFFFF", alpha: 0.5)
-            Variable.temporaryBasket = Variable.myBasket
-            Variable.temporaryBasket.append(Variable.mySearch[sender.tag].title)
-            Variable.myBasket = Variable.temporaryBasket
+            temporaryBasket = UserDefaultManager.myBasket
+            temporaryBasket.append(Variable.mySearch[sender.tag].title)
+            UserDefaultManager.myBasket = temporaryBasket
         } else {
-            likeButton.setImage(UIImage(named: Constant.likeImage.unselect.rawValue), for: .normal)
+            likeButton.setImage(UIImage(named: LikeImage.unselect.rawValue), for: .normal)
             likeButton.backgroundColor = UIColor(hexCode: "828282", alpha: 0.5)
-            if Variable.myBasket.count != 0 {
-                for i in 0..<Variable.myBasket.count {
-                    if Variable.myBasket[i] == Variable.mySearch[sender.tag].title {
-                        Variable.myBasket.remove(at: i)
+            if UserDefaultManager.myBasket.count != 0 {
+                for i in 0..<UserDefaultManager.myBasket.count {
+                    if UserDefaultManager.myBasket[i] == Variable.mySearch[sender.tag].title {
+                        UserDefaultManager.myBasket.remove(at: i)
                         break
                     }
                 }
                 
             }
         }
-        UserDefaults.standard.setValue(Constant.like, forKey: "\(Variable.mySearch[sender.tag].title)")
+        UserDefaults.standard.setValue(Variable.like, forKey: "\(Variable.mySearch[sender.tag].title)")
     }
     func configureHierarchy() {
         contentView.addSubview(imageView)
@@ -111,12 +112,11 @@ class ResultCollectionViewCell: UICollectionViewCell {
         companyNameLabel.text = Variable.mySearch[data.row].mallName
         productNameLabel.text = Variable.mySearch[data.row].title
         priceLabel.text = "\(Int(Variable.mySearch[data.row].lprice)?.formatted() ?? "0")원"
-        
-        if Constant.like {
-            likeButton.setImage(UIImage(named: Constant.likeImage.select.rawValue), for: .normal)
+        if Variable.like {
+            likeButton.setImage(UIImage(named: LikeImage.select.rawValue), for: .normal)
             likeButton.backgroundColor = UIColor.customWhite.withAlphaComponent(1)
         } else {
-            likeButton.setImage(UIImage(named: Constant.likeImage.unselect.rawValue), for: .normal)
+            likeButton.setImage(UIImage(named: LikeImage.unselect.rawValue), for: .normal)
             likeButton.backgroundColor = UIColor.customDarkGray.withAlphaComponent(0.5)
         }
     }

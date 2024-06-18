@@ -7,10 +7,7 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController {
-
-    static var dateFormatter = DateFormatter()
-    
+class ProfileViewController: UIViewController {    
     lazy var profileButton = {
         let button = CustomProfileButton()
         button.addTarget(self, action: #selector(profileButtonTapped), for: .touchUpInside)
@@ -31,7 +28,7 @@ class ProfileViewController: UIViewController {
     }()
     let warningTextfield = {
         let warning = UITextField()
-        warning.text = Constant.warningMessage.basic.rawValue
+        warning.text = WarningMessage.basic.rawValue
         warning.textColor = UIColor.mainColor
         warning.font = .systemFont(ofSize: 13)
         return warning
@@ -54,34 +51,33 @@ class ProfileViewController: UIViewController {
         profileCameraLogo.layer.cornerRadius = profileCameraLogo.frame.width/2
         nicknameTextfield.layer.addBorder([.bottom], color: .lightGray, width: 1)
         navigationController?.navigationBar.layer.addBorder([.bottom], color: .systemGray4, width: 1)
-        profileButton.setImage(UIImage(named: Variable.profileImage), for: .normal)
+        profileButton.setImage(UIImage(named: UserDefaultManager.profileImage), for: .normal)
     }
     override func viewWillAppear(_ animated: Bool) {
-        profileButton.setImage(UIImage(named: Variable.profileImage), for: .normal)
+        profileButton.setImage(UIImage(named: UserDefaultManager.profileImage), for: .normal)
     }
     @objc func nicknameDidChange() {
-
         guard let text = nicknameTextfield.text else {
             return
         }
         if text.count >= 2 && text.count < 10 {
-            warningTextfield.text = Constant.warningMessage.pass.rawValue
-            if text.contains(Constant.SpecialCharacters.hashSymbol.rawValue) || text.contains(Constant.SpecialCharacters.atTheRateSignSymbol.rawValue) || text.contains(Constant.SpecialCharacters.dollarSymbol.rawValue) || text.contains(Constant.SpecialCharacters.percentSymbol.rawValue) {
-                warningTextfield.text = Constant.warningMessage.specialCharactersFail.rawValue
+            warningTextfield.text = WarningMessage.pass.rawValue
+            if text.contains(SpecialCharacters.hashSymbol.rawValue) || text.contains(SpecialCharacters.atTheRateSignSymbol.rawValue) || text.contains(SpecialCharacters.dollarSymbol.rawValue) || text.contains(SpecialCharacters.percentSymbol.rawValue) {
+                warningTextfield.text = WarningMessage.specialCharactersFail.rawValue
             }
-            if text.contains(Constant.SpecialCharacters.blankSymbol.rawValue) {
-                warningTextfield.text = Constant.warningMessage.blankFail.rawValue
+            if text.contains(SpecialCharacters.blankSymbol.rawValue) {
+                warningTextfield.text = WarningMessage.blankFail.rawValue
             }
-            for i in Constant.number {
+            for i in String().number {
                 if text.contains(i)  {
-                    warningTextfield.text = Constant.warningMessage.numberFail.rawValue
+                    warningTextfield.text = WarningMessage.numberFail.rawValue
                 }
             }
         } else {
-            warningTextfield.text = Constant.warningMessage.countFail.rawValue
+            warningTextfield.text = WarningMessage.countFail.rawValue
         }
         
-        if warningTextfield.text == Constant.warningMessage.pass.rawValue {
+        if warningTextfield.text == WarningMessage.pass.rawValue {
             completeButton.isEnabled = true
         } else {
             completeButton.isEnabled = false
@@ -96,7 +92,7 @@ class ProfileViewController: UIViewController {
     }
     @objc func completeButtonTapped() {
         getDateString()
-        Variable.user = nicknameTextfield.text ?? "위에서 통과하고 온 닉네임이라 nil의 경우는 없음. 고로 이 문장도 나올 일이 없음."
+        UserDefaultManager.user = nicknameTextfield.text ?? "nil XX"
         let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
         let sceneDelegate = windowScene?.delegate as? SceneDelegate
         let vc = TabBarController()
@@ -104,12 +100,11 @@ class ProfileViewController: UIViewController {
         sceneDelegate?.window?.makeKeyAndVisible()
     }
     func getDateString() {
-        let toString = DateFormatter()
+        let toString = Variable.dateFormatter
         toString.dateFormat = "MM/dd/yy HH:mm"
         let convertNowStr = toString.string(from: Date())
-        Constant.signInTime = convertNowStr
+        UserDefaultManager.signInTime = convertNowStr
     }
-    
     func configureHierarchy() {
         view.addSubview(profileButton)
         view.addSubview(profileCameraLogo)

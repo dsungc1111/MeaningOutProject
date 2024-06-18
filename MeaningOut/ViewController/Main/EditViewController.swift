@@ -23,7 +23,7 @@ class EditViewController: UIViewController {
         nickname.font = .systemFont(ofSize: 13)
         nickname.leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 10.0, height: 0.0))
         nickname.leftViewMode = .always
-        nickname.text = Variable.user
+        nickname.text = UserDefaultManager.user
         nickname.addTarget(self, action: #selector(nicknameDidChange), for: .editingChanged)
         return nickname
     }()
@@ -49,37 +49,38 @@ class EditViewController: UIViewController {
         profileCameraLogo.layer.cornerRadius = profileCameraLogo.frame.width/2
         nicknameTextfield.layer.addBorder([.bottom], color: .lightGray, width: 1)
         navigationController?.navigationBar.layer.addBorder([.bottom], color: .systemGray4, width: 1)
-        profileButton.setImage(UIImage(named: Variable.profileImage), for: .normal)
+        profileButton.setImage(UIImage(named: UserDefaultManager.profileImage), for: .normal)
     }
     override func viewWillAppear(_ animated: Bool) {
-        profileButton.setImage(UIImage(named: Variable.profileImage), for: .normal)
+        profileButton.setImage(UIImage(named: UserDefaultManager.profileImage), for: .normal)
     }
     @objc func saveEditedInfo() {
-        Variable.user = nicknameTextfield.text!
+        if let text = nicknameTextfield.text {
+            UserDefaultManager.user = text
+        }
         navigationController?.popViewController(animated: true)
     }
     @objc func nicknameDidChange() {
         guard let text = nicknameTextfield.text else {
             return
         }
-        if text.count >= 2 && text.count < 8 {
-            warningTextfield.text = Constant.warningMessage.pass.rawValue
-            if text.contains(Constant.SpecialCharacters.hashSymbol.rawValue) || text.contains(Constant.SpecialCharacters.atTheRateSignSymbol.rawValue) || text.contains(Constant.SpecialCharacters.dollarSymbol.rawValue) || text.contains(Constant.SpecialCharacters.percentSymbol.rawValue) {
-                warningTextfield.text = Constant.warningMessage.specialCharactersFail.rawValue
+        if text.count >= 2 && text.count < 10 {
+            warningTextfield.text = WarningMessage.pass.rawValue
+            if text.contains(SpecialCharacters.hashSymbol.rawValue) || text.contains(SpecialCharacters.atTheRateSignSymbol.rawValue) || text.contains(SpecialCharacters.dollarSymbol.rawValue) || text.contains(SpecialCharacters.percentSymbol.rawValue) {
+                warningTextfield.text = WarningMessage.specialCharactersFail.rawValue
             }
-            if text.contains(Constant.SpecialCharacters.blankSymbol.rawValue) {
-                warningTextfield.text = Constant.warningMessage.blankFail.rawValue
+            if text.contains(SpecialCharacters.blankSymbol.rawValue) {
+                warningTextfield.text = WarningMessage.blankFail.rawValue
             }
-            for i in Constant.number {
+            for i in String().number {
                 if text.contains(i)  {
-                    warningTextfield.text = Constant.warningMessage.numberFail.rawValue
+                    warningTextfield.text = WarningMessage.numberFail.rawValue
                 }
             }
         } else {
-            warningTextfield.text = Constant.warningMessage.countFail.rawValue
+            warningTextfield.text = WarningMessage.countFail.rawValue
         }
-        
-        if warningTextfield.text == Constant.warningMessage.pass.rawValue {
+        if warningTextfield.text == WarningMessage.pass.rawValue {
             navigationItem.rightBarButtonItem?.isEnabled = true
         } else {
             navigationItem.rightBarButtonItem?.isEnabled = false

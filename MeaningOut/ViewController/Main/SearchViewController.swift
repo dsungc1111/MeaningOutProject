@@ -11,13 +11,11 @@ import IQKeyboardManagerSwift
 class SearchViewController: UIViewController {
     
     let tableView = UITableView()
-    static var resultText: [Int : String] = [:]
     let searchBar = {
         let bar = UISearchBar()
         bar.placeholder = "브랜드, 상품 등을 입력하세요."
         return bar
     }()
-    
     let noRecordImage = {
         let image = UIImageView()
         image.image = UIImage(named: "empty")
@@ -52,22 +50,24 @@ class SearchViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         searchBar.delegate = self
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(SearchResultTableViewCell.self, forCellReuseIdentifier: SearchResultTableViewCell.identifier)
+        tableViewSetting()
         configureHierarchy()
         configureLayout()
         selectedWindow()
         
     }
     override func viewWillAppear(_ animated: Bool) {
-        navigationItem.title = "\(Variable.user)'s Meaning Out"
+        navigationItem.title = "\(UserDefaultManager.user)'s Meaning Out"
     }
-    
     @objc func removeAllButtonTapped() {
-            Variable.searchList.removeAll()
+            UserDefaultManager.searchList.removeAll()
             selectedWindow()
         }
+    func tableViewSetting() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(SearchResultTableViewCell.self, forCellReuseIdentifier: SearchResultTableViewCell.identifier)
+    }
     
     func configureHierarchy() {
         view.addSubview(searchBar)
@@ -109,7 +109,7 @@ class SearchViewController: UIViewController {
     }
     
     func selectedWindow() {
-        if Variable.searchList.count == 0 {
+        if UserDefaultManager.searchList.count == 0 {
             tableView.isHidden = true
             noRecordImage.isHidden = false
             noSearchLabel.isHidden = false
@@ -127,40 +127,36 @@ class SearchViewController: UIViewController {
 
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Variable.searchList.count
+        return UserDefaultManager.searchList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: SearchResultTableViewCell.identifier, for: indexPath) as?
                 SearchResultTableViewCell else { return SearchResultTableViewCell() }
         cell.resultButton.tag = indexPath.row
-        
-        cell.resultButton.setTitle(Variable.searchList[indexPath.row], for: .normal)
+        cell.configureCell(data: indexPath)
         cell.resultButton.addTarget(self, action: #selector(resultButtonTapped(sender:)), for: .touchUpInside)
-
-        
         return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        Variable.searchList.remove(at: indexPath.row)
+        UserDefaultManager.searchList.remove(at: indexPath.row)
         selectedWindow()
         tableView.reloadData()
     }
-    
     @objc func resultButtonTapped(sender: UIButton) {
-        Variable.searchText = Variable.searchList[sender.tag]
-        searchBar.text = Variable.searchText
+        UserDefaultManager.searchText = UserDefaultManager.searchList[sender.tag]
+        searchBar.text = UserDefaultManager.searchText
         guard let text = searchBar.text else { return }
         
-        for i in 0..<Variable.searchList.count {
-            if text == Variable.searchList[i] {
-                Variable.searchList.remove(at: i)
-                Variable.searchList.insert(text, at: 0)
+        for i in 0..<UserDefaultManager.searchList.count {
+            if text == UserDefaultManager.searchList[i] {
+                UserDefaultManager.searchList.remove(at: i)
+                UserDefaultManager.searchList.insert(text, at: 0)
             }
         }
         let vc = ResultViewController()
-        vc.navigationItem.title = Variable.searchText
+        vc.navigationItem.title = UserDefaultManager.searchText
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         navigationController?.navigationBar.tintColor = .black
         navigationController?.pushViewController(vc, animated: true)
@@ -170,7 +166,6 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 40
     }
-    
 }
 
 extension SearchViewController: UISearchBarDelegate {
@@ -180,25 +175,23 @@ extension SearchViewController: UISearchBarDelegate {
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        var count = 0
         guard let text = searchBar.text else { return }
-        if text.contains(Constant.SpecialCharacters.blankSymbol.rawValue) {
-            searchBar.placeholder = "빈칸 안돼"
+        if text.contains(SpecialCharacters.blankSymbol.rawValue) {
+            searchBar.placeholder = "공백은 입력이 불가합니다."
         } else {
-            if Variable.searchList.count == 0 {
-                Variable.searchList.insert(text, at: 0)
+            if UserDefaultManager.searchList.count == 0 {
+                UserDefaultManager.searchList.insert(text, at: 0)
             } else {
-                for i in 0..<Variable.searchList.count {
-                    if text == Variable.searchList[i] {
-                        Variable.searchList.remove(at: i)
-                       
-                        Variable.searchList.insert(text, at: 0)
-                    } else {
-                        Variable.searchList.insert(text, at: 0)
-                        break
+                for i in 0..<UserDefaultManager.searchList.count {
+                    if text == UserDefaultManager.searchList[i] {
+                        UserDefaultManager.searchList.remove(at: i)
+                        count += 1
+                        UserDefaultManager.searchList.insert(text, at: 0)
                     }
                 }
+                if count == 0 { UserDefaultManager.searchList.insert(text, at: 0) }
             }
-            
             configureNextNavigation()
         }
         searchBar.text = nil
@@ -207,8 +200,10 @@ extension SearchViewController: UISearchBarDelegate {
     }
     func configureNextNavigation() {
         let vc = ResultViewController()
-        Variable.searchText = searchBar.text!
-        vc.navigationItem.title = Variable.searchText
+        if let text = searchBar.text {
+            UserDefaultManager.searchText = text
+        }
+        vc.navigationItem.title = UserDefaultManager.searchText
         navigationController?.pushViewController(vc, animated: true)
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         navigationController?.navigationBar.tintColor = .black

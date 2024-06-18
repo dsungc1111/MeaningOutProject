@@ -26,7 +26,7 @@ class SelectViewController: UIViewController {
     
     let profileButton = {
         let button = CustomProfileButton()
-        button.setImage(UIImage(named: Variable.profileImage), for: .normal)
+        button.setImage(UIImage(named: UserDefaultManager.profileImage), for: .normal)
         return button
     }()
     let profileCameraLogo = {
@@ -51,7 +51,7 @@ class SelectViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        profileButton.setImage(UIImage(named: Variable.profileImage), for: .normal)
+        profileButton.setImage(UIImage(named: UserDefaultManager.profileImage), for: .normal)
     }
     
     func configureHierarchy() {
@@ -77,11 +77,9 @@ class SelectViewController: UIViewController {
         }
     }
 }
-
-
 extension SelectViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return Constant.profileImages.allCases.count
+        return ProfileImages.allCases.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -93,8 +91,8 @@ extension SelectViewController : UICollectionViewDelegate, UICollectionViewDataS
     }
     
     @objc func profileIamgeButtonTapped(sender: UIButton) {
-        Variable.profileImage = Constant.profileImages.allCases[sender.tag].rawValue
-        profileButton.setImage(UIImage(named: Variable.profileImage), for: .normal)
+        UserDefaultManager.profileImage = ProfileImages.allCases[sender.tag].rawValue
+        profileButton.setImage(UIImage(named: UserDefaultManager.profileImage), for: .normal)
         collectionView.reloadData()
     }
 

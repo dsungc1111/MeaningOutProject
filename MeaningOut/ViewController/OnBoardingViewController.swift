@@ -43,8 +43,8 @@ class OnBoardingViewController: UIViewController {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         vc.navigationItem.title = "PROFILE SETTING"
         navigationController?.pushViewController(vc, animated: true)
-        Variable.profileImage = ""
-        Variable.user = ""
+        UserDefaultManager.profileImage = ""
+        UserDefaultManager.user = ""
     }
     
     func configureHierarchy() {

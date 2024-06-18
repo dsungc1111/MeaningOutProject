@@ -9,20 +9,6 @@ import UIKit
 import Alamofire
 import Kingfisher
 
-struct Shopping: Decodable {
-    let total: Int
-    let start: Int
-    let display: Int
-    let items: [ProductInfo]
-}
-struct ProductInfo: Decodable{
-    var title: String
-    let link: String
-    let mallName: String
-    let image: String
-    let lprice: String
-    let productId: String
-}
 class ResultViewController: UIViewController {
     var page = 1
     let numberOfSearch = {
@@ -180,7 +166,7 @@ class ResultViewController: UIViewController {
         let url = "https://openapi.naver.com/v1/search/shop.json?"
         
         let param: Parameters = [
-            "query" : Variable.searchText,
+            "query" : UserDefaultManager.searchText,
             "page" : "\(page)",
             "sort" : sort
         ]
@@ -209,6 +195,7 @@ class ResultViewController: UIViewController {
                 self.collectionView.reloadData()
             case .failure(let error):
                 self.numberOfSearch.text = "네트워크를 확인해주세요."
+                Variable.mySearch = []
                 print(error)
             }
         }
@@ -221,7 +208,7 @@ extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ResultCollectionViewCell.identifier, for: indexPath) as? ResultCollectionViewCell else { return ResultCollectionViewCell() }
-        Constant.like = UserDefaults.standard.bool(forKey: "\(Variable.mySearch[indexPath.item].title)")
+        Variable.like = UserDefaults.standard.bool(forKey: "\(Variable.mySearch[indexPath.item].title)")
         cell.configureCell(data: indexPath)
         return cell
     }
@@ -229,7 +216,6 @@ extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSo
         let vc = ProductViewController()
         vc.navigationItem.title = Variable.mySearch[indexPath.item].title
         Variable.searchItem = Variable.mySearch[indexPath.item].link
-//        Variable.getNumber = indexPath.item
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         navigationController?.pushViewController(vc, animated: true)
     }

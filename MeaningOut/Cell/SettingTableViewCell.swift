@@ -18,7 +18,7 @@ class SettingTableViewCell: UITableViewCell {
     }()
     var basketButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: Constant.likeImage.select.rawValue), for: .normal)
+        button.setImage(UIImage(named: LikeImage.select.rawValue), for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 14)
         button.setTitleColor(.black, for: .normal)
         button.isHidden = true
@@ -53,7 +53,7 @@ class SettingTableViewCell: UITableViewCell {
         settingButton.setTitle(SettingMenu.allCases[data.row].rawValue, for: .normal)
         if SettingMenu.allCases[data.row].rawValue == "나의 장바구니 목록" {
                 basketButton.isHidden = false
-                basketButton.setTitle("\(Variable.myBasket.count)개의 장바구니", for: .normal)
+            basketButton.setTitle("\(UserDefaultManager.myBasket.count)", for: .normal)
         } else {
             basketButton.isHidden = true
         }

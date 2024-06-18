@@ -32,8 +32,8 @@ class SelectCollectionViewCell: UICollectionViewCell {
     }
     
     func configureCell(data: IndexPath) {
-        profileImageButton.setImage(UIImage(named: Constant.profileImages.allCases[data.row].rawValue), for: .normal)
-        if Variable.profileImage == Constant.profileImages.allCases[data.row].rawValue {
+        profileImageButton.setImage(UIImage(named: ProfileImages.allCases[data.row].rawValue), for: .normal)
+        if UserDefaultManager.profileImage == ProfileImages.allCases[data.row].rawValue {
             layer.borderColor = UIColor.mainColor.cgColor
             profileImageButton.alpha = 1
         } else {
