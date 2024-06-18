@@ -181,7 +181,11 @@ class ResultViewController: UIViewController {
                 }
                 self.collectionView.reloadData()
             case .failure(let error):
-                self.numberOfSearch.text = "네트워크를 확인해주세요."
+                self.numberOfSearch.text = AlertMention.network.rawValue
+                let alert = UIAlertController(title: AlertMention.connectionError.rawValue, message: AlertMention.network.rawValue, preferredStyle: .alert)
+                let okButton = UIAlertAction(title: AlertMention.networkChecking.rawValue, style: .default)
+                alert.addAction(okButton)
+                self.present(alert, animated: true)
                 Variable.mySearch = []
                 print(error)
             }
