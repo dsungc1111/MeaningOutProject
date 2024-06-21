@@ -10,10 +10,10 @@ import Alamofire
 import Kingfisher
 
 class ResultViewController: UIViewController {
+    var category = ""
     var page = 1
     let numberOfSearch = {
         let label = UILabel()
-        label.text = "0개의 검색결과"
         label.font = .boldSystemFont(ofSize: 15)
         label.textColor = UIColor.mainColor
         return label
@@ -22,7 +22,6 @@ class ResultViewController: UIViewController {
         let button = FilterButton()
         button.tag = 0
         button.setTitle(Category.accuracy.rawValue, for: .normal)
-     
         button.addTarget(self, action: #selector(filterButtonTapped(sender:)), for: .touchUpInside)
         return button
     }()
@@ -58,23 +57,26 @@ class ResultViewController: UIViewController {
             buttonList[sender.tag].backgroundColor = .darkGray
             buttonList[sender.tag].setTitleColor(.white, for: .normal)
             page = 1
-            getNetworkData(sort: "sim")
-            
+            getNetworkData(sort: CategoryEng.sim.rawValue)
+            category = CategoryEng.sim.rawValue
         case 1:
             buttonList[sender.tag].backgroundColor = .darkGray
             buttonList[sender.tag].setTitleColor(.white, for: .normal)
             page = 1
-            getNetworkData(sort: "date")
+            getNetworkData(sort: CategoryEng.date.rawValue)
+            category = CategoryEng.date.rawValue
         case 2:
             buttonList[sender.tag].backgroundColor = .darkGray
             buttonList[sender.tag].setTitleColor(.white, for: .normal)
             page = 1
-            getNetworkData(sort: "dsc")
+            getNetworkData(sort: CategoryEng.dsc.rawValue)
+            category = CategoryEng.dsc.rawValue
         case 3:
             buttonList[sender.tag].backgroundColor = .darkGray
             buttonList[sender.tag].setTitleColor(.white, for: .normal)
             page = 1
-            getNetworkData(sort: "asc")
+            getNetworkData(sort: CategoryEng.asc.rawValue)
+            category = CategoryEng.asc.rawValue
         default:
             break
         }
@@ -194,17 +196,17 @@ extension ResultViewController: UICollectionViewDataSourcePrefetching {
         for item in indexPaths {
             if Variable.mySearch.count - 5 == item.row {
                 page += 1
-                Network.shared.callRequest(sort: "sim", page: page) { result in
-                    if self.page == 1{
-                        Variable.mySearch = result
-                    } else {
-                        Variable.mySearch.append(contentsOf: result)
-                    }
-                    self.numberOfSearch.text = "\(Network.contentCount.formatted())개의 검색결과"
-                    self.collectionView.reloadData()
-                    if self.page == 1{
-                        self.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
-                    }
+                switch category {
+                case CategoryEng.sim.rawValue:
+                    getNetworkData(sort: "sim")
+                case CategoryEng.date.rawValue:
+                    getNetworkData(sort: "date")
+                case CategoryEng.dsc.rawValue:
+                    getNetworkData(sort: "dsc")
+                case CategoryEng.asc.rawValue:
+                    getNetworkData(sort: "asc")
+                default:
+                    break
                 }
                 buttonList[0].backgroundColor = .darkGray
                 buttonList[0].setTitleColor(.white, for: .normal)

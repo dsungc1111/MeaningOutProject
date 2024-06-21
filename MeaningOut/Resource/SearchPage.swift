@@ -28,8 +28,17 @@ enum Category: String {
     case highPrice = "높은가격순"
     case lowPrice = "낮은가격순"
 }
+enum CategoryEng: String {
+    case sim
+    case date
+    case dsc
+    case asc
+}
+
 enum AlertMention: String {
     case network = "네트워크를 확인해주세요."
     case connectionError = "연결 끊김"
     case networkChecking = "확인"
 }
+
+
