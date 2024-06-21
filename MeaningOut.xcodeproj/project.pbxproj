@@ -48,6 +48,7 @@
 		8B71E2192C218EEF000BCB72 /* SettingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E2182C218EEF000BCB72 /* SettingPage.swift */; };
 		8B71E21B2C218F52000BCB72 /* Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E21A2C218F52000BCB72 /* Variables.swift */; };
 		8B71E21D2C2195E8000BCB72 /* FilterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E21C2C2195E8000BCB72 /* FilterButton.swift */; };
+		8BD339F22C2565E600B396CA /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD339F12C2565E600B396CA /* Network.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -90,6 +91,7 @@
 		8B71E2182C218EEF000BCB72 /* SettingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingPage.swift; sourceTree = "<group>"; };
 		8B71E21A2C218F52000BCB72 /* Variables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Variables.swift; sourceTree = "<group>"; };
 		8B71E21C2C2195E8000BCB72 /* FilterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterButton.swift; sourceTree = "<group>"; };
+		8BD339F12C2565E600B396CA /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +129,7 @@
 		8B71E1762C1AD983000BCB72 /* MeaningOut */ = {
 			isa = PBXGroup;
 			children = (
+				8BD339F02C2565D400B396CA /* Network */,
 				8B71E1A12C1AE794000BCB72 /* CuntomView */,
 				8B71E2112C2184F9000BCB72 /* Resource */,
 				8B71E1BB2C1BC2CF000BCB72 /* Protocol */,
@@ -240,6 +243,14 @@
 			path = Resource;
 			sourceTree = "<group>";
 		};
+		8BD339F02C2565D400B396CA /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				8BD339F12C2565E600B396CA /* Network.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -328,6 +339,7 @@
 				8B71E1CD2C1C2EED000BCB72 /* ResultViewController.swift in Sources */,
 				8B71E1C32C1BCBAB000BCB72 /* SelectCollectionViewCell.swift in Sources */,
 				8B71E1782C1AD983000BCB72 /* AppDelegate.swift in Sources */,
+				8BD339F22C2565E600B396CA /* Network.swift in Sources */,
 				8B71E1D52C1F1D2D000BCB72 /* ProductViewController.swift in Sources */,
 				8B71E1AC2C1AF895000BCB72 /* KeyValue.swift in Sources */,
 				8B71E2192C218EEF000BCB72 /* SettingPage.swift in Sources */,

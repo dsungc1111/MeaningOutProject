@@ -58,23 +58,23 @@ class ResultViewController: UIViewController {
             buttonList[sender.tag].backgroundColor = .darkGray
             buttonList[sender.tag].setTitleColor(.white, for: .normal)
             page = 1
-            callRequest(sort: "sim")
+            getNetworkData(sort: "sim")
             
         case 1:
             buttonList[sender.tag].backgroundColor = .darkGray
             buttonList[sender.tag].setTitleColor(.white, for: .normal)
             page = 1
-            callRequest(sort: "date")
+            getNetworkData(sort: "date")
         case 2:
             buttonList[sender.tag].backgroundColor = .darkGray
             buttonList[sender.tag].setTitleColor(.white, for: .normal)
             page = 1
-            callRequest(sort: "dsc")
+            getNetworkData(sort: "dsc")
         case 3:
             buttonList[sender.tag].backgroundColor = .darkGray
             buttonList[sender.tag].setTitleColor(.white, for: .normal)
             page = 1
-            callRequest(sort: "asc")
+            getNetworkData(sort: "asc")
         default:
             break
         }
@@ -96,11 +96,11 @@ class ResultViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         CollecionViewSetting()
-        callRequest(sort: "sim")
         buttonList[0].backgroundColor = .darkGray
         buttonList[0].setTitleColor(.white, for: .normal)
         configurehierarchy()
         configureLayout()
+        getNetworkData(sort: "sim")
     }
     override func viewDidLayoutSubviews() {
         navigationController?.navigationBar.layer.addBorder([.bottom], color: .systemGray4, width: 1)
@@ -156,50 +156,19 @@ class ResultViewController: UIViewController {
             make.bottom.equalTo(view.safeAreaLayoutGuide)
         }
     }
-    func callRequest(sort: String) {
-        let url = "https://openapi.naver.com/v1/search/shop.json?"
-        let param: Parameters = [
-            "query" : UserDefaultManager.searchText,
-            "page" : "\(page)",
-            "sort" : sort
-        ]
-        let header: HTTPHeaders = [
-            "X-Naver-Client-Id" : APIKey().clientId, "X-Naver-Client-Secret" : APIKey().secretKey]
-        
-        AF.request(url, method: .get, parameters: param, headers: header).responseDecodable(of: Shopping.self) { response in
-            switch response.result {
-            case .success(let value):
-                if value.items.count == 0 {
-                    Variable.mySearch = []
-                } else {
-                    var products: [ProductInfo] = []
-                    for var i in value.items {
-                        i.title = i.title.removeHtmlTag
-                        products.append(i)
-                        if self.page == 1{
-                            Variable.mySearch = products
-                        } else {
-                            Variable.mySearch.append(contentsOf: products)
-                        }
-                    }
-                    self.numberOfSearch.text = "\(value.total.formatted())개의 검색결과"
-                }
-                self.collectionView.reloadData()
-                
-                if self.page == 1{
-                    self.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
-                }
-            case .failure(let error):
-                self.numberOfSearch.text = AlertMention.network.rawValue
-                let alert = UIAlertController(title: AlertMention.connectionError.rawValue, message: AlertMention.network.rawValue, preferredStyle: .alert)
-                let okButton = UIAlertAction(title: AlertMention.networkChecking.rawValue, style: .default)
-                alert.addAction(okButton)
-                self.present(alert, animated: true)
-                Variable.mySearch = []
-                print(error)
+    func getNetworkData(sort: String) {
+        Network.shared.callRequest(sort: sort, page: page) { result in
+            if self.page == 1{
+                Variable.mySearch = result
+            } else {
+                Variable.mySearch.append(contentsOf: result)
+            }
+            self.numberOfSearch.text = "\(Network.contentCount.formatted())개의 검색결과"
+            self.collectionView.reloadData()
+            if self.page == 1{
+                self.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
             }
         }
-            
     }
 }
 extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -225,7 +194,18 @@ extension ResultViewController: UICollectionViewDataSourcePrefetching {
         for item in indexPaths {
             if Variable.mySearch.count - 5 == item.row {
                 page += 1
-                callRequest(sort: "sim")
+                Network.shared.callRequest(sort: "sim", page: page) { result in
+                    if self.page == 1{
+                        Variable.mySearch = result
+                    } else {
+                        Variable.mySearch.append(contentsOf: result)
+                    }
+                    self.numberOfSearch.text = "\(Network.contentCount.formatted())개의 검색결과"
+                    self.collectionView.reloadData()
+                    if self.page == 1{
+                        self.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
+                    }
+                }
                 buttonList[0].backgroundColor = .darkGray
                 buttonList[0].setTitleColor(.white, for: .normal)
             }
