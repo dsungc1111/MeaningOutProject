@@ -194,7 +194,7 @@ extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSo
 extension ResultViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         for item in indexPaths {
-            if Variable.mySearch.count - 5 == item.row {
+            if Variable.mySearch.count - 6 == item.row {
                 page += 1
                 switch category {
                 case CategoryEng.sim.rawValue:
@@ -208,8 +208,6 @@ extension ResultViewController: UICollectionViewDataSourcePrefetching {
                 default:
                     break
                 }
-                buttonList[0].backgroundColor = .darkGray
-                buttonList[0].setTitleColor(.white, for: .normal)
             }
         }
     }
