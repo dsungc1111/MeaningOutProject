@@ -9,16 +9,13 @@
 import UIKit
 import Alamofire
 
-
-
 class Network {
     
     static var shared = Network()
     static var contentCount = 0
     private init() {}
     
-    
-    func callRequest(sort: String, page: Int, completionHanler: @escaping ([ProductInfo]) -> Void) {
+    func callRequest(sort: String, page: Int, completionHanler: @escaping (Result<[ProductInfo], Error>) -> Void) {
         let url = "https://openapi.naver.com/v1/search/shop.json?"
         let param: Parameters = [
             "query" : UserDefaultManager.searchText,
@@ -40,16 +37,11 @@ class Network {
                         i.title = i.title.removeHtmlTag
                         products.append(i)
                     }
-                    completionHanler(products)
+                    completionHanler(.success(products))
                 }
             case .failure(let error):
-//                self.numberOfSearch.text = AlertMention.network.rawValue
-                let alert = UIAlertController(title: AlertMention.connectionError.rawValue, message: AlertMention.network.rawValue, preferredStyle: .alert)
-                let okButton = UIAlertAction(title: AlertMention.networkChecking.rawValue, style: .default)
-                alert.addAction(okButton)
-//                self.present(alert, animated: true)
                 Variable.mySearch = []
-                print(error)
+                completionHanler(.failure(error))
             }
         }
             

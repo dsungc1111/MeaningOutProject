@@ -160,15 +160,24 @@ class ResultViewController: UIViewController {
     }
     func getNetworkData(sort: String) {
         Network.shared.callRequest(sort: sort, page: page) { result in
-            if self.page == 1{
-                Variable.mySearch = result
-            } else {
-                Variable.mySearch.append(contentsOf: result)
-            }
-            self.numberOfSearch.text = "\(Network.contentCount.formatted())개의 검색결과"
-            self.collectionView.reloadData()
-            if self.page == 1{
-                self.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
+            switch result {
+            case .success(let value):
+                if self.page == 1{
+                    Variable.mySearch = value
+                } else {
+                    Variable.mySearch.append(contentsOf: value)
+                }
+                self.numberOfSearch.text = "\(Network.contentCount.formatted())개의 검색결과"
+                self.collectionView.reloadData()
+                if self.page == 1{
+                    self.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
+                }
+            case .failure(let error):
+                let alert = UIAlertController(title: AlertMention.connectionError.rawValue, message: AlertMention.network.rawValue, preferredStyle: .alert)
+                let okButton = UIAlertAction(title: AlertMention.networkChecking.rawValue, style: .default)
+                alert.addAction(okButton)
+                self.numberOfSearch.text = AlertMention.network.rawValue
+                self.present(alert, animated: true)
             }
         }
     }
@@ -191,6 +200,8 @@ extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSo
         navigationController?.pushViewController(vc, animated: true)
     }
 }
+
+
 extension ResultViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         for item in indexPaths {
