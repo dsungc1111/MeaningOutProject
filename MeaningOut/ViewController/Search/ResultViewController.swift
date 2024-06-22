@@ -206,7 +206,7 @@ extension ResultViewController: UICollectionViewDataSourcePrefetching {
                 case CategoryEng.asc.rawValue:
                     getNetworkData(sort: "asc")
                 default:
-                    break
+                    getNetworkData(sort: "sim")
                 }
             }
         }
