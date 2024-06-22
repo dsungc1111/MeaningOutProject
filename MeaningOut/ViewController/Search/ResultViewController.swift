@@ -108,11 +108,9 @@ class ResultViewController: UIViewController {
         navigationController?.navigationBar.layer.addBorder([.bottom], color: .systemGray4, width: 1)
         collectionView.showsHorizontalScrollIndicator = false
     }
-    
     override func viewWillAppear(_ animated: Bool) {
         collectionView.reloadData()
     }
-    
     func CollecionViewSetting() {
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -200,8 +198,6 @@ extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSo
         navigationController?.pushViewController(vc, animated: true)
     }
 }
-
-
 extension ResultViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         for item in indexPaths {

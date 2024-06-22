@@ -106,8 +106,18 @@ class ResultCollectionViewCell: UICollectionViewCell {
         }
     }
     func configureCell(data: IndexPath) {
-        let url = URL(string: Variable.mySearch[data.row].image)
-        imageView.kf.setImage(with: url)
+        DispatchQueue.global().async {
+            do {
+                let url = URL(string: Variable.mySearch[data.row].image)!
+                let image = try Data(contentsOf: url)
+                DispatchQueue.main.async {
+                    self.imageView.image = UIImage(data: image)
+                }
+              } catch {
+                
+                  self.imageView.image = UIImage(systemName: "star")
+            }
+        }
         likeButton.tag = data.row
         companyNameLabel.text = Variable.mySearch[data.row].mallName
         productNameLabel.text = Variable.mySearch[data.row].title
