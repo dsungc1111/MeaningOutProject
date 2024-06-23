@@ -49,6 +49,7 @@
 		8B71E21B2C218F52000BCB72 /* Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E21A2C218F52000BCB72 /* Variables.swift */; };
 		8B71E21D2C2195E8000BCB72 /* FilterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E21C2C2195E8000BCB72 /* FilterButton.swift */; };
 		8BD339F22C2565E600B396CA /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD339F12C2565E600B396CA /* Network.swift */; };
+		8BD339F62C28045700B396CA /* BasketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD339F52C28045700B396CA /* BasketViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -92,6 +93,7 @@
 		8B71E21A2C218F52000BCB72 /* Variables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Variables.swift; sourceTree = "<group>"; };
 		8B71E21C2C2195E8000BCB72 /* FilterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterButton.swift; sourceTree = "<group>"; };
 		8BD339F12C2565E600B396CA /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		8BD339F52C28045700B396CA /* BasketViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +178,7 @@
 				8B71E1D32C1F1BA3000BCB72 /* Profile */,
 				8B71E1D22C1F1B91000BCB72 /* Main */,
 				8B71E20B2C20F32F000BCB72 /* Search */,
+				8BD339F52C28045700B396CA /* BasketViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -341,6 +344,7 @@
 				8B71E1782C1AD983000BCB72 /* AppDelegate.swift in Sources */,
 				8BD339F22C2565E600B396CA /* Network.swift in Sources */,
 				8B71E1D52C1F1D2D000BCB72 /* ProductViewController.swift in Sources */,
+				8BD339F62C28045700B396CA /* BasketViewController.swift in Sources */,
 				8B71E1AC2C1AF895000BCB72 /* KeyValue.swift in Sources */,
 				8B71E2192C218EEF000BCB72 /* SettingPage.swift in Sources */,
 				8B71E1B22C1B1598000BCB72 /* CALayer+Extension.swift in Sources */,

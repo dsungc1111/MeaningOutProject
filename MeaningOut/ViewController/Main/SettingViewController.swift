@@ -120,6 +120,13 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
         return 50
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            let vc = BasketViewController()
+            navigationController?.navigationBar.tintColor = .black
+            navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+            vc.navigationItem.title = "장바구니 목록"
+            navigationController?.pushViewController(vc, animated: true)
+        }
         if indexPath.row == 4 {
             let alert = UIAlertController(title: "탈퇴하기", message: "탈퇴를 하면 데이터가 모두 초기화됩니다. 탈퇴하시겠습니까?", preferredStyle: .actionSheet)
             let okButton = UIAlertAction(title: "확인", style: .default) {_ in
