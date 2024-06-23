@@ -8,7 +8,6 @@
 import UIKit
 import WebKit
 
-
 class ProductViewController: UIViewController {
 
     let webView = WKWebView()
@@ -30,9 +29,7 @@ class ProductViewController: UIViewController {
         }
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         navigationItem.rightBarButtonItem?.tintColor = .black
-        let url = URL(string: Variable.searchItem)
-        let request = URLRequest(url: url!)
-        webView.load(request)
+        callRequest()
         configureLayout()
     }
     
@@ -60,7 +57,17 @@ class ProductViewController: UIViewController {
         UserDefaults.standard.setValue(Variable.like, forKey: "\(navigationItem.title!)")
     }
     
-    
+    func callRequest() {
+        if let url = URL(string: Variable.searchItem) {
+            let request = URLRequest(url: url)
+            webView.load(request)
+        } else {
+            let alert = UIAlertController(title: AlertMention.connectionError.rawValue, message: AlertMention.network.rawValue, preferredStyle: .alert)
+            let okButton = UIAlertAction(title: AlertMention.networkChecking.rawValue, style: .default)
+            alert.addAction(okButton)
+            self.present(alert, animated: true)
+        }
+    }
     
     func configureLayout() {
         view.addSubview(webView)

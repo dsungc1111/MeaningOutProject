@@ -73,6 +73,16 @@ class ResultCollectionViewCell: UICollectionViewCell {
         }
         UserDefaults.standard.setValue(Variable.like, forKey: "\(Variable.mySearch[sender.tag].title)")
     }
+//    
+//    override func prepareForReuse() {
+//        super.prepareForReuse()
+//        imageView.image = nil
+//        companyNameLabel.text = nil
+//        productNameLabel.text = nil
+//        priceLabel.text = nil
+//        likeButton.setImage(nil, for: .normal)
+//        likeButton.backgroundColor = .clear
+//    }
     func configureHierarchy() {
         contentView.addSubview(imageView)
         contentView.addSubview(companyNameLabel)
@@ -113,15 +123,19 @@ class ResultCollectionViewCell: UICollectionViewCell {
                 DispatchQueue.main.async {
                     self.imageView.image = UIImage(data: image)
                 }
-              } catch {
-                
-                  self.imageView.image = UIImage(systemName: "star")
+            } catch {
+                DispatchQueue.main.async {
+                    self.imageView.image = UIImage(systemName: "star")
+                }
             }
         }
         likeButton.tag = data.row
         companyNameLabel.text = Variable.mySearch[data.row].mallName
         productNameLabel.text = Variable.mySearch[data.row].title
         priceLabel.text = "\(Int(Variable.mySearch[data.row].lprice)?.formatted() ?? "0")원"
+        
+        Variable.like = UserDefaults.standard.bool(forKey: "\(Variable.mySearch[data.row].title)")
+        
         if Variable.like {
             likeButton.setImage(UIImage(named: LikeImage.select.rawValue), for: .normal)
             likeButton.backgroundColor = UIColor.customWhite.withAlphaComponent(1)

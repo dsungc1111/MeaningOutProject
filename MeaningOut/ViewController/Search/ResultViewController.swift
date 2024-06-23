@@ -108,9 +108,13 @@ class ResultViewController: UIViewController {
         navigationController?.navigationBar.layer.addBorder([.bottom], color: .systemGray4, width: 1)
         collectionView.showsHorizontalScrollIndicator = false
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         collectionView.reloadData()
     }
+    
+    
+    
     func CollecionViewSetting() {
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -165,12 +169,12 @@ class ResultViewController: UIViewController {
                 } else {
                     Variable.mySearch.append(contentsOf: value)
                 }
-                self.numberOfSearch.text = "\(Network.contentCount.formatted())개의 검색결과"
                 self.collectionView.reloadData()
+                self.numberOfSearch.text = "\(Network.contentCount.formatted())개의 검색결과"
                 if self.page == 1{
                     self.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
                 }
-            case .failure(let error):
+            case .failure(_):
                 let alert = UIAlertController(title: AlertMention.connectionError.rawValue, message: AlertMention.network.rawValue, preferredStyle: .alert)
                 let okButton = UIAlertAction(title: AlertMention.networkChecking.rawValue, style: .default)
                 alert.addAction(okButton)
@@ -178,6 +182,7 @@ class ResultViewController: UIViewController {
                 self.present(alert, animated: true)
             }
         }
+        
     }
 }
 extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -188,6 +193,9 @@ extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSo
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ResultCollectionViewCell.identifier, for: indexPath) as? ResultCollectionViewCell else { return ResultCollectionViewCell() }
         Variable.like = UserDefaults.standard.bool(forKey: "\(Variable.mySearch[indexPath.item].title)")
         cell.configureCell(data: indexPath)
+        
+        
+        
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -197,7 +205,10 @@ extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSo
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         navigationController?.pushViewController(vc, animated: true)
     }
+    
 }
+
+
 extension ResultViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         for item in indexPaths {
