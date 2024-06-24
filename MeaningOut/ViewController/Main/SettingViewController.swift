@@ -138,7 +138,6 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
                 UserDefaultManager.profileImage = ""
                 UserDefaultManager.searchList = []
                 UserDefaultManager.myBasket = []
-                
                 let vc = UINavigationController(rootViewController: OnBoardingViewController())
                 vc.modalPresentationStyle = .fullScreen
                 self.present(vc, animated: true)

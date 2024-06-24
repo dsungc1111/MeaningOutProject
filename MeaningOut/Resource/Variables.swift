@@ -9,6 +9,7 @@ import Foundation
 
 struct Variable {
     static var searchItem = ""
+    static var productNumber = ""
     static var mySearch: [ProductInfo] = []
     static var dateFormatter = DateFormatter()
     static var like = false

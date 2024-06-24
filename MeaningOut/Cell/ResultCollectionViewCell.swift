@@ -49,31 +49,28 @@ class ResultCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     @objc func likeButtonTapped(sender: UIButton) {
-        Variable.like = UserDefaults.standard.bool(forKey: "\(Variable.mySearch[sender.tag].title)")
-        temporaryBasket = []
+        Variable.like = UserDefaults.standard.bool(forKey: "\(Variable.mySearch[sender.tag].productId)")
         Variable.like.toggle()
         if Variable.like {
             likeButton.setImage(UIImage(named: LikeImage.select.rawValue), for: .normal)
             likeButton.backgroundColor = UIColor(hexCode: "FFFFFF", alpha: 0.5)
             temporaryBasket = UserDefaultManager.myBasket
-            temporaryBasket.append(Variable.mySearch[sender.tag].title)
+            temporaryBasket.append(Variable.mySearch[sender.tag].productId)
             UserDefaultManager.myBasket = temporaryBasket
         } else {
             likeButton.setImage(UIImage(named: LikeImage.unselect.rawValue), for: .normal)
             likeButton.backgroundColor = UIColor(hexCode: "828282", alpha: 0.5)
             if UserDefaultManager.myBasket.count != 0 {
-                for i in 0..<UserDefaultManager.myBasket.count {
-                    if UserDefaultManager.myBasket[i] == Variable.mySearch[sender.tag].title {
+                for i in 0..<(UserDefaultManager.myBasket.count) {
+                    if UserDefaultManager.myBasket[i] == Variable.mySearch[sender.tag].productId {
                         UserDefaultManager.myBasket.remove(at: i)
                         break
                     }
                 }
-                
             }
         }
-        UserDefaults.standard.setValue(Variable.like, forKey: "\(Variable.mySearch[sender.tag].title)")
+        UserDefaults.standard.setValue(Variable.like, forKey: "\(Variable.mySearch[sender.tag].productId)")
     }
-//    
 //    override func prepareForReuse() {
 //        super.prepareForReuse()
 //        imageView.image = nil
@@ -134,7 +131,7 @@ class ResultCollectionViewCell: UICollectionViewCell {
         productNameLabel.text = Variable.mySearch[data.row].title
         priceLabel.text = "\(Int(Variable.mySearch[data.row].lprice)?.formatted() ?? "0")원"
         
-        Variable.like = UserDefaults.standard.bool(forKey: "\(Variable.mySearch[data.row].title)")
+        Variable.like = UserDefaults.standard.bool(forKey: "\(Variable.mySearch[data.row].productId)")
         
         if Variable.like {
             likeButton.setImage(UIImage(named: LikeImage.select.rawValue), for: .normal)

@@ -195,13 +195,12 @@ extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSo
         let vc = ProductViewController()
         vc.navigationItem.title = Variable.mySearch[indexPath.item].title
         Variable.searchItem = Variable.mySearch[indexPath.item].link
+        Variable.productNumber = Variable.mySearch[indexPath.item].productId
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         navigationController?.pushViewController(vc, animated: true)
     }
     
 }
-
-
 extension ResultViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         for item in indexPaths {

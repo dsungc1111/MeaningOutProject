@@ -61,7 +61,7 @@ class SettingTableViewCell: UITableViewCell {
         }
     }
     func configureBasket() {
-        let title = "\(UserDefaultManager.myBasket.count)개의 상품"
+        let title = "\(String(describing: UserDefaultManager.myBasket.count))개의 상품"
         let highlighted = "\(UserDefaultManager.myBasket.count)개"
         let attributedTitle = NSMutableAttributedString(string: title)
         

@@ -15,10 +15,10 @@ class ProductViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         
-        guard let title = navigationItem.title else { return }
+        let id = Variable.productNumber
         var count = 0
-        for i in 0..<UserDefaultManager.myBasket.count {
-            if title == UserDefaultManager.myBasket[i] {
+        for i in 0..<(UserDefaultManager.myBasket.count) {
+            if id == UserDefaultManager.myBasket[i] {
                 count += 1
             }
         }
@@ -32,21 +32,23 @@ class ProductViewController: UIViewController {
         callRequest()
         configureLayout()
     }
-    
     @objc func likeButtonTapped() {
-        Variable.like = UserDefaults.standard.bool(forKey: "\(navigationItem.title!)")
         var temporaryBasket: [String] = []
         Variable.like.toggle()
         if Variable.like {
             navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: LikeImage.select.rawValue), style: .plain, target: self, action: nil)
             temporaryBasket = UserDefaultManager.myBasket
-            temporaryBasket.append(navigationItem.title!)
-            UserDefaultManager.myBasket = temporaryBasket
+            for i in 0..<UserDefaultManager.myBasket.count {
+                if UserDefaultManager.myBasket[i] == Variable.productNumber {
+                    temporaryBasket.append(UserDefaultManager.myBasket[i])
+                }
+            }
+            UserDefaultManager.myBasket = temporaryBasket 
         } else {
             navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: LikeImage.unselect.rawValue), style: .plain, target: self, action: nil)
             if UserDefaultManager.myBasket.count != 0 {
                 for i in 0..<UserDefaultManager.myBasket.count {
-                    if UserDefaultManager.myBasket[i] == navigationItem.title! {
+                    if UserDefaultManager.myBasket[i] == Variable.productNumber {
                         UserDefaultManager.myBasket.remove(at: i)
                         break
                     }
@@ -54,7 +56,7 @@ class ProductViewController: UIViewController {
                 
             }
         }
-        UserDefaults.standard.setValue(Variable.like, forKey: "\(navigationItem.title!)")
+        UserDefaults.standard.setValue(Variable.like, forKey: Variable.productNumber)
     }
     
     func callRequest() {

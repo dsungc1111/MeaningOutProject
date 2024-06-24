@@ -27,13 +27,13 @@ struct UserDefaultManager {
         }
     }
     static var myBasket: [String] {
-        get {
-            return UserDefaults.standard.array(forKey: SaveKeyWord.myBasket.rawValue) as? [String] ?? []
-        }
-        set {
-            UserDefaults.standard.setValue(newValue, forKey: SaveKeyWord.myBasket.rawValue)
-        }
-    }
+           get {
+               return UserDefaults.standard.array(forKey: SaveKeyWord.myBasket.rawValue) as? [String] ?? []
+           }
+           set {
+               UserDefaults.standard.setValue(newValue, forKey: SaveKeyWord.myBasket.rawValue)
+           }
+       }
     static var searchText: String {
         get {
             return UserDefaults.standard.string(forKey: SaveKeyWord.searchBarText.rawValue) ?? ""

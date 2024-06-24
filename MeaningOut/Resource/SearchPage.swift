@@ -13,7 +13,7 @@ struct Shopping: Decodable {
     let display: Int
     let items: [ProductInfo]
 }
-struct ProductInfo: Decodable{
+struct ProductInfo: Codable {
     var title: String
     let link: String
     let mallName: String
