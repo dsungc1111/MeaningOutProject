@@ -113,8 +113,6 @@ class ResultViewController: UIViewController {
         collectionView.reloadData()
     }
     
-    
-    
     func CollecionViewSetting() {
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -164,22 +162,19 @@ class ResultViewController: UIViewController {
         Network.shared.callRequest(sort: sort, page: page) { result in
             switch result {
             case .success(let value):
-                if self.page == 1{
+                if self.page == 1 {
                     Variable.mySearch = value
                 } else {
                     Variable.mySearch.append(contentsOf: value)
                 }
                 self.collectionView.reloadData()
                 self.numberOfSearch.text = "\(Network.contentCount.formatted())개의 검색결과"
-                if self.page == 1{
+                if self.page == 1 {
                     self.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
                 }
             case .failure(_):
-                let alert = UIAlertController(title: AlertMention.connectionError.rawValue, message: AlertMention.network.rawValue, preferredStyle: .alert)
-                let okButton = UIAlertAction(title: AlertMention.networkChecking.rawValue, style: .default)
-                alert.addAction(okButton)
+                self.showAlert(title: AlertMention.connectionError.rawValue, message: AlertMention.network.rawValue)
                 self.numberOfSearch.text = AlertMention.network.rawValue
-                self.present(alert, animated: true)
             }
         }
         
@@ -191,10 +186,8 @@ extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ResultCollectionViewCell.identifier, for: indexPath) as? ResultCollectionViewCell else { return ResultCollectionViewCell() }
-        Variable.like = UserDefaults.standard.bool(forKey: "\(Variable.mySearch[indexPath.item].title)")
+        Variable.like = UserDefaults.standard.bool(forKey: "\(Variable.mySearch[indexPath.item].productId)")
         cell.configureCell(data: indexPath)
-        
-        
         
         return cell
     }
