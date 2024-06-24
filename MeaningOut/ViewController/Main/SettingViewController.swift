@@ -130,9 +130,10 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
         if indexPath.row == 4 {
             let alert = UIAlertController(title: "탈퇴하기", message: "탈퇴를 하면 데이터가 모두 초기화됩니다. 탈퇴하시겠습니까?", preferredStyle: .actionSheet)
             let okButton = UIAlertAction(title: "확인", style: .default) {_ in
-                
-                for i in 0..<Variable.mySearch.count {
-                    UserDefaults.standard.setValue(false, forKeyPath: "\(Variable.mySearch[i].title)")
+                if UserDefaultManager.myBasket.count != 0{
+                    for i in 0..<UserDefaultManager.myBasket.count {
+                        UserDefaults.standard.setValue(false, forKey: UserDefaultManager.myBasket[i])
+                    }
                 }
                 UserDefaultManager.user = ""
                 UserDefaultManager.profileImage = ""

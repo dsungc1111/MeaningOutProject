@@ -132,7 +132,6 @@ class ResultCollectionViewCell: UICollectionViewCell {
         priceLabel.text = "\(Int(Variable.mySearch[data.row].lprice)?.formatted() ?? "0")원"
         
         Variable.like = UserDefaults.standard.bool(forKey: "\(Variable.mySearch[data.row].productId)")
-        
         if Variable.like {
             likeButton.setImage(UIImage(named: LikeImage.select.rawValue), for: .normal)
             likeButton.backgroundColor = UIColor.customWhite.withAlphaComponent(1)
