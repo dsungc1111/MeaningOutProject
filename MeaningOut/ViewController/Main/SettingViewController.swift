@@ -128,29 +128,12 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
             navigationController?.pushViewController(vc, animated: true)
         }
         if indexPath.row == 4 {
-            let alert = UIAlertController(title: "탈퇴하기", message: "탈퇴를 하면 데이터가 모두 초기화됩니다. 탈퇴하시겠습니까?", preferredStyle: .actionSheet)
-            let okButton = UIAlertAction(title: "확인", style: .default) {_ in
-                if UserDefaultManager.myBasket.count != 0{
-                    for i in 0..<UserDefaultManager.myBasket.count {
-                        UserDefaults.standard.setValue(false, forKey: UserDefaultManager.myBasket[i])
-                    }
-                }
-                UserDefaultManager.user = ""
-                UserDefaultManager.profileImage = ""
-                UserDefaultManager.searchList = []
-                UserDefaultManager.myBasket = []
-                let vc = UINavigationController(rootViewController: OnBoardingViewController())
-                vc.modalPresentationStyle = .fullScreen
-                self.present(vc, animated: true)
+            showAlertReset(title: "탈퇴하기", message: "탈퇴를하면 데이터가 모두 초기화 됩니다. 탈퇴하시겠습니까?") { _ in print("df")
             }
-            let cancelButton = UIAlertAction(title: "취소", style: .cancel)
-            alert.addAction(cancelButton)
-            alert.addAction(okButton)
-            present(alert, animated: true)
+         
         }
         tableView.reloadRows(at: [indexPath], with: .automatic)
     }
-    
     
 }
 

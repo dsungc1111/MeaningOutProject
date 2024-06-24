@@ -84,7 +84,7 @@ extension BasketViewController: UICollectionViewDataSource, UICollectionViewDele
         Variable.like = UserDefaults.standard.bool(forKey: "\(UserDefaultManager.myBasket[indexPath.item])")
         
         cell.configureCell(data: indexPath)
-        
+
         return cell
     }
     

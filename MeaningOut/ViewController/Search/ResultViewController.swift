@@ -173,7 +173,11 @@ class ResultViewController: UIViewController {
                     self.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
                 }
             case .failure(_):
-                self.showAlert(title: AlertMention.connectionError.rawValue, message: AlertMention.network.rawValue)
+                
+                self.showAlertNetwork(title: AlertMention.connectionError.rawValue, message: AlertMention.network.rawValue) { _ in
+                    print("dfas")
+                }
+               
                 self.numberOfSearch.text = AlertMention.network.rawValue
             }
         }
