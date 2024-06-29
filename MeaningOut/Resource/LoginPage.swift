@@ -7,6 +7,13 @@
 
 import Foundation
 
+enum LoginError: Error {
+    case short
+    case long
+    case specialCharacters
+    case blank
+    case number
+}
 
 enum WarningMessage: String {
     case basic = "닉네임에 @는 포함될 수 없어요."
@@ -15,8 +22,9 @@ enum WarningMessage: String {
     case specialCharactersFail = "닉네임에 @, #, $, % 는 포함할 수 없어요."
     case blankFail = "공백은 불가능해요."
     case numberFail = "닉네임에 숫자는 포함할 수 없어요"
+    case exception = "예상치 못한 오류"
 }
-enum SpecialCharacters: String {
+enum SpecialCharacters: String, CaseIterable {
     case hashSymbol = "#"
     case percentSymbol = "%"
     case atTheRateSignSymbol = "@"

@@ -174,10 +174,7 @@ class ResultViewController: UIViewController {
                 }
             case .failure(_):
                 
-                self.showAlertNetwork(title: AlertMention.connectionError.rawValue, message: AlertMention.network.rawValue) { _ in
-                    print("dfas")
-                }
-               
+                self.showAlertNetwork(title: AlertMention.connectionError.rawValue, message: AlertMention.network.rawValue)
                 self.numberOfSearch.text = AlertMention.network.rawValue
             }
         }

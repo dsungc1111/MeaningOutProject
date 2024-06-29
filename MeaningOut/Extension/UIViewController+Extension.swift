@@ -8,17 +8,18 @@
 import UIKit
 
 extension UIViewController {
-    func showAlertNetwork(title: String, message: String, completionHandler: @escaping (UIAlertAction) -> Void) {
+    
+    func showAlertNetwork(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okButton = UIAlertAction(title: AlertMention.networkChecking.rawValue, style: .default)
         alert.addAction(okButton)
         present(alert, animated: true)
     }
     
-    func showAlertReset(title: String, message: String, completionHandler: @escaping (UIAlertAction) -> Void) {
+    func showAlertReset(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okButton = UIAlertAction(title: AlertMention.networkChecking.rawValue, style: .default) {_ in
-            if UserDefaultManager.myBasket.count != 0{
+            if UserDefaultManager.myBasket.count != 0 {
                 for i in 0..<UserDefaultManager.myBasket.count {
                     UserDefaults.standard.setValue(false, forKey: UserDefaultManager.myBasket[i])
                 }
@@ -35,6 +36,5 @@ extension UIViewController {
         alert.addAction(cancelButton)
         alert.addAction(okButton)
         present(alert, animated: true)
-        
     }
 }

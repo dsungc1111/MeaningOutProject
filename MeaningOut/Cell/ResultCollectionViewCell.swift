@@ -71,15 +71,15 @@ class ResultCollectionViewCell: UICollectionViewCell {
         }
         UserDefaults.standard.setValue(Variable.like, forKey: "\(Variable.mySearch[sender.tag].productId)")
     }
-//    override func prepareForReuse() {
-//        super.prepareForReuse()
-//        imageView.image = nil
-//        companyNameLabel.text = nil
-//        productNameLabel.text = nil
-//        priceLabel.text = nil
-//        likeButton.setImage(nil, for: .normal)
-//        likeButton.backgroundColor = .clear
-//    }
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        imageView.image = nil
+        companyNameLabel.text = nil
+        productNameLabel.text = nil
+        priceLabel.text = nil
+        likeButton.setImage(nil, for: .normal)
+        likeButton.backgroundColor = .clear
+    }
     func configureHierarchy() {
         contentView.addSubview(imageView)
         contentView.addSubview(companyNameLabel)
@@ -127,11 +127,13 @@ class ResultCollectionViewCell: UICollectionViewCell {
             }
         }
         likeButton.tag = data.row
+        print(data.item)
         companyNameLabel.text = Variable.mySearch[data.row].mallName
         productNameLabel.text = Variable.mySearch[data.row].title
         priceLabel.text = "\(Int(Variable.mySearch[data.row].lprice)?.formatted() ?? "0")원"
         
         Variable.like = UserDefaults.standard.bool(forKey: "\(Variable.mySearch[data.row].productId)")
+
         if Variable.like {
             likeButton.setImage(UIImage(named: LikeImage.select.rawValue), for: .normal)
             likeButton.backgroundColor = UIColor.customWhite.withAlphaComponent(1)

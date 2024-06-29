@@ -128,8 +128,7 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
             navigationController?.pushViewController(vc, animated: true)
         }
         if indexPath.row == 4 {
-            showAlertReset(title: "탈퇴하기", message: "탈퇴를하면 데이터가 모두 초기화 됩니다. 탈퇴하시겠습니까?") { _ in print("df")
-            }
+            showAlertReset(title: "탈퇴하기", message: "탈퇴를하면 데이터가 모두 초기화 됩니다. 탈퇴하시겠습니까?")
          
         }
         tableView.reloadRows(at: [indexPath], with: .automatic)

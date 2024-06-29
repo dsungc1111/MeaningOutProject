@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController {    
+class ProfileViewController: UIViewController {
     lazy var profileButton = {
         let button = CustomProfileButton()
         button.addTarget(self, action: #selector(profileButtonTapped), for: .touchUpInside)
@@ -57,31 +57,8 @@ class ProfileViewController: UIViewController {
         profileButton.setImage(UIImage(named: UserDefaultManager.profileImage), for: .normal)
     }
     @objc func nicknameDidChange() {
-        guard let text = nicknameTextfield.text else {
-            return
-        }
-        if text.count >= 2 && text.count < 10 {
-            warningTextfield.text = WarningMessage.pass.rawValue
-            if text.contains(SpecialCharacters.hashSymbol.rawValue) || text.contains(SpecialCharacters.atTheRateSignSymbol.rawValue) || text.contains(SpecialCharacters.dollarSymbol.rawValue) || text.contains(SpecialCharacters.percentSymbol.rawValue) {
-                warningTextfield.text = WarningMessage.specialCharactersFail.rawValue
-            }
-            if text.contains(SpecialCharacters.blankSymbol.rawValue) {
-                warningTextfield.text = WarningMessage.blankFail.rawValue
-            }
-            for i in String().number {
-                if text.contains(i)  {
-                    warningTextfield.text = WarningMessage.numberFail.rawValue
-                }
-            }
-        } else {
-            warningTextfield.text = WarningMessage.countFail.rawValue
-        }
-        
-        if warningTextfield.text == WarningMessage.pass.rawValue {
-            completeButton.isEnabled = true
-        } else {
-            completeButton.isEnabled = false
-        }
+        guard let text = nicknameTextfield.text else { return }
+        confirmNickname(text: text)
         
     }
     @objc func profileButtonTapped() {
@@ -99,6 +76,52 @@ class ProfileViewController: UIViewController {
         sceneDelegate?.window?.rootViewController = vc
         sceneDelegate?.window?.makeKeyAndVisible()
     }
+    
+    func nicknameCheck(text: String) throws -> String {
+        guard text.count >= 2 else {
+            throw LoginError.short
+        }
+        guard text.count < 10 else {
+            throw LoginError.long
+        }
+        guard !text.contains(SpecialCharacters.hashSymbol.rawValue) &&
+                !text.contains(SpecialCharacters.atTheRateSignSymbol.rawValue) &&
+                !text.contains(SpecialCharacters.dollarSymbol.rawValue) &&
+                !text.contains(SpecialCharacters.percentSymbol.rawValue) else {
+            throw LoginError.specialCharacters
+        }
+        for i in String().number {
+            guard !text.contains(i) else {
+                throw LoginError.number
+            }
+        }
+        guard !text.contains(SpecialCharacters.blankSymbol.rawValue) else {
+            throw LoginError.blank
+        }
+        
+        return WarningMessage.pass.rawValue
+    }
+    
+    func confirmNickname(text: String) {
+        do {
+            let warningMessage = try nicknameCheck(text: text)
+            warningTextfield.text = warningMessage
+            completeButton.isEnabled = true
+        } catch LoginError.blank {
+            warningTextfield.text = WarningMessage.blankFail.rawValue
+        } catch LoginError.long {
+            warningTextfield.text = WarningMessage.countFail.rawValue
+        } catch LoginError.short {
+            warningTextfield.text = WarningMessage.countFail.rawValue
+        } catch LoginError.number {
+           warningTextfield.text = WarningMessage.numberFail.rawValue
+        } catch LoginError.specialCharacters {
+            warningTextfield.text = WarningMessage.specialCharactersFail.rawValue
+        } catch {
+            warningTextfield.text = WarningMessage.exception.rawValue
+        }
+    }
+    
     func getDateString() {
         let toString = Variable.dateFormatter
         toString.dateFormat = "MM/dd/yy HH:mm"
