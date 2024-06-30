@@ -30,30 +30,11 @@ class ProductViewController: UIViewController {
     }
     
     @objc func likeButtonTapped() {
-        var temporaryBasket: [String] = []
+        let id = Self.productNumber
         Variable.like.toggle()
-        if Variable.like {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: LikeImage.select.rawValue), style: .plain, target: self, action: nil)
-            temporaryBasket = UserDefaultManager.myBasket
-            for i in 0..<UserDefaultManager.myBasket.count {
-                if UserDefaultManager.myBasket[i] == Self.productNumber {
-                    temporaryBasket.append(UserDefaultManager.myBasket[i])
-                }
-            }
-            UserDefaultManager.myBasket = temporaryBasket 
-        } else {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: LikeImage.unselect.rawValue), style: .plain, target: self, action: nil)
-            if UserDefaultManager.myBasket.count != 0 {
-                for i in 0..<UserDefaultManager.myBasket.count {
-                    if UserDefaultManager.myBasket[i] == Self.productNumber {
-                        UserDefaultManager.myBasket.remove(at: i)
-                        break
-                    }
-                }
-                
-            }
-        }
-        UserDefaults.standard.setValue(Variable.like, forKey: Self.productNumber)
+        imageSet()
+        UserDefaultManager.appendInMyBasket(productId: id, like: Variable.like)
+        UserDefaults.standard.setValue(Variable.like, forKey: id)
     }
     
     func imageSet() {
