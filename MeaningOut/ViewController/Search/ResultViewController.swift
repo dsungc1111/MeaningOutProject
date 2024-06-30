@@ -195,8 +195,8 @@ extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = ProductViewController()
         vc.navigationItem.title = Variable.mySearch[indexPath.item].title
-        Variable.searchItem = Variable.mySearch[indexPath.item].link
-        Variable.productNumber = Variable.mySearch[indexPath.item].productId
+        ProductViewController.searchItemLink = Variable.mySearch[indexPath.item].link
+        ProductViewController.productNumber = Variable.mySearch[indexPath.item].productId
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         navigationController?.pushViewController(vc, animated: true)
     }

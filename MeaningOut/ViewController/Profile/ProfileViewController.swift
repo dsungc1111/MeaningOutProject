@@ -8,6 +8,9 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
+    
+    static var dateFormatter = DateFormatter()
+    
     lazy var profileButton = {
         let button = CustomProfileButton()
         button.addTarget(self, action: #selector(profileButtonTapped), for: .touchUpInside)
@@ -68,7 +71,7 @@ class ProfileViewController: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     @objc func completeButtonTapped() {
-        getDateString()
+        UserDefaultManager.signInTime = DateChange.shared.dateToString(date: Date())
         UserDefaultManager.user = nicknameTextfield.text ?? "nil XX"
         let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
         let sceneDelegate = windowScene?.delegate as? SceneDelegate
@@ -120,13 +123,6 @@ class ProfileViewController: UIViewController {
         } catch {
             warningTextfield.text = WarningMessage.exception.rawValue
         }
-    }
-    
-    func getDateString() {
-        let toString = Variable.dateFormatter
-        toString.dateFormat = "MM/dd/yy HH:mm"
-        let convertNowStr = toString.string(from: Date())
-        UserDefaultManager.signInTime = convertNowStr
     }
     func configureHierarchy() {
         view.addSubview(profileButton)

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8B29AE572C2937BC006DB1FF /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B29AE562C2937BC006DB1FF /* UIViewController+Extension.swift */; };
+		8B456EEF2C311264003CFBD1 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B456EEE2C311264003CFBD1 /* DateFormatter.swift */; };
 		8B71E1782C1AD983000BCB72 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1772C1AD983000BCB72 /* AppDelegate.swift */; };
 		8B71E17A2C1AD983000BCB72 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E1792C1AD983000BCB72 /* SceneDelegate.swift */; };
 		8B71E17C2C1AD983000BCB72 /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E17B2C1AD983000BCB72 /* OnBoardingViewController.swift */; };
@@ -56,6 +57,7 @@
 
 /* Begin PBXFileReference section */
 		8B29AE562C2937BC006DB1FF /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		8B456EEE2C311264003CFBD1 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		8B71E1742C1AD983000BCB72 /* MeaningOut.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeaningOut.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B71E1772C1AD983000BCB72 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8B71E1792C1AD983000BCB72 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 				8B71E2142C218AF1000BCB72 /* Image.swift */,
 				8B71E2162C218B60000BCB72 /* LoginPage.swift */,
 				8B71E2182C218EEF000BCB72 /* SettingPage.swift */,
+				8B456EEE2C311264003CFBD1 /* DateFormatter.swift */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -373,6 +376,7 @@
 				8B71E1C52C1C078C000BCB72 /* TabBarController.swift in Sources */,
 				8B71E20A2C201C6E000BCB72 /* EditViewController.swift in Sources */,
 				8B71E21D2C2195E8000BCB72 /* FilterButton.swift in Sources */,
+				8B456EEF2C311264003CFBD1 /* DateFormatter.swift in Sources */,
 				8B71E1AE2C1AFB2B000BCB72 /* CustomProfileButton.swift in Sources */,
 				8B71E1D72C1F29A4000BCB72 /* APIKey.swift in Sources */,
 				8B71E2132C218506000BCB72 /* UserDefaultsManager.swift in Sources */,

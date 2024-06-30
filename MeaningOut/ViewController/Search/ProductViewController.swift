@@ -10,12 +10,16 @@ import WebKit
 
 class ProductViewController: UIViewController {
 
+    
+    static var productNumber = ""
+    static var searchItemLink = ""
+    
     let webView = WKWebView()
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         
-        let id = Variable.productNumber
+        let id = Self.productNumber
         var count = 0
         for i in 0..<(UserDefaultManager.myBasket.count) {
             if id == UserDefaultManager.myBasket[i] {
@@ -32,6 +36,7 @@ class ProductViewController: UIViewController {
         callRequest()
         configureLayout()
     }
+    
     @objc func likeButtonTapped() {
         var temporaryBasket: [String] = []
         Variable.like.toggle()
@@ -39,7 +44,7 @@ class ProductViewController: UIViewController {
             navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: LikeImage.select.rawValue), style: .plain, target: self, action: nil)
             temporaryBasket = UserDefaultManager.myBasket
             for i in 0..<UserDefaultManager.myBasket.count {
-                if UserDefaultManager.myBasket[i] == Variable.productNumber {
+                if UserDefaultManager.myBasket[i] == Self.productNumber {
                     temporaryBasket.append(UserDefaultManager.myBasket[i])
                 }
             }
@@ -48,7 +53,7 @@ class ProductViewController: UIViewController {
             navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: LikeImage.unselect.rawValue), style: .plain, target: self, action: nil)
             if UserDefaultManager.myBasket.count != 0 {
                 for i in 0..<UserDefaultManager.myBasket.count {
-                    if UserDefaultManager.myBasket[i] == Variable.productNumber {
+                    if UserDefaultManager.myBasket[i] == Self.productNumber {
                         UserDefaultManager.myBasket.remove(at: i)
                         break
                     }
@@ -56,11 +61,11 @@ class ProductViewController: UIViewController {
                 
             }
         }
-        UserDefaults.standard.setValue(Variable.like, forKey: Variable.productNumber)
+        UserDefaults.standard.setValue(Variable.like, forKey: Self.productNumber)
     }
     
     func callRequest() {
-        if let url = URL(string: Variable.searchItem) {
+        if let url = URL(string: ProductViewController.searchItemLink) {
             let request = URLRequest(url: url)
             webView.load(request)
         } else {
