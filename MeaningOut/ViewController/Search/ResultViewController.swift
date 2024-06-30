@@ -164,12 +164,12 @@ class ResultViewController: UIViewController {
         
         Network.shared.callRequest(sort: sort, page: page) { product, error in
             
-            guard let product = product?.items else { return }
+            guard let product = product else { return }
             
             if self.page == 1{
-                Self.shoppingList.items = product
+                Self.shoppingList = product
             } else {
-                Self.shoppingList.items.append(contentsOf: product)
+                Self.shoppingList.items.append(contentsOf: product.items)
             }
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
