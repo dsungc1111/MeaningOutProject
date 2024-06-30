@@ -50,7 +50,7 @@ class ResultCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     @objc func likeButtonTapped(sender: UIButton) {
-        let id = Variable.mySearch[sender.tag].productId
+        let id = ResultViewController.shoppingList.items[sender.tag].productId
         userLike = UserDefaults.standard.bool(forKey: id)
         userLike.toggle()
         imageSet()
@@ -107,7 +107,7 @@ class ResultCollectionViewCell: UICollectionViewCell {
     func configureCell(data: IndexPath) {
         DispatchQueue.global().async {
             do {
-                let url = URL(string: Variable.mySearch[data.row].image)!
+                let url = URL(string: ResultViewController.shoppingList.items[data.row].image)!
                 let image = try Data(contentsOf: url)
                 DispatchQueue.main.async {
                     self.imageView.image = UIImage(data: image)
@@ -119,11 +119,11 @@ class ResultCollectionViewCell: UICollectionViewCell {
             }
         }
         likeButton.tag = data.row
-        companyNameLabel.text = Variable.mySearch[data.row].mallName
-        productNameLabel.text = Variable.mySearch[data.row].title
-        priceLabel.text = "\(Int(Variable.mySearch[data.row].lprice)?.formatted() ?? "0")원"
+        companyNameLabel.text = ResultViewController.shoppingList.items[data.row].mallName
+        productNameLabel.text = ResultViewController.shoppingList.items[data.row].title.removeHtmlTag
+        priceLabel.text = "\(Int(ResultViewController.shoppingList.items[data.row].lprice)?.formatted() ?? "0")원"
         
-        userLike = UserDefaults.standard.bool(forKey: "\(Variable.mySearch[data.row].productId)")
+        userLike = UserDefaults.standard.bool(forKey: "\(ResultViewController.shoppingList.items[data.row].productId)")
         imageSet()
     }
     

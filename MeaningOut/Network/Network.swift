@@ -12,37 +12,59 @@ import Alamofire
 class Network {
     
     static var shared = Network()
-    static var contentCount = 0
     private init() {}
     
-    func callRequest(sort: String, page: Int, completionHanler: @escaping (Result<[ProductInfo], Error>) -> Void) {
-        let url = "https://openapi.naver.com/v1/search/shop.json?"
-        let param: Parameters = [
-            "query" : UserDefaultManager.searchText,
-            "page" : "\(page)",
-            "sort" : sort
-        ]
-        let header: HTTPHeaders = [
-            "X-Naver-Client-Id" : APIKey().clientId, "X-Naver-Client-Secret" : APIKey().secretKey]
+    func callRequest(sort: String, page: Int, completionHandler: @escaping (Shopping?, SearchError?) -> Void) {
+        let scheme = "https"
+        let host = "openapi.naver.com"
+        let path = "/v1/search/shop.json"
         
-        AF.request(url, method: .get, parameters: param, headers: header).responseDecodable(of: Shopping.self) { response in
-            switch response.result {
-            case .success(let value):
-                Network.contentCount = value.total
-                if value.items.count == 0 {
-                    Variable.mySearch = []
-                } else {
-                    var products: [ProductInfo] = []
-                    for var i in value.items {
-                        i.title = i.title.removeHtmlTag
-                        products.append(i)
-                    }
-                    completionHanler(.success(products))
+        var component = URLComponents()
+        component.scheme = scheme
+        component.host = host
+        component.path = path
+        component.queryItems = [
+            URLQueryItem(name: "query", value: UserDefaultManager.searchText),
+            URLQueryItem(name: "page", value: "\(page)"),
+            URLQueryItem(name: "sort", value: sort)
+        ]
+        
+        var request = URLRequest(url: component.url!, timeoutInterval: 2)
+        
+        request.addValue(APIKey().clientId, forHTTPHeaderField: "X-Naver-Client-Id")
+        request.addValue(APIKey().secretKey, forHTTPHeaderField: "X-Naver-Client-Secret")
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            DispatchQueue.global().async {
+                guard error == nil else {
+                    print("Fail Request")
+                    completionHandler(nil, .failedRequest)
+                    return
                 }
-            case .failure(let error):
-                Variable.mySearch = []
-                completionHanler(.failure(error))
+                guard let data = data else {
+                    print("no data retruned")
+                    completionHandler(nil, .noData)
+                    return
+                }
+                guard let response = response as? HTTPURLResponse else {
+                    print("unable response")
+                    completionHandler(nil, .invalidResponse)
+                    return
+                }
+                guard response.statusCode == 200 else {
+                    print(response.statusCode)
+                    print("failed resopnse")
+                    completionHandler(nil, .failedRequest)
+                    return
+                }
+                do {
+                    let result = try JSONDecoder().decode(Shopping.self, from: data)
+                    completionHandler(result, nil)
+                } catch {
+                    print("Error")
+                    print(error)
+                    completionHandler(nil, .invalidData)
+                }
             }
-        }
+        }.resume()
     }
 }

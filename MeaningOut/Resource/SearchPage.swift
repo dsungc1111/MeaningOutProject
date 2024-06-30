@@ -11,7 +11,7 @@ struct Shopping: Decodable {
     let total: Int
     let start: Int
     let display: Int
-    let items: [ProductInfo]
+    var items: [ProductInfo]
 }
 struct ProductInfo: Codable {
     var title: String

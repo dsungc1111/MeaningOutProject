@@ -49,28 +49,28 @@ class BasketViewController: UIViewController {
         collectionView.prefetchDataSource = self
         collectionView.register(ResultCollectionViewCell.self, forCellWithReuseIdentifier: ResultCollectionViewCell.identifier)
     }
-    func getNetworkData(sort: String) {
-        Network.shared.callRequest(sort: sort, page: page) { result in
-            switch result {
-            case .success(let value):
-                if self.page == 1{
-                    Variable.mySearch = value
-                } else {
-                    Variable.mySearch.append(contentsOf: value)
-                }
-                self.collectionView.reloadData()
-                if self.page == 1{
-                    self.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
-                }
-            case .failure(_):
-                let alert = UIAlertController(title: AlertMention.connectionError.rawValue, message: AlertMention.network.rawValue, preferredStyle: .alert)
-                let okButton = UIAlertAction(title: AlertMention.networkChecking.rawValue, style: .default)
-                alert.addAction(okButton)
-                self.present(alert, animated: true)
-            }
-        }
-        
-    }
+//    func getNetworkData(sort: String) {
+//        Network.shared.callRequest(sort: sort, page: page) { result in
+//            switch result {
+//            case .success(let value):
+//                if self.page == 1{
+//                    Variable.mySearch = value
+//                } else {
+//                    Variable.mySearch.append(contentsOf: value)
+//                }
+//                self.collectionView.reloadData()
+//                if self.page == 1{
+//                    self.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
+//                }
+//            case .failure(_):
+//                let alert = UIAlertController(title: AlertMention.connectionError.rawValue, message: AlertMention.network.rawValue, preferredStyle: .alert)
+//                let okButton = UIAlertAction(title: AlertMention.networkChecking.rawValue, style: .default)
+//                alert.addAction(okButton)
+//                self.present(alert, animated: true)
+//            }
+//        }
+//        
+//    }
 }
 extension BasketViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
@@ -91,9 +91,9 @@ extension BasketViewController: UICollectionViewDataSource, UICollectionViewDele
 extension BasketViewController: UICollectionViewDataSourcePrefetching  {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         for item in indexPaths {
-            if Variable.mySearch.count - 6 == item.row {
+            if ResultViewController.shoppingList.items.count - 6 == item.row {
                 page += 1
-                getNetworkData(sort: "sim")
+//                getNetworkData(sort: "sim")
                 
             }
         }

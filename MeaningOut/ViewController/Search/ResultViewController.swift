@@ -10,6 +10,8 @@ import Alamofire
 import Kingfisher
 
 class ResultViewController: UIViewController {
+    
+    static var shoppingList = Shopping(total: 0, start: 0, display: 0, items: [])
     var category = ""
     var page = 1
     let numberOfSearch = {
@@ -159,31 +161,29 @@ class ResultViewController: UIViewController {
         }
     }
     func getNetworkData(sort: String) {
-        Network.shared.callRequest(sort: sort, page: page) { result in
-            switch result {
-            case .success(let value):
-                if self.page == 1 {
-                    Variable.mySearch = value
-                } else {
-                    Variable.mySearch.append(contentsOf: value)
-                }
+        
+        Network.shared.callRequest(sort: sort, page: page) { product, error in
+            
+            guard let product = product?.items else { return }
+            
+            if self.page == 1{
+                Self.shoppingList.items = product
+            } else {
+                Self.shoppingList.items.append(contentsOf: product)
+            }
+            DispatchQueue.main.async {
                 self.collectionView.reloadData()
-                self.numberOfSearch.text = "\(Network.contentCount.formatted())개의 검색결과"
+                self.numberOfSearch.text = "\(Self.shoppingList.total.formatted())개의 검색결과"
                 if self.page == 1 {
                     self.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
                 }
-            case .failure(_):
-                
-                self.showAlertNetwork(title: AlertMention.connectionError.rawValue, message: AlertMention.network.rawValue)
-                self.numberOfSearch.text = AlertMention.network.rawValue
             }
         }
-        
     }
 }
 extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return Variable.mySearch.count
+        return Self.shoppingList.items.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ResultCollectionViewCell.identifier, for: indexPath) as? ResultCollectionViewCell else { return ResultCollectionViewCell() }
@@ -193,9 +193,9 @@ extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = ProductViewController()
-        vc.navigationItem.title = Variable.mySearch[indexPath.item].title
-        ProductViewController.searchItemLink = Variable.mySearch[indexPath.item].link
-        ProductViewController.productNumber = Variable.mySearch[indexPath.item].productId
+        vc.navigationItem.title = Self.shoppingList.items[indexPath.item].title.removeHtmlTag
+        ProductViewController.searchItemLink = Self.shoppingList.items[indexPath.item].link
+        ProductViewController.productNumber = Self.shoppingList.items[indexPath.item].productId
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -204,7 +204,7 @@ extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSo
 extension ResultViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         for item in indexPaths {
-            if Variable.mySearch.count - 6 == item.row {
+            if Self.shoppingList.items.count - 6 == item.row {
                 page += 1
                 switch category {
                 case CategoryEng.sim.rawValue:
