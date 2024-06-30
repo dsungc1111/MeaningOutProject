@@ -13,6 +13,7 @@ class ProductViewController: UIViewController {
     
     static var productNumber = ""
     static var searchItemLink = ""
+    var userLike = false
     
     let webView = WKWebView()
     override func viewDidLoad() {
@@ -20,7 +21,7 @@ class ProductViewController: UIViewController {
         view.backgroundColor = .white
         
         let id = Self.productNumber
-        Variable.like = UserDefaults.standard.bool(forKey: id)
+        userLike = UserDefaults.standard.bool(forKey: id)
         imageSet()
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
@@ -31,14 +32,14 @@ class ProductViewController: UIViewController {
     
     @objc func likeButtonTapped() {
         let id = Self.productNumber
-        Variable.like.toggle()
+        userLike.toggle()
         imageSet()
-        UserDefaultManager.appendInMyBasket(productId: id, like: Variable.like)
-        UserDefaults.standard.setValue(Variable.like, forKey: id)
+        UserDefaultManager.appendInMyBasket(productId: id, like: userLike)
+        UserDefaults.standard.setValue(userLike, forKey: id)
     }
     
     func imageSet() {
-        let image = Variable.like ? LikeImage.select.rawValue : LikeImage.unselect.rawValue
+        let image = userLike ? LikeImage.select.rawValue : LikeImage.unselect.rawValue
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: image), style: .plain, target: self, action: #selector(likeButtonTapped))
     }
     
