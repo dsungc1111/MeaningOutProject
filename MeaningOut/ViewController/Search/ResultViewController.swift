@@ -197,6 +197,7 @@ extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSo
         vc.navigationItem.title = Variable.mySearch[indexPath.item].title
         ProductViewController.searchItemLink = Variable.mySearch[indexPath.item].link
         ProductViewController.productNumber = Variable.mySearch[indexPath.item].productId
+        print(Variable.mySearch[indexPath.item].productId)
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         navigationController?.pushViewController(vc, animated: true)
     }

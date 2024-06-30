@@ -10,6 +10,34 @@ import Foundation
 
 struct UserDefaultManager {
     
+    static var myBasket: [String] {
+        get {
+            return UserDefaults.standard.stringArray(forKey: SaveKeyWord.myBasket.rawValue) ?? []
+        }
+        set {
+            UserDefaults.standard.setValue(newValue, forKey: SaveKeyWord.myBasket.rawValue)
+        }
+    }
+    static func appendInMyBasket(productId: String, like: Bool) {
+        var basket = myBasket
+        
+        if like {
+            if !basket.contains(productId) {
+                basket.append(productId)
+            }
+        } else {
+            for i in 0..<basket.count {
+                if basket[i] == productId {
+                    basket.remove(at: i)
+                    break
+                }
+            }
+        }
+        
+        myBasket = basket
+    }
+    
+    
     static var index: Int {
         get {
             return UserDefaults.standard.integer(forKey: SaveKeyWord.index.rawValue)
@@ -20,20 +48,12 @@ struct UserDefaultManager {
     }
     static var searchList: [String] {
         get {
-            return UserDefaults.standard.stringArray(forKey: SaveKeyWord.search.rawValue) ?? [""]
+            return UserDefaults.standard.stringArray(forKey: SaveKeyWord.search.rawValue) ?? []
         }
         set {
             UserDefaults.standard.setValue(newValue, forKey: SaveKeyWord.search.rawValue)
         }
     }
-    static var myBasket: [String] {
-           get {
-               return UserDefaults.standard.array(forKey: SaveKeyWord.myBasket.rawValue) as? [String] ?? []
-           }
-           set {
-               UserDefaults.standard.setValue(newValue, forKey: SaveKeyWord.myBasket.rawValue)
-           }
-       }
     static var searchText: String {
         get {
             return UserDefaults.standard.string(forKey: SaveKeyWord.searchBarText.rawValue) ?? ""
@@ -42,7 +62,7 @@ struct UserDefaultManager {
             UserDefaults.standard.setValue(newValue, forKey: SaveKeyWord.searchBarText.rawValue)
         }
     }
-   
+    
     static var profileImage: String {
         get {
             return UserDefaults.standard.string(forKey: SaveKeyWord.profileImage.rawValue) ?? ""

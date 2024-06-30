@@ -20,17 +20,9 @@ class ProductViewController: UIViewController {
         view.backgroundColor = .white
         
         let id = Self.productNumber
-        var count = 0
-        for i in 0..<(UserDefaultManager.myBasket.count) {
-            if id == UserDefaultManager.myBasket[i] {
-                count += 1
-            }
-        }
-        if count == 0 {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: LikeImage.unselect.rawValue), style: .plain, target: self, action: #selector(likeButtonTapped))
-        } else {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: LikeImage.select.rawValue), style: .plain, target: self, action: #selector(likeButtonTapped))
-        }
+        Variable.like = UserDefaults.standard.bool(forKey: id)
+        imageSet()
+        
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         navigationItem.rightBarButtonItem?.tintColor = .black
         callRequest()
@@ -62,6 +54,11 @@ class ProductViewController: UIViewController {
             }
         }
         UserDefaults.standard.setValue(Variable.like, forKey: Self.productNumber)
+    }
+    
+    func imageSet() {
+        let image = Variable.like ? LikeImage.select.rawValue : LikeImage.unselect.rawValue
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: image), style: .plain, target: self, action: #selector(likeButtonTapped))
     }
     
     func callRequest() {
