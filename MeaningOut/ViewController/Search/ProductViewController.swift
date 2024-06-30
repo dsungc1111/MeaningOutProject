@@ -10,7 +10,6 @@ import WebKit
 
 class ProductViewController: UIViewController {
 
-    
     static var productNumber = ""
     static var searchItemLink = ""
     var userLike = false
@@ -19,17 +18,14 @@ class ProductViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        
         let id = Self.productNumber
         userLike = UserDefaults.standard.bool(forKey: id)
         imageSet()
-        
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         navigationItem.rightBarButtonItem?.tintColor = .black
         callRequest()
         configureLayout()
     }
-    
     @objc func likeButtonTapped() {
         let id = Self.productNumber
         userLike.toggle()
@@ -37,12 +33,10 @@ class ProductViewController: UIViewController {
         UserDefaultManager.appendInMyBasket(productId: id, like: userLike)
         UserDefaults.standard.setValue(userLike, forKey: id)
     }
-    
     func imageSet() {
         let image = userLike ? LikeImage.select.rawValue : LikeImage.unselect.rawValue
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: image), style: .plain, target: self, action: #selector(likeButtonTapped))
     }
-    
     func callRequest() {
         if let url = URL(string: ProductViewController.searchItemLink) {
             let request = URLRequest(url: url)
@@ -54,15 +48,10 @@ class ProductViewController: UIViewController {
             self.present(alert, animated: true)
         }
     }
-    
     func configureLayout() {
         view.addSubview(webView)
-        
         webView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
     }
-
-
-
 }

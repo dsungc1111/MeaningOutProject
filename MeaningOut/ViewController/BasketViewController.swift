@@ -80,9 +80,6 @@ extension BasketViewController: UICollectionViewDataSource, UICollectionViewDele
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ResultCollectionViewCell.identifier, for: indexPath) as? ResultCollectionViewCell else { return ResultCollectionViewCell() }
-        
-        Variable.like = UserDefaults.standard.bool(forKey: "\(UserDefaultManager.myBasket[indexPath.item])")
-        
         cell.configureCell(data: indexPath)
 
         return cell

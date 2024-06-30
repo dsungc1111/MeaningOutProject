@@ -12,5 +12,5 @@ struct Variable {
 //    static var productNumber = ""
     static var mySearch: [ProductInfo] = []
 //    static var dateFormatter = DateFormatter()
-    static var like = false
+//    static var like = false
 }

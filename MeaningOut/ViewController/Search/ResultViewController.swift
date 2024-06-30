@@ -187,7 +187,6 @@ extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ResultCollectionViewCell.identifier, for: indexPath) as? ResultCollectionViewCell else { return ResultCollectionViewCell() }
-        Variable.like = UserDefaults.standard.bool(forKey: "\(Variable.mySearch[indexPath.item].productId)")
         cell.configureCell(data: indexPath)
         
         return cell
@@ -197,7 +196,6 @@ extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSo
         vc.navigationItem.title = Variable.mySearch[indexPath.item].title
         ProductViewController.searchItemLink = Variable.mySearch[indexPath.item].link
         ProductViewController.productNumber = Variable.mySearch[indexPath.item].productId
-        print(Variable.mySearch[indexPath.item].productId)
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         navigationController?.pushViewController(vc, animated: true)
     }
