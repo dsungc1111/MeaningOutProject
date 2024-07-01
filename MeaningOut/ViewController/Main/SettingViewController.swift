@@ -8,27 +8,27 @@
 import UIKit
 
 
-class SettingViewController: UIViewController {
+final class SettingViewController: UIViewController {
     
-    let tableView = UITableView()
-    lazy var profileButton = {
+    private let tableView = UITableView()
+    private lazy var profileButton = {
         let button = CustomProfileButton()
         return button
     }()
-    let userNickname = {
+    private let userNickname = {
         let label = UILabel()
         label.text = UserDefaultManager.user
         label.font = .boldSystemFont(ofSize: 16)
         return label
     }()
-    let signInDate = {
+    private let signInDate = {
         let label = UILabel()
         label.textColor = .darkGray
         label.text = "\(UserDefaultManager.signInTime)에 가입"
         label.font = .systemFont(ofSize: 13)
         return label
     }()
-    lazy var editButton = {
+    private lazy var editButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "chevron.right"), for: .normal)
         button.contentHorizontalAlignment = .right
@@ -64,7 +64,7 @@ class SettingViewController: UIViewController {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         navigationController?.pushViewController(vc, animated: true)
     }
-    func tableViewSetting() {
+    private func tableViewSetting() {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(SettingTableViewCell.self, forCellReuseIdentifier: SettingTableViewCell.identifier)

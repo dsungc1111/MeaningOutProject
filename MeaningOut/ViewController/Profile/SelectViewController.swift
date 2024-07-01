@@ -7,11 +7,11 @@
 
 import UIKit
 
-class SelectViewController: UIViewController {
+final class SelectViewController: UIViewController {
 
-    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: CollectionViewLayout())
+    private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: CollectionViewLayout())
  
-    static func CollectionViewLayout() -> UICollectionViewLayout{
+    private static func CollectionViewLayout() -> UICollectionViewLayout{
         let layout = UICollectionViewFlowLayout()
         let sectionSpacing: CGFloat = 30
         let cellSpacing: CGFloat = 10
@@ -24,12 +24,12 @@ class SelectViewController: UIViewController {
         return layout
     }
     
-    let profileButton = {
+    private let profileButton = {
         let button = CustomProfileButton()
         button.setImage(UIImage(named: UserDefaultManager.profileImage), for: .normal)
         return button
     }()
-    let profileCameraLogo = {
+    private  let profileCameraLogo = {
         let logo = CameraLogo(frame: .zero)
         return logo
     }()

@@ -7,20 +7,20 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController {
+final class ProfileViewController: UIViewController {
     
-    static var dateFormatter = DateFormatter()
+    private static var dateFormatter = DateFormatter()
     
-    lazy var profileButton = {
+    private lazy var profileButton = {
         let button = CustomProfileButton()
         button.addTarget(self, action: #selector(profileButtonTapped), for: .touchUpInside)
         return button
     }()
-    let profileCameraLogo = {
+    private let profileCameraLogo = {
         let logo = CameraLogo(frame: .zero)
         return logo
     }()
-    lazy var nicknameTextfield = {
+    private lazy var nicknameTextfield = {
         let nickname = UITextField()
         nickname.font = .systemFont(ofSize: 13)
         nickname.leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 10.0, height: 0.0))
@@ -29,14 +29,14 @@ class ProfileViewController: UIViewController {
         nickname.addTarget(self, action: #selector(nicknameDidChange), for: .editingChanged)
         return nickname
     }()
-    let warningTextfield = {
+    private let warningTextfield = {
         let warning = UITextField()
         warning.text = WarningMessage.basic.rawValue
         warning.textColor = UIColor.mainColor
         warning.font = .systemFont(ofSize: 13)
         return warning
     }()
-    lazy var completeButton = {
+    private lazy var completeButton = {
         let button = BigSizeButton()
         button.setTitle("Complete", for: .normal)
         button.addTarget(self, action: #selector(completeButtonTapped), for: .touchUpInside)
@@ -71,8 +71,15 @@ class ProfileViewController: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     @objc func completeButtonTapped() {
+        
+//        UserDefaultManager.saveMemories(value: Date(), key: SaveKeyWord.signInTime.rawValue)
+//        
         UserDefaultManager.signInTime = DateChange.shared.dateToString(date: Date())
-        UserDefaultManager.user = nicknameTextfield.text ?? "nil XX"
+//        UserDefaultManager.user = nicknameTextfield.text ?? "nil XX"
+//        
+//        print(UserDefaultManager.useMemories(key: SaveKeyWord.signInTime.rawValue))
+//        
+//        UserDefaultManager.saveMemories(value: "a", key: "a")
         let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
         let sceneDelegate = windowScene?.delegate as? SceneDelegate
         let vc = TabBarController()
@@ -80,7 +87,7 @@ class ProfileViewController: UIViewController {
         sceneDelegate?.window?.makeKeyAndVisible()
     }
     
-    func nicknameCheck(text: String) throws -> String {
+    private func nicknameCheck(text: String) throws -> String {
         guard text.count >= 2 else {
             throw LoginError.short
         }
@@ -105,7 +112,7 @@ class ProfileViewController: UIViewController {
         return WarningMessage.pass.rawValue
     }
     
-    func confirmNickname(text: String) {
+    private func confirmNickname(text: String) {
         do {
             let warningMessage = try nicknameCheck(text: text)
             warningTextfield.text = warningMessage

@@ -8,35 +8,35 @@
 import UIKit
 import IQKeyboardManagerSwift
 
-class SearchViewController: UIViewController {
+final class SearchViewController: UIViewController {
     
-    let tableView = UITableView()
-    let searchBar = {
+    private let tableView = UITableView()
+    private let searchBar = {
         let bar = UISearchBar()
         bar.placeholder = "브랜드, 상품 등을 입력하세요."
         return bar
     }()
-    let noRecordImage = {
+    private let noRecordImage = {
         let image = UIImageView()
         image.image = UIImage(named: "empty")
         image.contentMode = .scaleAspectFill
         return image
     }()
-    let noSearchLabel = {
+    private let noSearchLabel = {
         let label = UILabel()
         label.text = "최근 검색어가 없어요."
         label.textAlignment = .center
         label.font = .boldSystemFont(ofSize: 16)
         return label
     }()
-    let recentSearch = {
+    private let recentSearch = {
         let label = UILabel()
         label.text = "최근검색"
         label.font = .boldSystemFont(ofSize: 14)
         label.isHidden = true
         return label
     }()
-    lazy var removeAll = {
+    private lazy var removeAll = {
         let button = UIButton()
         button.setTitle("전체삭제", for: .normal)
         button.setTitleColor(.mainColor, for: .normal)
@@ -60,9 +60,9 @@ class SearchViewController: UIViewController {
         navigationItem.title = "\(UserDefaultManager.user)'s Meaning Out"
     }
     @objc func removeAllButtonTapped() {
-            UserDefaultManager.searchList.removeAll()
-            selectedWindow()
-        }
+        UserDefaultManager.searchList.removeAll()
+        selectedWindow()
+    }
     func tableViewSetting() {
         tableView.delegate = self
         tableView.dataSource = self
@@ -108,7 +108,7 @@ class SearchViewController: UIViewController {
         }
     }
     
-    func selectedWindow() {
+    private func selectedWindow() {
         if UserDefaultManager.searchList.count == 0 {
             tableView.isHidden = true
             noRecordImage.isHidden = false
@@ -138,7 +138,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         cell.resultButton.addTarget(self, action: #selector(resultButtonTapped(sender:)), for: .touchUpInside)
         return cell
     }
-
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         UserDefaultManager.searchList.remove(at: indexPath.row)
         selectedWindow()
@@ -198,7 +198,7 @@ extension SearchViewController: UISearchBarDelegate {
         selectedWindow()
         tableView.reloadData()
     }
-    func configureNextNavigation() {
+    private func configureNextNavigation() {
         let vc = ResultViewController()
         if let text = searchBar.text {
             UserDefaultManager.searchText = text

@@ -9,46 +9,46 @@ import UIKit
 import Alamofire
 import Kingfisher
 
-class ResultViewController: UIViewController {
+final class ResultViewController: UIViewController {
     
     static var shoppingList = Shopping(total: 0, start: 0, display: 0, items: [])
-    var category = ""
-    var page = 1
-    let numberOfSearch = {
+    private  var category = ""
+    private var page = 1
+    private let numberOfSearch = {
         let label = UILabel()
         label.font = .boldSystemFont(ofSize: 15)
         label.textColor = UIColor.mainColor
         return label
     }()
-    lazy var accuracyButton = {
+    private lazy var accuracyButton = {
         let button = FilterButton()
         button.tag = 0
         button.setTitle(Category.accuracy.rawValue, for: .normal)
         button.addTarget(self, action: #selector(filterButtonTapped(sender:)), for: .touchUpInside)
         return button
     }()
-    lazy var dateButton = {
+    private lazy var dateButton = {
         let button = FilterButton()
         button.tag = 1
         button.setTitle(Category.byDate.rawValue, for: .normal)
         button.addTarget(self, action: #selector(filterButtonTapped(sender:)), for: .touchUpInside)
         return button
     }()
-    lazy var highPriceButton = {
+    private lazy var highPriceButton = {
         let button = FilterButton()
         button.tag = 2
         button.setTitle(Category.highPrice.rawValue, for: .normal)
         button.addTarget(self, action: #selector(filterButtonTapped(sender:)), for: .touchUpInside)
         return button
     }()
-    lazy var lowPriceButton = {
+    private lazy var lowPriceButton = {
         let button = FilterButton()
         button.tag = 3
         button.setTitle(Category.lowPrice.rawValue, for: .normal)
         button.addTarget(self, action: #selector(filterButtonTapped(sender:)), for: .touchUpInside)
         return button
     }()
-    lazy var buttonList: [UIButton] = [accuracyButton, dateButton, highPriceButton, lowPriceButton]
+    private lazy var buttonList: [UIButton] = [accuracyButton, dateButton, highPriceButton, lowPriceButton]
     @objc func filterButtonTapped(sender: UIButton) {
         for i in 0..<buttonList.count {
             buttonList[i].backgroundColor = .white
@@ -83,8 +83,8 @@ class ResultViewController: UIViewController {
             break
         }
     }
-    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
-    static func collectionViewLayout() -> UICollectionViewLayout {
+    private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
+    private static func collectionViewLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewFlowLayout()
         let sectionSpacing: CGFloat = 10
         let cellSpacing: CGFloat = 10
@@ -115,7 +115,7 @@ class ResultViewController: UIViewController {
         collectionView.reloadData()
     }
     
-    func CollecionViewSetting() {
+    private func CollecionViewSetting() {
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.prefetchDataSource = self
@@ -160,7 +160,7 @@ class ResultViewController: UIViewController {
             make.bottom.equalTo(view.safeAreaLayoutGuide)
         }
     }
-    func getNetworkData(sort: String) {
+    private func getNetworkData(sort: String) {
         
         Network.shared.callRequest(sort: sort, page: page) { product, error in
             

@@ -8,13 +8,13 @@
 import UIKit
 import WebKit
 
-class ProductViewController: UIViewController {
+final class ProductViewController: UIViewController {
 
     static var productNumber = ""
     static var searchItemLink = ""
-    var userLike = false
+    private var userLike = false
     
-    let webView = WKWebView()
+    private let webView = WKWebView()
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -33,11 +33,11 @@ class ProductViewController: UIViewController {
         UserDefaultManager.appendInMyBasket(productId: id, like: userLike)
         UserDefaults.standard.setValue(userLike, forKey: id)
     }
-    func imageSet() {
+    private func imageSet() {
         let image = userLike ? LikeImage.select.rawValue : LikeImage.unselect.rawValue
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: image), style: .plain, target: self, action: #selector(likeButtonTapped))
     }
-    func callRequest() {
+    private func callRequest() {
         if let url = URL(string: ProductViewController.searchItemLink) {
             let request = URLRequest(url: url)
             webView.load(request)

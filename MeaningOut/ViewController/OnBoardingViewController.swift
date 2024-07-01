@@ -8,9 +8,9 @@
 import UIKit
 import SnapKit
 
-class OnBoardingViewController: UIViewController {
+final class OnBoardingViewController: UIViewController {
 
-    let projectTitle = {
+    private let projectTitle = {
         let title = UILabel()
         title.text = "Meaning Out"
         title.font = UIFont(name: "Marker Felt Wide", size: 50)
@@ -18,13 +18,13 @@ class OnBoardingViewController: UIViewController {
         title.textColor = UIColor.mainColor
         return title
     }()
-    let launchImageView = {
+    private let launchImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage.launch
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
-    lazy var startButton = {
+    private lazy var startButton = {
         let button = BigSizeButton()
         button.setTitle("START", for: .normal)
         button.addTarget(self, action: #selector(startButtonTapped), for: .touchUpInside)

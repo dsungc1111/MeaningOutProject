@@ -7,18 +7,18 @@
 
 import UIKit
 
-class EditViewController: UIViewController {
+final class EditViewController: UIViewController {
     
-    lazy var profileButton = {
+    private lazy var profileButton = {
         let button = CustomProfileButton()
         button.addTarget(self, action: #selector(profileButtonTapped), for: .touchUpInside)
         return button
     }()
-    let profileCameraLogo = {
+    private let profileCameraLogo = {
         let logo = CameraLogo(frame: .zero)
         return logo
     }()
-    lazy var nicknameTextfield = {
+    private lazy var nicknameTextfield = {
         let nickname = UITextField()
         nickname.font = .systemFont(ofSize: 13)
         nickname.leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 10.0, height: 0.0))
@@ -27,7 +27,7 @@ class EditViewController: UIViewController {
         nickname.addTarget(self, action: #selector(nicknameDidChange), for: .editingChanged)
         return nickname
     }()
-    let warningTextfield = {
+    private let warningTextfield = {
         let warning = UITextField()
         warning.text = "닉네임을 바꾸시겠어요?"
         warning.textColor = UIColor.black

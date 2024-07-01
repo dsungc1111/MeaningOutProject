@@ -88,4 +88,14 @@ struct UserDefaultManager {
             UserDefaults.standard.setValue(newValue, forKey: SaveKeyWord.signInTime.rawValue)
         }
     }
+    
+    
+    static func saveMemories<T>(value: T, key : String) {
+        UserDefaults.setValue(value, forKey: key)
+    }
+    static func useMemories<T>(key: String) -> T?{
+        return UserDefaults.standard.object(forKey: key) as? T
+    }
+    
+    
 }
