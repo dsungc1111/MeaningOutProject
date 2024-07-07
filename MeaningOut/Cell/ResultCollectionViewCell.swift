@@ -57,11 +57,9 @@ class ResultCollectionViewCell: UICollectionViewCell {
     }
     @objc func likeButtonTapped(sender: UIButton) {
         let items = ResultViewController.shoppingList.items[sender.tag]
-//        let id = ResultViewController.shoppingList.items[sender.tag].productId
         userLike = UserDefaults.standard.bool(forKey: items.productId)
         userLike.toggle()
         let list = RealmTable(productName: items.title.removeHtmlTag, link: items.link, productId: items.productId, mallName: items.mallName, image: items.image, lprice: items.lprice, isLike: userLike)
-        print(userLike)
         imageSet()
         if userLike {
             try! self.realm.write {

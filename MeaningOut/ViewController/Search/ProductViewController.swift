@@ -7,12 +7,14 @@
 
 import UIKit
 import WebKit
+import RealmSwift
 
 final class ProductViewController: UIViewController {
 
     var productNumber = ""
     var searchItemLink = ""
     private var userLike = false
+    private let realm = try! Realm()
     
     private let webView = WKWebView()
     override func viewDidLoad() {
@@ -28,8 +30,26 @@ final class ProductViewController: UIViewController {
     }
     @objc func likeButtonTapped() {
         let id = productNumber
+        let list = realm.objects(RealmTable.self).filter("productId == %@", id)
         userLike.toggle()
         imageSet()
+        print(list)
+        if userLike {
+            try! self.realm.write {
+                
+                self.realm.create(RealmTable.self, value: ["productId": id, "isLike": userLike], update: .modified)
+            }
+        } else {
+            if let removeItem = list.first {
+                try! self.realm.write {
+                    self.realm.delete(removeItem)
+                }
+            }
+        }
+        
+        
+        
+        
         UserDefaultManager.appendInMyBasket(productId: id, like: userLike)
         UserDefaults.standard.setValue(userLike, forKey: id)
     }
