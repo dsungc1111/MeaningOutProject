@@ -13,7 +13,7 @@ import RealmSwift
 final class ResultViewController: UIViewController {
     
      let realm = try! Realm()
-    var list = RealmTable(productName: "", link: "", mallName: "", image: "", lprice: "", isLike: false)
+//    var list = RealmTable(productName: "", link: "", mallName: "", image: "", lprice: "", isLike: false)
     static var shoppingList = Shopping(total: 0, start: 0, display: 0, items: [])
     
     private var category = ""
@@ -109,7 +109,7 @@ final class ResultViewController: UIViewController {
         configurehierarchy()
         configureLayout()
         getNetworkData(sort: "sim")
-//        print(realm.configuration.fileURL)
+        print(realm.configuration.fileURL)
     }
     override func viewDidLayoutSubviews() {
         navigationController?.navigationBar.layer.addBorder([.bottom], color: .systemGray4, width: 1)

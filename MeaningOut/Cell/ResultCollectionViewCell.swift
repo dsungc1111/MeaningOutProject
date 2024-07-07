@@ -9,10 +9,10 @@ import UIKit
 import SnapKit
 import RealmSwift
 
+
 class ResultCollectionViewCell: UICollectionViewCell {
     
     private let realm = try! Realm()
-    
     
     var temporaryBasket: [String] = []
     let imageView = {
@@ -57,16 +57,23 @@ class ResultCollectionViewCell: UICollectionViewCell {
     }
     @objc func likeButtonTapped(sender: UIButton) {
         let items = ResultViewController.shoppingList.items[sender.tag]
+//        let id = ResultViewController.shoppingList.items[sender.tag].productId
         userLike = UserDefaults.standard.bool(forKey: items.productId)
         userLike.toggle()
+        let list = RealmTable(productName: items.title.removeHtmlTag, link: items.link, productId: items.productId, mallName: items.mallName, image: items.image, lprice: items.lprice, isLike: userLike)
+        print(userLike)
         imageSet()
-        let data = RealmTable(productName: items.title, link: items.link, mallName: items.mallName, image: items.image, lprice: items.lprice, isLike: userLike)
-        try! self.realm.write {
-            self.realm.add(data)
-            
+        if userLike {
+            try! self.realm.write {
+                self.realm.create(RealmTable.self, value: ["productName": list.productName.removeHtmlTag, "link": list.link ?? "","productId" : list.productId ?? "" ,"mallName": list.mallName ?? "", "image": list.image ?? "", "lprice": list.lprice ?? "", "isLike": userLike], update: .modified)
+            }
+        } else {
+            if let removeItem = realm.objects(RealmTable.self).filter("productId == %@", items.productId).first {
+                      try! self.realm.write {
+                          self.realm.delete(removeItem)
+                      }
+                  }
         }
-        
-        
         UserDefaultManager.appendInMyBasket(productId: items.productId, like: userLike)
         UserDefaults.standard.setValue(userLike, forKey: items.productId)
     }

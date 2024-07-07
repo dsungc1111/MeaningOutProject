@@ -19,8 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         sleep(2)
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.resignOnTouchOutside = true
-        let config = Realm.Configuration(schemaVersion: 1) { migration, oldSchemaVersion in
-            if oldSchemaVersion < 1 {
+        let config = Realm.Configuration(schemaVersion: 3) { migration, oldSchemaVersion in
+            if oldSchemaVersion < 3 {
                 //folder column add
                 // 단순 컬럼, 추가나 삭제 등의 경우네는 코드 x
             }
