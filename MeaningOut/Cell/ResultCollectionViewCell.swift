@@ -6,8 +6,14 @@
 //
 
 import UIKit
+import SnapKit
+import RealmSwift
 
 class ResultCollectionViewCell: UICollectionViewCell {
+    
+    private let realm = try! Realm()
+    
+    
     var temporaryBasket: [String] = []
     let imageView = {
         let image = UIImageView()
@@ -50,27 +56,24 @@ class ResultCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     @objc func likeButtonTapped(sender: UIButton) {
-        let id = ResultViewController.shoppingList.items[sender.tag].productId
-        userLike = UserDefaults.standard.bool(forKey: id)
+        let items = ResultViewController.shoppingList.items[sender.tag]
+        userLike = UserDefaults.standard.bool(forKey: items.productId)
         userLike.toggle()
         imageSet()
-        UserDefaultManager.appendInMyBasket(productId: id, like: userLike)
-        UserDefaults.standard.setValue(userLike, forKey: id)
-    }
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        imageView.image = nil
-        companyNameLabel.text = nil
-        productNameLabel.text = nil
-        priceLabel.text = nil
-        likeButton.setImage(nil, for: .normal)
-        likeButton.backgroundColor = .clear
+        let data = RealmTable(productName: items.title, link: items.link, mallName: items.mallName, image: items.image, lprice: items.lprice, isLike: userLike)
+        try! self.realm.write {
+            self.realm.add(data)
+            
+        }
+        
+        
+        UserDefaultManager.appendInMyBasket(productId: items.productId, like: userLike)
+        UserDefaults.standard.setValue(userLike, forKey: items.productId)
     }
     func imageSet() {
         let likeImage = userLike ? LikeImage.select.rawValue : LikeImage.unselect.rawValue
-        let backgroundColor = userLike ? UIColor(hexCode: "FFFFFF", alpha: 0.5) : UIColor(hexCode: "828282", alpha: 0.5)
         likeButton.setImage(UIImage(named: likeImage), for: .normal)
-        likeButton.backgroundColor = backgroundColor
+        likeButton.backgroundColor  = userLike ? UIColor(hexCode: "FFFFFF", alpha: 0.5) : UIColor(hexCode: "828282", alpha: 0.5)
     }
     func configureHierarchy() {
         contentView.addSubview(imageView)
@@ -122,7 +125,6 @@ class ResultCollectionViewCell: UICollectionViewCell {
         companyNameLabel.text = ResultViewController.shoppingList.items[data.row].mallName
         productNameLabel.text = ResultViewController.shoppingList.items[data.row].title.removeHtmlTag
         priceLabel.text = "\(Int(ResultViewController.shoppingList.items[data.row].lprice)?.formatted() ?? "0")원"
-        
         userLike = UserDefaults.standard.bool(forKey: "\(ResultViewController.shoppingList.items[data.row].productId)")
         imageSet()
     }

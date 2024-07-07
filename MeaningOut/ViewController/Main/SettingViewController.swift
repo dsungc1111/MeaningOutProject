@@ -36,7 +36,6 @@ final class SettingViewController: UIViewController {
         button.addTarget(self, action: #selector(editButtonTapped), for: .touchUpInside)
         return button
     }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -45,15 +44,12 @@ final class SettingViewController: UIViewController {
         configureHierarchy()
         configureLayout()
     }
-    
-    
     override func viewDidLayoutSubviews() {
         profileButton.layer.cornerRadius = profileButton.frame.width / 2
        navigationController?.navigationBar.layer.addBorder([.bottom], color: .systemGray4, width: 1)
         profileButton.setImage(UIImage(named: UserDefaultManager.profileImage), for: .normal)
         tableView.layer.addBorder([.top], color: .systemGray4, width: 1)
     }
- 
     override func viewWillAppear(_ animated: Bool) {
         profileButton.setImage(UIImage(named: UserDefaultManager.profileImage), for: .normal)
         userNickname.text = UserDefaultManager.user
@@ -69,7 +65,6 @@ final class SettingViewController: UIViewController {
         tableView.dataSource = self
         tableView.register(SettingTableViewCell.self, forCellReuseIdentifier: SettingTableViewCell.identifier)
     }
-    
     func configureHierarchy() {
         view.addSubview(profileButton)
         view.addSubview(tableView)
@@ -103,13 +98,10 @@ final class SettingViewController: UIViewController {
         }
     }
 }
-
-
 extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return SettingMenu.allCases.count
     }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingTableViewCell.identifier, for: indexPath) as? SettingTableViewCell else { return SettingTableViewCell() }
         cell.settingButton.tag = indexPath.row
@@ -129,10 +121,8 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
         }
         if indexPath.row == 4 {
             showAlertReset(title: "탈퇴하기", message: "탈퇴를하면 데이터가 모두 초기화 됩니다. 탈퇴하시겠습니까?")
-         
         }
         tableView.reloadRows(at: [indexPath], with: .automatic)
     }
-    
 }
 

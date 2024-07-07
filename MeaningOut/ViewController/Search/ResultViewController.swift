@@ -8,11 +8,15 @@
 import UIKit
 import Alamofire
 import Kingfisher
+import RealmSwift
 
 final class ResultViewController: UIViewController {
     
+     let realm = try! Realm()
+    var list = RealmTable(productName: "", link: "", mallName: "", image: "", lprice: "", isLike: false)
     static var shoppingList = Shopping(total: 0, start: 0, display: 0, items: [])
-    private  var category = ""
+    
+    private var category = ""
     private var page = 1
     private let numberOfSearch = {
         let label = UILabel()
@@ -105,6 +109,7 @@ final class ResultViewController: UIViewController {
         configurehierarchy()
         configureLayout()
         getNetworkData(sort: "sim")
+//        print(realm.configuration.fileURL)
     }
     override func viewDidLayoutSubviews() {
         navigationController?.navigationBar.layer.addBorder([.bottom], color: .systemGray4, width: 1)
@@ -161,11 +166,8 @@ final class ResultViewController: UIViewController {
         }
     }
     private func getNetworkData(sort: String) {
-        
         Network.shared.callRequest(sort: sort, page: page) { product, error in
-            
             guard let product = product else { return }
-            
             if self.page == 1{
                 Self.shoppingList = product
             } else {
@@ -188,18 +190,17 @@ extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ResultCollectionViewCell.identifier, for: indexPath) as? ResultCollectionViewCell else { return ResultCollectionViewCell() }
         cell.configureCell(data: indexPath)
-        
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = ProductViewController()
         vc.navigationItem.title = Self.shoppingList.items[indexPath.item].title.removeHtmlTag
-        ProductViewController.searchItemLink = Self.shoppingList.items[indexPath.item].link
-        ProductViewController.productNumber = Self.shoppingList.items[indexPath.item].productId
+        vc.productNumber = Self.shoppingList.items[indexPath.item].productId
+        vc.searchItemLink = Self.shoppingList.items[indexPath.item].link
+
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         navigationController?.pushViewController(vc, animated: true)
     }
-    
 }
 extension ResultViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {

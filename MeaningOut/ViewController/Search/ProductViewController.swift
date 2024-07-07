@@ -10,15 +10,15 @@ import WebKit
 
 final class ProductViewController: UIViewController {
 
-    static var productNumber = ""
-    static var searchItemLink = ""
+    var productNumber = ""
+    var searchItemLink = ""
     private var userLike = false
     
     private let webView = WKWebView()
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        let id = Self.productNumber
+        let id = productNumber
         userLike = UserDefaults.standard.bool(forKey: id)
         imageSet()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
@@ -27,7 +27,7 @@ final class ProductViewController: UIViewController {
         configureLayout()
     }
     @objc func likeButtonTapped() {
-        let id = Self.productNumber
+        let id = productNumber
         userLike.toggle()
         imageSet()
         UserDefaultManager.appendInMyBasket(productId: id, like: userLike)
@@ -38,7 +38,7 @@ final class ProductViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: image), style: .plain, target: self, action: #selector(likeButtonTapped))
     }
     private func callRequest() {
-        if let url = URL(string: ProductViewController.searchItemLink) {
+        if let url = URL(string: searchItemLink) {
             let request = URLRequest(url: url)
             webView.load(request)
         } else {

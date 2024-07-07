@@ -53,6 +53,8 @@
 		8BD339F22C2565E600B396CA /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD339F12C2565E600B396CA /* Network.swift */; };
 		8BD339F62C28045700B396CA /* BasketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD339F52C28045700B396CA /* BasketViewController.swift */; };
 		8BD339F82C28D9F300B396CA /* BasketCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD339F72C28D9F300B396CA /* BasketCollectionViewCell.swift */; };
+		8BFB5C4B2C3A558E00CE14C5 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8BFB5C4A2C3A558E00CE14C5 /* RealmSwift */; };
+		8BFB5C4D2C3A59AE00CE14C5 /* MyBasketDataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFB5C4C2C3A59AE00CE14C5 /* MyBasketDataBase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -100,6 +102,7 @@
 		8BD339F12C2565E600B396CA /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		8BD339F52C28045700B396CA /* BasketViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketViewController.swift; sourceTree = "<group>"; };
 		8BD339F72C28D9F300B396CA /* BasketCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketCollectionViewCell.swift; sourceTree = "<group>"; };
+		8BFB5C4C2C3A59AE00CE14C5 /* MyBasketDataBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBasketDataBase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +113,7 @@
 				8B71E1932C1AE029000BCB72 /* Kingfisher in Frameworks */,
 				8B71E19B2C1AE1E3000BCB72 /* SnapKit in Frameworks */,
 				8B71E18D2C1AE017000BCB72 /* IQKeyboardManagerSwift in Frameworks */,
+				8BFB5C4B2C3A558E00CE14C5 /* RealmSwift in Frameworks */,
 				8B71E1902C1AE021000BCB72 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -251,6 +255,7 @@
 				8B71E2182C218EEF000BCB72 /* SettingPage.swift */,
 				8B456EEE2C311264003CFBD1 /* DateFormatter.swift */,
 				8B456EF02C315B77003CFBD1 /* Error.swift */,
+				8BFB5C4C2C3A59AE00CE14C5 /* MyBasketDataBase.swift */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -284,6 +289,7 @@
 				8B71E18F2C1AE021000BCB72 /* Alamofire */,
 				8B71E1922C1AE029000BCB72 /* Kingfisher */,
 				8B71E19A2C1AE1E3000BCB72 /* SnapKit */,
+				8BFB5C4A2C3A558E00CE14C5 /* RealmSwift */,
 			);
 			productName = MeaningOut;
 			productReference = 8B71E1742C1AD983000BCB72 /* MeaningOut.app */;
@@ -318,6 +324,7 @@
 				8B71E18E2C1AE021000BCB72 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				8B71E1912C1AE029000BCB72 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				8B71E1992C1AE1E3000BCB72 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				8BFB5C492C3A558E00CE14C5 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = 8B71E1752C1AD983000BCB72 /* Products */;
 			projectDirPath = "";
@@ -352,6 +359,7 @@
 				8B71E1C32C1BCBAB000BCB72 /* SelectCollectionViewCell.swift in Sources */,
 				8B71E1782C1AD983000BCB72 /* AppDelegate.swift in Sources */,
 				8BD339F22C2565E600B396CA /* Network.swift in Sources */,
+				8BFB5C4D2C3A59AE00CE14C5 /* MyBasketDataBase.swift in Sources */,
 				8B71E1D52C1F1D2D000BCB72 /* ProductViewController.swift in Sources */,
 				8BD339F62C28045700B396CA /* BasketViewController.swift in Sources */,
 				8B456EF12C315B77003CFBD1 /* Error.swift in Sources */,
@@ -645,6 +653,14 @@
 				minimumVersion = 5.7.1;
 			};
 		};
+		8BFB5C492C3A558E00CE14C5 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -667,6 +683,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8B71E1992C1AE1E3000BCB72 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		8BFB5C4A2C3A558E00CE14C5 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8BFB5C492C3A558E00CE14C5 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
