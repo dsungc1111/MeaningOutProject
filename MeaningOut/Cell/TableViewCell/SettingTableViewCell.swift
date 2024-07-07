@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import RealmSwift
 
-class SettingTableViewCell: UITableViewCell {
+final class SettingTableViewCell: UITableViewCell {
     
     var settingButton = {
         let button = UIButton()
@@ -25,6 +26,8 @@ class SettingTableViewCell: UITableViewCell {
         button.isHidden = true
         return button
     }()
+    private let realm = try! Realm()
+    private lazy var list = realm.objects(RealmTable.self).filter("isLike == %@", true)
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureHierarchy()
@@ -55,13 +58,12 @@ class SettingTableViewCell: UITableViewCell {
         if SettingMenu.allCases[data.row].rawValue == "나의 장바구니 목록" {
             basketButton.isHidden = false
             configureBasket()
-            
         } else {
             basketButton.isHidden = true
         }
     }
     func configureBasket() {
-        let title = "\(String(describing: UserDefaultManager.myBasket.count))개의 상품"
+        let title = "\(String(describing: list.count))개의 상품"
         let highlighted = "\(UserDefaultManager.myBasket.count)개"
         let attributedTitle = NSMutableAttributedString(string: title)
         

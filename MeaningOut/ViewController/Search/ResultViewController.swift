@@ -109,7 +109,7 @@ final class ResultViewController: UIViewController {
         configurehierarchy()
         configureLayout()
         getNetworkData(sort: "sim")
-        print(realm.configuration.fileURL)
+//        print(realm.configuration.fileURL)
     }
     override func viewDidLayoutSubviews() {
         navigationController?.navigationBar.layer.addBorder([.bottom], color: .systemGray4, width: 1)
@@ -196,8 +196,6 @@ extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSo
         let vc = ProductViewController()
         vc.navigationItem.title = Self.shoppingList.items[indexPath.item].title.removeHtmlTag
         vc.basketList = Self.shoppingList.items[indexPath.row]
-//        vc.productNumber = Self.shoppingList.items[indexPath.item].productId
-//        vc.searchItemLink = Self.shoppingList.items[indexPath.item].link
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         navigationController?.pushViewController(vc, animated: true)
     }

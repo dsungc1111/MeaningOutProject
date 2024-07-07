@@ -71,15 +71,9 @@ final class ProfileViewController: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     @objc func completeButtonTapped() {
-        
-//        UserDefaultManager.saveMemories(value: Date(), key: SaveKeyWord.signInTime.rawValue)
-//        
         UserDefaultManager.signInTime = DateChange.shared.dateToString(date: Date())
-//        UserDefaultManager.user = nicknameTextfield.text ?? "nil XX"
-//        
-//        print(UserDefaultManager.useMemories(key: SaveKeyWord.signInTime.rawValue))
-//        
-//        UserDefaultManager.saveMemories(value: "a", key: "a")
+        UserDefaultManager.user = nicknameTextfield.text ?? "nil XX"
+
         let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
         let sceneDelegate = windowScene?.delegate as? SceneDelegate
         let vc = TabBarController()

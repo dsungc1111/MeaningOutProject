@@ -9,12 +9,21 @@ import UIKit
 import SnapKit
 import RealmSwift
 
-class BasketViewController: UIViewController {
+final class BasketViewController: UIViewController {
     
-    let realm = try! Realm()
+    private lazy var searchBar = {
+        let search = UISearchBar()
+        search.delegate = self
+        search.placeholder = "검색"
+        search.backgroundColor = .clear
+        search.barTintColor = .systemGray6
+        search.searchTextField.backgroundColor = .white
+        return search
+    }()
+    private let realm = try! Realm()
     var page = 1
     private var userLike = false
-    lazy var list = realm.objects(RealmTable.self).filter("isLike == %@", true)
+    private lazy var list = realm.objects(RealmTable.self).filter("isLike == %@", true)
     
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
     static func collectionViewLayout() -> UICollectionViewLayout {
@@ -38,12 +47,17 @@ class BasketViewController: UIViewController {
         configureLayout()
     }
     func configureHeirarchy() {
+        view.addSubview(searchBar)
         view.addSubview(collectionView)
     }
     func configureLayout() {
+        searchBar.snp.makeConstraints { make in
+            make.top.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
+            make.height.equalTo(40)
+        }
         collectionView.snp.makeConstraints { make in
-            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
-            make.verticalEdges.equalTo(view.safeAreaLayoutGuide).inset(20)
+            make.top.equalTo(searchBar.snp.bottom).offset(5)
+            make.bottom.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
         }
     }
     
@@ -85,3 +99,14 @@ extension BasketViewController: UICollectionViewDataSource, UICollectionViewDele
 //    
 //    
 //}
+
+extension BasketViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        let filter = realm.objects(RealmTable.self).where {
+            $0.productName.contains(searchText, options: .caseInsensitive)
+        }
+        let result = filter
+        list = result
+        collectionView.reloadData()
+    }
+}

@@ -11,8 +11,6 @@ import RealmSwift
 
 final class ProductViewController: UIViewController {
 
-//    var productNumber = ""
-//    var searchItemLink = ""
     private var userLike = false
     private let realm = try! Realm()
     private var realmList = RealmTable(productName: "", link: "", productId: "", mallName: "", image: "", lprice: "", isLike: false)
@@ -58,6 +56,8 @@ final class ProductViewController: UIViewController {
         UserDefaultManager.appendInMyBasket(productId: id, like: userLike)
         UserDefaults.standard.setValue(userLike, forKey: id)
     }
+    
+    
     private func imageSet() {
         let image = userLike ? LikeImage.select.rawValue : LikeImage.unselect.rawValue
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: image), style: .plain, target: self, action: #selector(likeButtonTapped))
