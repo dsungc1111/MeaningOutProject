@@ -23,7 +23,9 @@ final class BasketViewController: UIViewController {
     private let realm = try! Realm()
     var page = 1
     private var userLike = false
-    private lazy var list = realm.objects(RealmTable.self).filter("isLike == %@", true)
+    static var list: Results<RealmTable>!
+    
+
     
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
     static func collectionViewLayout() -> UICollectionViewLayout {
@@ -43,6 +45,7 @@ final class BasketViewController: UIViewController {
         super.viewDidLoad()
         CollecionViewSetting()
         view.backgroundColor = .white
+        Self.list = realm.objects(RealmTable.self).filter("isLike == %@", true)
         configureHeirarchy()
         configureLayout()
     }
@@ -71,15 +74,13 @@ final class BasketViewController: UIViewController {
 extension BasketViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return list.count
+        return Self.list.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BasketCollectionViewCell.identifier, for: indexPath) as? BasketCollectionViewCell else { return BasketCollectionViewCell() }
-     
-        
+
         cell.configureCell(data: indexPath)
-        cell.companyNameLabel.text = "dsf"
 
         return cell
     }
@@ -102,11 +103,14 @@ extension BasketViewController: UICollectionViewDataSource, UICollectionViewDele
 
 extension BasketViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        
         let filter = realm.objects(RealmTable.self).where {
             $0.productName.contains(searchText, options: .caseInsensitive)
         }
-        let result = filter
-        list = result
+        let result = searchText.isEmpty ? realm.objects(RealmTable.self) : filter
+        Self.list = result
+        
         collectionView.reloadData()
     }
 }

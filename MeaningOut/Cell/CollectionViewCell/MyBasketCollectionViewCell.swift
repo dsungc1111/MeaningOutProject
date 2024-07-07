@@ -14,7 +14,7 @@ class BasketCollectionViewCell: UICollectionViewCell {
     let realm = try! Realm()
     var page = 1
     private var userLike = false
-    lazy var list = realm.objects(RealmTable.self).filter("isLike == %@", true)
+//    lazy var list = realm.objects(RealmTable.self).filter("isLike == %@", true)
     
     let imageView = {
         let image = UIImageView()
@@ -114,14 +114,14 @@ class BasketCollectionViewCell: UICollectionViewCell {
         }
     }
     func configureCell(data: IndexPath) {
+        let list = BasketViewController.list
         likeButton.tag = data.row
-        let url = URL(string: self.list[data.row].image ?? "")!
+        let url = URL(string: list?[data.row].image ?? "")!
         imageView.kf.setImage(with: url)
-        companyNameLabel.text = "Dfsdfsdf"
-        companyNameLabel.text = list[data.row].mallName
-        productNameLabel.text = list[data.row].productName.removeHtmlTag
-        priceLabel.text = "\(Int(list[data.row].lprice ?? "0")?.formatted() ?? "0")원"
-        userLike = UserDefaults.standard.bool(forKey: "\(list[data.row].productId ?? "")")
+        companyNameLabel.text = list?[data.row].mallName
+        productNameLabel.text = list?[data.row].productName.removeHtmlTag
+        priceLabel.text = "\(Int(list?[data.row].lprice ?? "0")?.formatted() ?? "0")원"
+        userLike = UserDefaults.standard.bool(forKey: "\(list?[data.row].productId ?? "")")
         imageSet()
     }
     
