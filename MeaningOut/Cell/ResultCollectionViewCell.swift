@@ -59,11 +59,10 @@ class ResultCollectionViewCell: UICollectionViewCell {
         let items = ResultViewController.shoppingList.items[sender.tag]
         userLike = UserDefaults.standard.bool(forKey: items.productId)
         userLike.toggle()
-        let list = RealmTable(productName: items.title.removeHtmlTag, link: items.link, productId: items.productId, mallName: items.mallName, image: items.image, lprice: items.lprice, isLike: userLike)
         imageSet()
         if userLike {
             try! self.realm.write {
-                self.realm.create(RealmTable.self, value: ["productName": list.productName.removeHtmlTag, "link": list.link ?? "","productId" : list.productId ?? "" ,"mallName": list.mallName ?? "", "image": list.image ?? "", "lprice": list.lprice ?? "", "isLike": userLike], update: .modified)
+                self.realm.create(RealmTable.self, value: ["productName": items.title.removeHtmlTag, "link": items.link,"productId" : items.productId ,"mallName": items.mallName, "image": items.image, "lprice": items.lprice, "isLike": userLike], update: .modified)
             }
         } else {
             if let removeItem = realm.objects(RealmTable.self).filter("productId == %@", items.productId).first {

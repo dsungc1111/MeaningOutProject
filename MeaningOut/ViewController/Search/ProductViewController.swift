@@ -11,16 +11,19 @@ import RealmSwift
 
 final class ProductViewController: UIViewController {
 
-    var productNumber = ""
-    var searchItemLink = ""
+//    var productNumber = ""
+//    var searchItemLink = ""
     private var userLike = false
     private let realm = try! Realm()
+    private var realmList = RealmTable(productName: "", link: "", productId: "", mallName: "", image: "", lprice: "", isLike: false)
+    var basketList = ProductInfo(title: "", link: "", mallName: "", image: "", lprice: "", productId: "")
+    
     
     private let webView = WKWebView()
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        let id = productNumber
+        let id = basketList.productId
         userLike = UserDefaults.standard.bool(forKey: id)
         imageSet()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
@@ -29,16 +32,23 @@ final class ProductViewController: UIViewController {
         configureLayout()
     }
     @objc func likeButtonTapped() {
-        let id = productNumber
+        let id = basketList.productId
         let list = realm.objects(RealmTable.self).filter("productId == %@", id)
         userLike.toggle()
         imageSet()
-        print(list)
         if userLike {
-            try! self.realm.write {
-                
-                self.realm.create(RealmTable.self, value: ["productId": id, "isLike": userLike], update: .modified)
+            if list.isEmpty {
+                try! self.realm.write {
+                    self.realm.create(RealmTable.self, value: ["productName": basketList.title.removeHtmlTag, "link": basketList.link,"productId" : basketList.productId ,"mallName": basketList.mallName, "image": basketList.image, "lprice": basketList.lprice, "isLike": userLike], update: .modified)
+                }
+            } else {
+                if let removeItem = list.first {
+                    try! self.realm.write {
+                        self.realm.delete(removeItem)
+                    }
+                }
             }
+            
         } else {
             if let removeItem = list.first {
                 try! self.realm.write {
@@ -46,10 +56,6 @@ final class ProductViewController: UIViewController {
                 }
             }
         }
-        
-        
-        
-        
         UserDefaultManager.appendInMyBasket(productId: id, like: userLike)
         UserDefaults.standard.setValue(userLike, forKey: id)
     }
@@ -58,7 +64,7 @@ final class ProductViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: image), style: .plain, target: self, action: #selector(likeButtonTapped))
     }
     private func callRequest() {
-        if let url = URL(string: searchItemLink) {
+        if let url = URL(string: basketList.link) {
             let request = URLRequest(url: url)
             webView.load(request)
         } else {

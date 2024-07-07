@@ -30,3 +30,7 @@ class RealmTable: Object {
     }
     
 }
+
+struct MyBasketList {
+    static var list: Results<RealmTable>!
+}

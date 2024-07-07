@@ -6,10 +6,15 @@
 //
 
 import UIKit
+import SnapKit
+import RealmSwift
 
 class BasketViewController: UIViewController {
-
+    
+    let realm = try! Realm()
     var page = 1
+    private var userLike = false
+    lazy var list = realm.objects(RealmTable.self).filter("isLike == %@", true)
     
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
     static func collectionViewLayout() -> UICollectionViewLayout {
@@ -31,8 +36,9 @@ class BasketViewController: UIViewController {
         view.backgroundColor = .white
         configureHeirarchy()
         configureLayout()
+        
+        print(list)
     }
-    
     func configureHeirarchy() {
         view.addSubview(collectionView)
     }
@@ -75,12 +81,14 @@ class BasketViewController: UIViewController {
 extension BasketViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return UserDefaultManager.myBasket.count
+        return list.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ResultCollectionViewCell.identifier, for: indexPath) as? ResultCollectionViewCell else { return ResultCollectionViewCell() }
-        cell.configureCell(data: indexPath)
+        print(list.count)
+        cell.priceLabel.text = list[indexPath.row].lprice
+//        cell.configureCell(data: indexPath)
 
         return cell
     }
