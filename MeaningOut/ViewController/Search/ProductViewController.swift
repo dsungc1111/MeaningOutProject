@@ -48,7 +48,6 @@ final class ProductViewController: UIViewController {
                     }
                 }
             }
-            
         } else {
             if let removeItem = list.first {
                 try! self.realm.write {

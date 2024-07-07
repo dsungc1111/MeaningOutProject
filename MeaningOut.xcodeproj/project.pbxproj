@@ -52,9 +52,9 @@
 		8B71E21D2C2195E8000BCB72 /* FilterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B71E21C2C2195E8000BCB72 /* FilterButton.swift */; };
 		8BD339F22C2565E600B396CA /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD339F12C2565E600B396CA /* Network.swift */; };
 		8BD339F62C28045700B396CA /* BasketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD339F52C28045700B396CA /* BasketViewController.swift */; };
-		8BD339F82C28D9F300B396CA /* BasketCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD339F72C28D9F300B396CA /* BasketCollectionViewCell.swift */; };
 		8BFB5C4B2C3A558E00CE14C5 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8BFB5C4A2C3A558E00CE14C5 /* RealmSwift */; };
 		8BFB5C4D2C3A59AE00CE14C5 /* MyBasketDataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFB5C4C2C3A59AE00CE14C5 /* MyBasketDataBase.swift */; };
+		8BFB5C512C3AAAE900CE14C5 /* MyBasketCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFB5C502C3AAAE900CE14C5 /* MyBasketCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -101,8 +101,8 @@
 		8B71E21C2C2195E8000BCB72 /* FilterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterButton.swift; sourceTree = "<group>"; };
 		8BD339F12C2565E600B396CA /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		8BD339F52C28045700B396CA /* BasketViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketViewController.swift; sourceTree = "<group>"; };
-		8BD339F72C28D9F300B396CA /* BasketCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketCollectionViewCell.swift; sourceTree = "<group>"; };
 		8BFB5C4C2C3A59AE00CE14C5 /* MyBasketDataBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBasketDataBase.swift; sourceTree = "<group>"; };
+		8BFB5C502C3AAAE900CE14C5 /* MyBasketCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBasketCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -226,11 +226,8 @@
 		8B71E2032C200555000BCB72 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				8B71E1CA2C1C0B46000BCB72 /* SearchResultTableViewCell.swift */,
-				8B71E1CE2C1D38B2000BCB72 /* ResultCollectionViewCell.swift */,
-				8B71E1C22C1BCBAB000BCB72 /* SelectCollectionViewCell.swift */,
-				8B71E2052C2005F9000BCB72 /* SettingTableViewCell.swift */,
-				8BD339F72C28D9F300B396CA /* BasketCollectionViewCell.swift */,
+				8BFB5C4F2C3AAAC800CE14C5 /* CollectionViewCell */,
+				8BFB5C4E2C3AAABB00CE14C5 /* TableViewCell */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -266,6 +263,25 @@
 				8BD339F12C2565E600B396CA /* Network.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		8BFB5C4E2C3AAABB00CE14C5 /* TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				8B71E1CA2C1C0B46000BCB72 /* SearchResultTableViewCell.swift */,
+				8B71E2052C2005F9000BCB72 /* SettingTableViewCell.swift */,
+			);
+			path = TableViewCell;
+			sourceTree = "<group>";
+		};
+		8BFB5C4F2C3AAAC800CE14C5 /* CollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				8B71E1CE2C1D38B2000BCB72 /* ResultCollectionViewCell.swift */,
+				8B71E1C22C1BCBAB000BCB72 /* SelectCollectionViewCell.swift */,
+				8BFB5C502C3AAAE900CE14C5 /* MyBasketCollectionViewCell.swift */,
+			);
+			path = CollectionViewCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -364,7 +380,6 @@
 				8BD339F62C28045700B396CA /* BasketViewController.swift in Sources */,
 				8B456EF12C315B77003CFBD1 /* Error.swift in Sources */,
 				8B29AE572C2937BC006DB1FF /* UIViewController+Extension.swift in Sources */,
-				8BD339F82C28D9F300B396CA /* BasketCollectionViewCell.swift in Sources */,
 				8B71E1AC2C1AF895000BCB72 /* KeyValue.swift in Sources */,
 				8B71E2192C218EEF000BCB72 /* SettingPage.swift in Sources */,
 				8B71E1B22C1B1598000BCB72 /* CALayer+Extension.swift in Sources */,
@@ -373,6 +388,7 @@
 				8B71E1B42C1B176B000BCB72 /* TextField+Extension.swift in Sources */,
 				8B71E1BA2C1BC1B4000BCB72 /* CameraLogo.swift in Sources */,
 				8B71E1A32C1AE7B4000BCB72 /* BigSizeButton.swift in Sources */,
+				8BFB5C512C3AAAE900CE14C5 /* MyBasketCollectionViewCell.swift in Sources */,
 				8B71E1D12C1EC2C6000BCB72 /* String+Extension.swift in Sources */,
 				8B71E2082C200A0B000BCB72 /* UIButton+Extension.swift in Sources */,
 				8B71E2172C218B60000BCB72 /* LoginPage.swift in Sources */,

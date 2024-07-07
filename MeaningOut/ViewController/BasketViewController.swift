@@ -36,8 +36,6 @@ class BasketViewController: UIViewController {
         view.backgroundColor = .white
         configureHeirarchy()
         configureLayout()
-        
-        print(list)
     }
     func configureHeirarchy() {
         view.addSubview(collectionView)
@@ -52,31 +50,9 @@ class BasketViewController: UIViewController {
     func CollecionViewSetting() {
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.prefetchDataSource = self
-        collectionView.register(ResultCollectionViewCell.self, forCellWithReuseIdentifier: ResultCollectionViewCell.identifier)
+//        collectionView.prefetchDataSource = self
+        collectionView.register(BasketCollectionViewCell.self, forCellWithReuseIdentifier: BasketCollectionViewCell.identifier)
     }
-//    func getNetworkData(sort: String) {
-//        Network.shared.callRequest(sort: sort, page: page) { result in
-//            switch result {
-//            case .success(let value):
-//                if self.page == 1{
-//                    Variable.mySearch = value
-//                } else {
-//                    Variable.mySearch.append(contentsOf: value)
-//                }
-//                self.collectionView.reloadData()
-//                if self.page == 1{
-//                    self.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
-//                }
-//            case .failure(_):
-//                let alert = UIAlertController(title: AlertMention.connectionError.rawValue, message: AlertMention.network.rawValue, preferredStyle: .alert)
-//                let okButton = UIAlertAction(title: AlertMention.networkChecking.rawValue, style: .default)
-//                alert.addAction(okButton)
-//                self.present(alert, animated: true)
-//            }
-//        }
-//        
-//    }
 }
 extension BasketViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
@@ -85,27 +61,27 @@ extension BasketViewController: UICollectionViewDataSource, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ResultCollectionViewCell.identifier, for: indexPath) as? ResultCollectionViewCell else { return ResultCollectionViewCell() }
-        print(list.count)
-        cell.priceLabel.text = list[indexPath.row].lprice
-//        cell.configureCell(data: indexPath)
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BasketCollectionViewCell.identifier, for: indexPath) as? BasketCollectionViewCell else { return BasketCollectionViewCell() }
+     
+        
+        cell.configureCell(data: indexPath)
+        cell.companyNameLabel.text = "dsf"
 
         return cell
     }
-    
-    
+
 }
 
-extension BasketViewController: UICollectionViewDataSourcePrefetching  {
-    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
-        for item in indexPaths {
-            if ResultViewController.shoppingList.items.count - 6 == item.row {
-                page += 1
-//                getNetworkData(sort: "sim")
-                
-            }
-        }
-    }
-    
-    
-}
+//extension BasketViewController: UICollectionViewDataSourcePrefetching  {
+//    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+//        for item in indexPaths {
+//            if ResultViewController.shoppingList.items.count - 6 == item.row {
+//                page += 1
+////                getNetworkData(sort: "sim")
+//                
+//            }
+//        }
+//    }
+//    
+//    
+//}

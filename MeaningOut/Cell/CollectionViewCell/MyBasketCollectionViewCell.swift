@@ -1,20 +1,21 @@
 //
-//  ResultCollectionViewCell.swift
+//  MyBasketCollectionViewCell.swift
 //  MeaningOut
 //
-//  Created by 최대성 on 6/15/24.
+//  Created by 최대성 on 7/7/24.
 //
 
 import UIKit
-import SnapKit
 import RealmSwift
+import SnapKit
 
-
-class ResultCollectionViewCell: UICollectionViewCell {
+class BasketCollectionViewCell: UICollectionViewCell {
     
-    private let realm = try! Realm()
+    let realm = try! Realm()
+    var page = 1
+    private var userLike = false
+    lazy var list = realm.objects(RealmTable.self).filter("isLike == %@", true)
     
-    var temporaryBasket: [String] = []
     let imageView = {
         let image = UIImageView()
         image.clipsToBounds = true
@@ -46,7 +47,6 @@ class ResultCollectionViewCell: UICollectionViewCell {
         button.addTarget(self, action: #selector(likeButtonTapped(sender:)), for: .touchUpInside)
         return button
     }()
-    var userLike = false
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureHierarchy()
@@ -56,24 +56,26 @@ class ResultCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     @objc func likeButtonTapped(sender: UIButton) {
-        let items = ResultViewController.shoppingList.items[sender.tag]
-        userLike = UserDefaults.standard.bool(forKey: items.productId)
+        let items = list[sender.tag]
+        userLike = UserDefaults.standard.bool(forKey: items.productId ?? "")
         userLike.toggle()
         imageSet()
         if userLike {
             try! self.realm.write {
-                self.realm.create(RealmTable.self, value: ["productName": items.title.removeHtmlTag, "link": items.link,"productId" : items.productId ,"mallName": items.mallName, "image": items.image, "lprice": items.lprice, "isLike": userLike], update: .modified)
+                self.realm.create(RealmTable.self, value: ["productName": items.productName.removeHtmlTag, "link": items.link ?? "","productId" : items.productId ?? "" ,"mallName": items.mallName ?? "", "image": items.image ?? "", "lprice": items.lprice ?? "", "isLike": userLike], update: .modified)
             }
         } else {
-            if let removeItem = realm.objects(RealmTable.self).filter("productId == %@", items.productId).first {
+            if let removeItem = realm.objects(RealmTable.self).filter("productId == %@", items.productId ?? "").first {
                       try! self.realm.write {
                           self.realm.delete(removeItem)
                       }
                   }
         }
-        UserDefaultManager.appendInMyBasket(productId: items.productId, like: userLike)
-        UserDefaults.standard.setValue(userLike, forKey: items.productId)
+        UserDefaultManager.appendInMyBasket(productId: items.productId ?? "", like: userLike)
+        UserDefaults.standard.setValue(userLike, forKey: items.productId ?? "")
     }
+//    
+    
     func imageSet() {
         let likeImage = userLike ? LikeImage.select.rawValue : LikeImage.unselect.rawValue
         likeButton.setImage(UIImage(named: likeImage), for: .normal)
@@ -112,24 +114,14 @@ class ResultCollectionViewCell: UICollectionViewCell {
         }
     }
     func configureCell(data: IndexPath) {
-        DispatchQueue.global().async {
-            do {
-                let url = URL(string: ResultViewController.shoppingList.items[data.row].image)!
-                let image = try Data(contentsOf: url)
-                DispatchQueue.main.async {
-                    self.imageView.image = UIImage(data: image)
-                }
-            } catch {
-                DispatchQueue.main.async {
-                    self.imageView.image = UIImage(systemName: "star")
-                }
-            }
-        }
         likeButton.tag = data.row
-        companyNameLabel.text = ResultViewController.shoppingList.items[data.row].mallName
-        productNameLabel.text = ResultViewController.shoppingList.items[data.row].title.removeHtmlTag
-        priceLabel.text = "\(Int(ResultViewController.shoppingList.items[data.row].lprice)?.formatted() ?? "0")원"
-        userLike = UserDefaults.standard.bool(forKey: "\(ResultViewController.shoppingList.items[data.row].productId)")
+        let url = URL(string: self.list[data.row].image ?? "")!
+        imageView.kf.setImage(with: url)
+        companyNameLabel.text = "Dfsdfsdf"
+        companyNameLabel.text = list[data.row].mallName
+        productNameLabel.text = list[data.row].productName.removeHtmlTag
+        priceLabel.text = "\(Int(list[data.row].lprice ?? "0")?.formatted() ?? "0")원"
+        userLike = UserDefaults.standard.bool(forKey: "\(list[data.row].productId ?? "")")
         imageSet()
     }
     
